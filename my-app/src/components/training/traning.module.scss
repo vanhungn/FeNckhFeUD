@@ -1,0 +1,55 @@
+.training {
+    padding-top: 20vh;
+    width: 80%;
+    margin: auto;
+}
+
+
+
+tr {
+    border: 1px black solid !important;
+
+    th,
+    td {
+        text-align: center;
+        padding: 5px 0;
+        border: 1px black solid !important;
+
+    }
+}
+
+@media(max-width:540px) {
+    .training {
+        h3 {
+            font-size: 18px;
+        }
+
+    }
+
+    .none {
+        display: none !important;
+    }
+}
+
+@media(max-width:430px) {
+    .training {
+        h3 {
+            font-size: 14px !important;
+        }
+        table{
+            font-size: 11px !important;
+            tbody{
+                tr{
+                    .titleTable{
+                        font-size: 14px !important;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .none {
+        display: none !important;
+    }
+}

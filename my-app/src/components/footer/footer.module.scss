@@ -1,0 +1,78 @@
+.footer {
+    margin-top: 30px;
+    padding: 30px 100px;
+    background-color: #0d4d94;
+    color: #fff;
+    position: relative;
+}
+
+.infoAddress {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+
+}
+
+.boxInfor {
+    background-color: black;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.lobby {
+
+    width: 50%;
+    height: 20vh;
+    background: url("https://ts.hust.edu.vn/public/images/bgFOOT.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.info {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width:1220px) {
+    .footer {
+        padding: 20px 90px;
+    }
+
+    .infoAddress {
+        span {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width:1024px) {
+    .lobby {
+        top: 40%
+    }
+
+    .titleAddress {
+        font-size: 20px;
+    }
+}
+
+@media(max-width:540px) {
+    .footer {
+        padding: 20px 40px;
+    }
+
+    .titleAddress {
+        font-size: 16px;
+    }
+
+    .info {
+        display: block !important;
+    }
+}

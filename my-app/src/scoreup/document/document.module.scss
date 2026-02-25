@@ -1,0 +1,77 @@
+.contentBgrImg {
+    padding: 80px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+.practice {
+    height: 100vh;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.listPractice {
+    flex: 1;
+    overflow-y: auto;
+    background-color: rgb(26, 78, 141);
+    border-radius: 5px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    min-height: 0;
+    scrollbar-width: none;
+}
+
+
+
+.btnTitle {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(26, 78, 141);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    height: fit-content;
+
+}
+
+.boxTitle {
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: rgb(242, 247, 253);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr 0.5fr;
+
+    h3,
+    p {
+        color: rgb(26, 78, 141);
+
+    }
+}
+
+.search {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.inputSearch {
+    width: 65%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: rgb(83, 144, 219) 0px 8px 24px;
+}

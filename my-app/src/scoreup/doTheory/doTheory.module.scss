@@ -1,0 +1,48 @@
+.doTheory {
+
+    padding: 20px;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
+    /* Ẩn cho Firefox */
+    -ms-overflow-style: none;
+    /* Ẩn cho IE và Edge cũ */
+
+}
+
+.doTheory::-webkit-scrollbar {
+    display: none;
+}
+
+.theory {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
+}
+
+.showSelect {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.boxShow {
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px black solid;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+
+    a {
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+
+
+}

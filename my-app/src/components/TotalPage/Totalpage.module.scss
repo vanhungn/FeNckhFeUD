@@ -1,0 +1,33 @@
+.boxChoose,
+.box {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.total {
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.boxChoose {
+    color: #fff;
+    background-color: rgb(26, 78, 141);
+}
+
+@media(max-width:540px) {
+
+    .boxChoose,
+    .box {
+        width: 25px !important;
+        height: 25px !important;
+        font-size: 14px !important;
+    }
+}

@@ -1,0 +1,62 @@
+.buttonDiscover {
+    background: linear-gradient(90deg,
+            #4c79ff 0%,
+            #8800ff 100%);
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.listFeature {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+}
+
+.boxFeature {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.boxShadowButton {
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    left: -90%;
+    background-color: rgba(149, 157, 165, 0.3);
+    transform: skewX(-15deg);
+    transition: all 1s ease-out;
+}
+
+.buttonDiscover:hover .boxShadowButton {
+    position: absolute;
+    left: 100%;
+}
+
+.usedTechnology {
+    margin: 30px 0px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.nameTechnology {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(228, 228, 228);
+    font-size: 14px;
+}
+
+.generalProject {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+}

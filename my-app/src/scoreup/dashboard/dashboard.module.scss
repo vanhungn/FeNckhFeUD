@@ -1,0 +1,65 @@
+.imgBgr {
+
+    background: url('https://fit.neu.edu.vn/scoreup/assets/Container%20136-BYP2JeFl.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #fff;
+}
+
+.practice {
+    height: 100vh;
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentBgrImg {
+    padding: 80px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+.listPractice {
+    flex: 1;
+    overflow-y: auto;
+    background-color: rgb(26, 78, 141);
+    border-radius: 5px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    min-height: 0;
+    scrollbar-width: none;
+}
+
+
+.btnTitle {
+    padding: 5px;
+
+    background-color: rgb(26, 78, 141);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.boxTitle {
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: rgb(242, 247, 253);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    h4,
+    p {
+        color: rgb(26, 78, 141);
+
+    }
+}

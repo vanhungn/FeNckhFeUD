@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Thêm vào file CSS global */
+/* Thêm vào index.css hoặc App.css */
+
+/* ✅ Tăng khoảng lùi cho mỗi cấp */
+.cdx-nested-list__item-children {
+  margin-left: 50px !important;
+  /* Tăng từ 20px lên 50px */
+}
+
+/* Hoặc tùy chỉnh theo từng level */
+.cdx-nested-list__item[data-level="0"] {
+  padding-left: 0;
+}
+
+.cdx-nested-list__item[data-level="1"] .cdx-nested-list__item-children {
+  margin-left: 40px !important;
+}
+
+.cdx-nested-list__item[data-level="2"] .cdx-nested-list__item-children {
+  margin-left: 40px !important;
+}
+
+.cdx-nested-list__item[data-level="3"] .cdx-nested-list__item-children {
+  margin-left: 40px !important;
+}
+
+/* Style cho item content */
+.cdx-nested-list__item-content {
+  min-height: 30px;
+  padding: 4px 0;
+}
+
+/* index.css hoặc App.css */
+
+/* ✅ Fix inline toolbar position */
+.ce-inline-toolbar {
+  position: absolute !important;
+  z-index: 1000 !important;
+}
+
+.ce-conversion-toolbar,
+.ce-inline-tool {
+  z-index: 1001 !important;
+}
+
+/* Fix tooltip (Link, Bold, etc) */
+.ce-popover {
+  z-index: 1002 !important;
+}
+
+.ce-inline-toolbar__dropdown {
+  z-index: 1003 !important;
+}
+
+/* Đảm bảo không bị overflow hidden */
+.codex-editor,
+.ce-block {
+  overflow: visible !important;
+}
+
+.ce-block__content {
+  overflow: visible !important;
+}

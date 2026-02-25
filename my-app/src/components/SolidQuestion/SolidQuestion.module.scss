@@ -1,0 +1,53 @@
+.header {
+    margin: 30px 0px;
+
+    padding: 40px 10px;
+
+    position: relative;
+}
+
+.index {
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    background-color: #007A7A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: absolute;
+    top: 0;
+}
+
+.option,
+.correct,
+.inCorrect {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.correct {
+    background-color: #d4edda;
+
+}
+
+.inCorrect {
+    background-color: #f8d7da;
+}
+
+.BoxQuestion {
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px gray solid;
+    padding: 20px;
+
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}

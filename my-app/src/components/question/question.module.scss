@@ -1,0 +1,43 @@
+.buttonCreate {
+    width: fit-content;
+    background-color: rgb(26, 78, 141) !important;
+    color: #fff !important;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}
+
+.previewImg {
+    width: 100px;
+}
+
+.titleInput {
+    margin: 15px 0 10px 0;
+}
+
+.icon:hover,
+.iconAnswer:hover {
+    color: red !important;
+}
+
+.icon,
+.iconAnswer {
+    display: none !important;
+}
+
+.boxQuestion {
+    &:hover {
+        .icon {
+            display: block !important;
+        }
+    }
+}
+
+.boxInputAnswer {
+    &:hover {
+        .iconAnswer {
+            display: block !important;
+        }
+    }
+}

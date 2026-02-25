@@ -1,0 +1,73 @@
+.infoSearch {
+    padding-top: 14vh;
+}
+
+.boxImg {
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.contentBanner {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    h3 {
+        font-size: 55px;
+        color: #fff;
+
+
+    }
+
+    div {
+        font-size: 16px;
+        color: #f0f0f0;
+    }
+
+}
+
+
+
+.shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(6, 6, 6, 0.2);
+    top: 0;
+    z-index: 2;
+}
+
+.boxNews {
+    padding: 15px;
+    cursor: pointer;
+
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 10px;
+
+    &:hover {
+        .menuTopic {
+            display: block;
+        }
+    }
+
+}
+
+.imgNews {
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.category {
+    cursor: pointer;
+
+    &:hover {
+        color: #024c92;
+    }
+}

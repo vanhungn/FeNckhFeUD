@@ -1,0 +1,25 @@
+.boxFeature {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .icon {
+            transform: rotate(20deg);
+        }
+    }
+}
+
+.icon {
+    width: fit-content;
+    padding: 8px;
+    background-color: #E0E8F9;
+    border-radius: 10px;
+    transition: all 0.5s ease-out;
+
+
+}

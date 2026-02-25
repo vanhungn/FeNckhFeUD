@@ -1,0 +1,51 @@
+.practice {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.practiceContainer {
+    width: 75%;
+    display: flex;
+    gap: 150px;
+    align-items: center;
+}
+
+.loginForm {
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px rgb(209, 207, 207) solid;
+
+
+}
+
+.boxBtn {
+    cursor: pointer;
+    margin: 20px 0px;
+    border-radius: 10px;
+    border: 1px rgb(209, 207, 207) solid;
+    width: 100%;
+    padding: 8px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px
+}
+
+.loginBtn {
+    border: none;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+h1 {
+    margin: 10px 0px;
+}
+
+p {
+    font-size: 13px;
+    line-height: 20px;
+}

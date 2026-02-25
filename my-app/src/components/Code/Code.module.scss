@@ -1,0 +1,152 @@
+.codeLap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.runCode {
+    width: fit-content;
+
+    height: 20px;
+}
+
+.headerCodeLap {
+    padding: 10px 15px;
+    background-color: rgb(246, 246, 246);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.header {
+    padding: 0 15px;
+    background-color: rgb(246, 246, 246);
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    align-items: center;
+
+}
+
+.title {
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: #fff;
+    }
+}
+
+.select {
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+
+    .selectLanguage {
+        border-radius: 5px;
+        padding: 0px 5px 5px 5px;
+        background-color: #fff;
+        border-radius: 5px;
+        position: absolute;
+        top: 125%;
+        right: 50%;
+        transform: translateX(40%);
+        z-index: 10;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+        .language {
+            padding: 5px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(241, 240, 240);
+            }
+        }
+    }
+}
+
+.program {
+
+    padding: 10px;
+    background-color: #0284c7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchLanguage {
+    padding: 0 10px;
+    border-bottom: 1px black solid;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    input {
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
+}
+
+.chooseSelect {
+    padding: 10px;
+    display: flex;
+    gap: 15px
+}
+
+.buttonDownLoad {
+    background-color: #00AEEF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.element {
+    overflow: auto;
+    /* hoặc scroll */
+    scrollbar-width: none;
+    /* Ẩn cho Firefox */
+    -ms-overflow-style: none;
+    /* Ẩn cho IE và Edge cũ */
+}
+
+/* Ẩn cho Chrome, Safari và Opera */
+.element::-webkit-scrollbar {
+    display: none;
+}
+
+.boxCodeLap {
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.startCode {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background-color: #28A745;
+    border-radius: 5px;
+    padding: 5px;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.boxInput {
+    width: 100%;
+
+    height: 50vh;
+
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 25px;
+}

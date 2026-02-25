@@ -1,0 +1,127 @@
+.algorithm {
+    padding: 20px;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.algorithm::-webkit-scrollbar {
+    display: none;
+}
+
+.listAlgorithm {
+    width: 100%;
+    margin: auto auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px
+}
+
+.topic {
+    background-color: #fff;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    border: 1px rgb(225, 223, 223) solid;
+    border-radius: 10px;
+    position: relative;
+
+    &:hover {
+        .menuTopic {
+            display: block;
+        }
+    }
+
+}
+
+.output {
+
+    padding: 20px;
+    background-color: rgb(243, 241, 241);
+    border-radius: 10px;
+}
+
+.headerDocument {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.buttonCreate {
+    width: fit-content;
+    background-color: rgb(26, 78, 141) !important;
+    color: #fff !important;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}
+
+.formCreate {
+    padding: 0 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px
+}
+
+.error {
+    width: 100%;
+
+    .pError {
+        margin: 0;
+        padding: 0;
+        color: red;
+        font-size: 12px;
+        font-family: 'Roboto', sans-serif;
+    }
+}
+
+.titleAlgorithm {
+    border: none !important;
+    outline: none !important;
+    background-color: #fff !important;
+    color: black !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    text-align: center;
+    resize: none;
+}
+
+.no-arrow {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: transparent !important;
+    padding-right: 24px;
+    /* chừa chỗ cho icon */
+}
+
+.question {
+    font-size: 13px;
+}
+
+.content {
+    font-size: 13px !important;
+    border: none !important;
+    outline: none !important;
+    background-color: #fff !important;
+    resize: none;
+}
+
+.menuTopic {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.icon {
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+        color: red;
+    }
+}

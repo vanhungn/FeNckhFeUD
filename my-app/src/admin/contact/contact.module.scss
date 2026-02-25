@@ -1,0 +1,47 @@
+.headerContact {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+
+}
+
+.contactAdmin {
+    height: 100vh;
+    padding: 20px;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.contactAdmin::-webkit-scrollbar {
+    display: none;
+}
+
+.iconDelete {
+    display: none !important;
+    cursor: pointer;
+
+    &:hover {
+        color: red;
+    }
+}
+
+.item {
+    transition: background 0.2s ease;
+
+    &:hover {
+        &:hover td {
+            background-color: #e1f4fd !important;
+            cursor: pointer;
+        }
+
+        // hoặc màu bạn muốn
+
+
+        .iconDelete {
+            display: flex !important;
+
+        }
+    }
+}

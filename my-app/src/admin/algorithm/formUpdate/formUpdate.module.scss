@@ -1,0 +1,82 @@
+.topic {
+    background-color: #fff;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    border: 1px rgb(225, 223, 223) solid;
+    border-radius: 10px;
+    position: relative;
+
+    &:hover {
+        .menuTopic {
+            display: block;
+        }
+    }
+
+}
+
+.titleAlgorithm {
+    border: none !important;
+    outline: none !important;
+    background-color: #fff !important;
+    color: black !important;
+    font-weight: 600 !important;
+    font-size: 20px !important;
+    text-align: center;
+    resize: none;
+}
+
+.no-arrow {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background: transparent !important;
+    padding-right: 24px;
+    /* chừa chỗ cho icon */
+}
+
+.question {
+    font-size: 13px;
+}
+
+.content {
+    font-size: 13px !important;
+    border: none !important;
+    outline: none !important;
+    background-color: #fff !important;
+    resize: none;
+}
+
+.menuTopic {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.icon {
+    margin-left: 10px;
+    cursor: pointer;
+
+    &:hover {
+        color: red;
+    }
+}
+
+.output {
+
+    padding: 20px;
+    background-color: rgb(243, 241, 241);
+    border-radius: 10px;
+}
+
+.buttonCreate {
+    width: fit-content;
+    background-color: rgb(26, 78, 141) !important;
+    color: #fff !important;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}

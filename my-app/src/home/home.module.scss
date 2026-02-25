@@ -1,0 +1,502 @@
+.banner {
+    height: 60vh;
+    width: 100%;
+    background-image: url('../../public/123.jpg');
+    background-repeat: no-repeat;
+}
+
+.home {
+    padding-top: 15vh;
+}
+
+.newsImg {
+    max-height: 69vh;
+}
+
+.icon {
+    width: 70px;
+    height: 70px;
+    color: #0061bb;
+}
+
+.title {
+    color: #0061bb;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.news {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px
+}
+
+.event {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 130px;
+    gap: 10px;
+
+    h5 {
+        font-size: 18px !important;
+        font-weight: 600;
+
+    }
+
+    p {
+        font-size: 14px !important;
+    }
+}
+
+.btnSeeMore {
+    background-color: #0061bb !important;
+    color: #fff !important;
+    font-size: medium;
+    width: 100%;
+}
+
+.chooseDepartment {
+    height: fit-content;
+    width: 100%;
+    background: url("../../public/9.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.boxIntroduce {
+    height: fit-content;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+
+
+    img {
+        border-radius: 20px;
+        object-fit: cover;
+    }
+
+}
+
+.imgLibrary {
+    width: 100%;
+    height: 100%;
+    transition: 1s all;
+
+}
+
+.boxImg {
+    overflow: hidden;
+    border-radius: 15px;
+
+
+    &:hover {
+        .imgLibrary {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.buttonNext {
+    cursor: pointer;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #0061bb;
+    color: #fff;
+    transition: 0.5s all;
+
+    &:hover {
+        padding: 6px;
+        background-color: #02498b;
+    }
+}
+
+.registerNow {
+
+    padding: 10px 50px;
+    animation: myAnimation 1s linear 2s infinite alternate;
+}
+
+.whyChoose {
+    padding: 20px 250px !important;
+}
+
+@keyframes myAnimation {
+    from {
+        padding: 10px 50px;
+
+    }
+
+    to {
+        padding: 5px 30px;
+
+    }
+}
+
+@media (max-width:1220px) {
+    .box {
+        .icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .title {
+            font-size: 16px;
+        }
+
+        p {
+            font-size: 14px !important;
+        }
+    }
+
+
+    .event {
+        div {
+            h5 {
+                font-size: 16px;
+            }
+
+            p {
+                font-size: 12px !important;
+                margin: 0;
+            }
+        }
+    }
+
+    .achievement {
+        h1 {
+            font-size: 30px;
+        }
+
+        h5 {
+            font-size: 16px;
+        }
+    }
+
+    .chooseDepartment {
+        .whyChoose {
+            padding: 20px 100px !important;
+
+            .boxIntroduce {
+                padding: 20px;
+            }
+        }
+
+    }
+
+    .partner {
+        width: 300px !important;
+    }
+
+    .imgPartner {
+        grid-template-columns: 150px 150px 150px 150px 150px !important;
+
+        img {
+            height: 150px !important;
+        }
+    }
+}
+
+@media(max-width:1280px) {
+    .partner {
+        width: 250px !important;
+    }
+
+    .imgPartner {
+        p {
+            font-size: 14px !important;
+        }
+    }
+}
+
+@media (max-width:1024px) {
+    .whyChoose {
+        padding: 20px 100px !important;
+
+        .boxIntroduce {
+            padding: 20px;
+        }
+    }
+
+    .banner {
+        height: 40vh;
+    }
+
+    .home {
+        padding-top: 5vh;
+    }
+
+    .library {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .achievement {
+        div {
+            div {
+                h2 {
+                    font-size: 16px !important;
+                }
+
+                h5 {
+                    font-size: 12px !important;
+                }
+            }
+        }
+    }
+
+    .questionChoose {
+        padding: 10px !important;
+
+        h3 {
+            font-size: 18px !important;
+        }
+    }
+
+    .registerNow {
+        font-size: 16px !important;
+    }
+
+    .titleNews {
+        font-size: 16px !important;
+        font-weight: 600;
+    }
+
+    .boxIntroduce {
+        img {
+            width: 110px !important;
+            height: 80px !important;
+        }
+    }
+
+    .event {
+        div {
+            h5 {
+                font-size: 14px !important;
+            }
+
+            p {
+                font-size: 11px !important;
+                margin: 0;
+            }
+        }
+    }
+
+    .partner {
+        width: 200px !important;
+    }
+
+    .imgPartner {
+        grid-template-columns: 140px 140px 140px 140px 140px !important;
+
+        img {
+            height: 140px !important;
+        }
+    }
+}
+
+
+
+@media(max-width:890px) {
+    .whyChoose {
+        padding: 20px 60px !important;
+
+        .boxIntroduce {
+            padding: 20px;
+        }
+    }
+
+    .questionChoose {
+        padding: 10px !important;
+
+        h3 {
+            font-size: 18px !important;
+        }
+    }
+
+    .boxIntroduce {
+        img {
+            width: 90px !important;
+            height: 70px !important;
+        }
+    }
+
+    .registerNow {
+        font-size: 16px !important;
+    }
+
+    .imgPartner {
+        grid-template-columns: 100px 100px 100px 100px 100px !important;
+
+        img {
+            height: 100px !important;
+        }
+    }
+}
+
+@media(max-width:795px) {
+    .questionChoose {
+        padding: 5px !important;
+
+        h3 {
+            font-size: 16px !important;
+        }
+    }
+
+    .whyChoose {
+        padding: 20px 150px !important;
+
+        .boxIntroduce {
+            padding: 15px;
+        }
+    }
+
+    .boxIntroduce {
+        img {
+            width: 70px !important;
+            height: 50px !important;
+        }
+
+        h5 {
+            font-size: 12px !important;
+            margin: 0 !important;
+        }
+    }
+
+    .registerNow {
+        font-size: 14px !important;
+    }
+
+    .partner {
+        width: 150px !important;
+    }
+
+
+}
+
+@media(max-width:540px) {
+    .general {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .news {
+        display: block;
+
+        .newsImg {
+            display: none;
+        }
+    }
+
+    .chooseDepartment {
+        .whyChoose {
+            padding: 20px !important;
+
+            .boxIntroduce {
+                padding: 20px;
+            }
+        }
+
+    }
+
+    .registerNow {
+        font-size: 12px !important;
+    }
+
+    .partner {
+        width: 100px !important;
+    }
+
+    .imgPartner {
+        grid-template-columns: 80px 80px 80px 80px 80px !important;
+
+        img {
+            height: 80px !important;
+        }
+    }
+}
+
+@media(max-width:431px) {
+    .questionChoose {
+        padding: 5px !important;
+
+        h3 {
+            font-size: 14px !important;
+        }
+    }
+
+    .chooseDepartment {
+        .whyChoose {
+            padding: 20px !important;
+
+            .boxIntroduce {
+                padding: 10px !important;
+
+                img {
+                    width: 60px !important;
+                    height: 50px !important;
+                }
+            }
+        }
+
+    }
+
+    .imgPartner {
+        grid-template-columns: 50px 50px 50px 50px 50px !important;
+
+        img {
+            height: 50px !important;
+        }
+
+        p {
+            display: none;
+        }
+    }
+
+    .buttonNext {
+        padding: 2px !important;
+
+        svg {
+            width: 12px !important;
+            height: 12px !important;
+        }
+    }
+
+    .achievement {
+        .result {
+            div {
+                h2 {
+                    font-size: 14px !important;
+                }
+
+                h5 {
+                    font-size: 12px !important;
+                }
+            }
+        }
+    }
+
+    .library {
+        font-size: 14px !important;
+    }
+
+    .partner {
+        width: 40px !important;
+    }
+}

@@ -1,0 +1,21 @@
+@media (max-width:540px) {
+    .training {
+        h2 {
+            font-size: 18px !important;
+        }
+    }
+}
+
+@media (max-width:431px) {
+    .training {
+        h2 {
+            font-size: 14px !important;
+            margin-bottom: 15px !important;
+        }
+
+        p,
+        ul {
+            font-size: 11px !important;
+        }
+    }
+}

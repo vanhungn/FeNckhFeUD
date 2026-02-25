@@ -1,0 +1,101 @@
+.document {
+    cursor: pointer;
+    padding: 25px 15px 15px 15px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px gray solid;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+
+    &:hover {
+        .boxMenu {
+            display: block;
+        }
+    }
+}
+
+.listDocx {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+
+.document::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
+}
+
+
+.boxMenu {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -30%);
+
+}
+
+.icon:hover {
+    color: red;
+}
+
+.headerDocument {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.buttonCreate {
+    width: fit-content;
+    background-color: rgb(26, 78, 141) !important;
+    color: #fff !important;
+
+    &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+}
+
+.eDocument {
+    height: 100vh;
+    padding: 20px 50px;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.eDocument::-webkit-scrollbar {
+    display: none;
+}
+
+.inputCreate {
+    width: 100%;
+}
+
+.titleInput {
+    margin: 15px 0 10px 0;
+}
+
+.error {
+    width: 100%;
+
+    .pError {
+        margin: 0;
+        padding: 0;
+        color: red;
+        font-size: 12px;
+        font-family: 'Roboto', sans-serif;
+    }
+}
