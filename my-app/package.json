@@ -39,6 +39,8 @@
     "aos": "^2.3.4",
     "axios": "^1.13.1",
     "classnames": "^2.5.1",
+    "dompurify": "^3.3.1",
+    "editorjs-html": "^4.0.5",
     "editorjs-style": "^3.0.3",
     "editorjs-text-alignment-blocktune": "^1.0.3",
     "editorjs-video": "^1.1.0",

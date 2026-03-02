@@ -120,4 +120,20 @@
         flex-direction: column;
     }
 
+    .post-content {
+        line-height: 1.7;
+    }
+
+    .post-content img,
+    .post-content video,
+    .post-content iframe {
+        max-width: 100%;
+       
+    }
+
+    .post-content h1,
+    .post-content h2,
+    .post-content h3 {
+        margin: 20px 0 10px;
+    }
 }

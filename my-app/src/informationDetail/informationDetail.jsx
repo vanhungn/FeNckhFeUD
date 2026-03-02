@@ -7,7 +7,7 @@ import CIcon from "@coreui/icons-react";
 import { cilAlarm } from "@coreui/icons";
 import { CButton } from "@coreui/react";
 import BANNER from "../components/listBgrInfo";
-
+import { parseEditorJsToHtml } from "./parseEditorJs";
 import Editor from "../components/editor/editor";
 const cx = classNames.bind(style);
 
@@ -62,13 +62,16 @@ export const InformationDetail = () => {
 
             <div style={{ width: "80%", margin: "auto", paddingTop: "30px" }}>
                 <div className={cx('contentInfo')} style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
-                    <Editor
-                        style={{ backgroundColor: "#fff", width: "100%", padding: 0 }}
-                        setResetEditor={setResetEditor}
-                        resetEditor={resetEditor}
-                        data={dataDetail?.content}
-                        readOnly={true}
-                    />
+                    <div className={cx('editor-lock')}>
+
+                        <div
+                            className="post-content"
+                            dangerouslySetInnerHTML={{
+                                __html: parseEditorJsToHtml(dataDetail?.content),
+                            }}
+                        />
+                    </div>
+
                     <div style={{ padding: "0 30px" }}>
                         <h4 className={cx('title')} style={{ color: "#0061bb", fontWeight: 600, fontSize: 30 }}>Tin cùng chuyên mục</h4>
                         <div>
