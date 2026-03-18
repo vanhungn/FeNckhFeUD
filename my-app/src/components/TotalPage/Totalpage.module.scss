@@ -9,6 +9,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &:hover {
+        color: #fff;
+        background-color: rgb(26, 78, 141);
+    }
 }
 
 .total {

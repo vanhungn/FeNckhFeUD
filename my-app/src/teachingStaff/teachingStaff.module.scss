@@ -1,0 +1,129 @@
+.teachingStaff {
+    padding-top: 30vh;
+    width: 90%;
+    margin: auto;
+}
+
+h1 {
+
+    text-align: center;
+    color: rgb(26, 78, 141) !important;
+    font-weight: 700 !important;
+
+}
+
+.boxImgTeaching {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 20px
+}
+
+.boxTeaching {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 15px;
+    transition: 1s;
+    padding-bottom: 10px;
+
+    &:hover {
+        scale: calc(1.1);
+    }
+}
+
+.boxChoose,
+.box {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        color: #fff;
+        background-color: rgb(26, 78, 141);
+    }
+}
+
+.boxChoose {
+    color: #fff;
+    background-color: rgb(26, 78, 141);
+}
+
+.total {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:1220px) {}
+
+@media(max-width:1280px) {
+    .teachingStaff {
+        padding-top: 20vh;
+    }
+
+    .boxImgTeaching {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 20px
+    }
+
+    .boxTeaching {
+
+
+        &:hover {
+            scale: calc(1.05);
+        }
+    }
+}
+
+@media (max-width:1024px) {
+    .teachingStaff {
+        padding-top: 20vh;
+    }
+}
+
+@media (max-width:912px) {
+    .teachingStaff {
+        padding-top: 15 vh;
+    }
+}
+
+
+
+@media(max-width:890px) {
+    .teachingStaff {
+        padding-top: 10vh;
+    }
+}
+
+@media(max-width:795px) {}
+
+@media(max-width:540px) {
+    .teachingStaff {
+        padding-top: 15vh;
+    }
+
+    .boxImgTeaching {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px
+    }
+
+
+}
+
+@media(max-width:431px) {
+    .boxImgTeaching {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px
+    }
+}

@@ -8,7 +8,6 @@ export const TotalPage = ({ page, colorTotal, handlePage }) => {
     const querypage = parseInt(searchParams.get('page')) || 1;
     const totalPages = page;
 
-    // ⭐ CHỈ THAY ĐOẠN NÀY
     const getPages = () => {
         let arr = [];
 
@@ -44,7 +43,6 @@ export const TotalPage = ({ page, colorTotal, handlePage }) => {
             <div className={cx('box')} onClick={handleFirstPage}><span>{"<<"}</span></div>
             <div className={cx('box')} onClick={handlePrevious}><span>{"<"}</span></div>
 
-            {/* ⭐ CHỈ THAY PHẦN NÀY */}
             {pages.map((item, index) => {
                 if (item === "leftDots" || item === "rightDots") {
                     return (

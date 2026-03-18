@@ -17,6 +17,7 @@ import { InformationDetail } from "./informationDetail/informationDetail";
 import { TrainingTechnology } from "./training/trainingTechnology";
 import { TrainingDesign } from "./training/trainingDesign";
 import { InfoSearch } from "./inforSearch/inforSearch";
+import TeachingStaff from "./teachingStaff/teachingStaff";
 import './App.css'
 import '@coreui/coreui/dist/css/coreui.min.css';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/code_lap" element={<CodeLap />} />
           <Route path="/code_lap_introduce" element={<IntroduceLapCode />} />
           <Route path="/code_lap_practice" element={<Practice />} />
+
         </Route>
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/scoreup/*" element={<ScoreUp />} />
@@ -49,6 +51,7 @@ function App() {
           <Route path="/information/detail/:_id" element={<InformationDetail />} />
           <Route path="/training/technology" element={<TrainingTechnology />} />
           <Route path="/training/design" element={<TrainingDesign />} />
+          <Route path="/teaching_staff" element={<TeachingStaff />} />
           <Route path="/search" element={<InfoSearch />} />
           <Route path="/" element={<Home />} />
         </Route>
