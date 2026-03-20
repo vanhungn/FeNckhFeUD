@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
 import ARRIMG from "../components/listImg";
-
+import Banner from "./Banner/Banner";
 import { Get } from "../baseService/baseService";
 import { Link, useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles)
@@ -18,7 +18,8 @@ export const Home = () => {
   const MAX_PAGE = Math.ceil(TOTAL / PER_PAGE);
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
-  const [seeImg,seSeeImg] = useState('')
+  const [seeImg, seSeeImg] = useState('')
+
   const handleNext = () => {
     setPageImg(prev => Math.min(prev + 1, MAX_PAGE));
   };
@@ -48,18 +49,16 @@ export const Home = () => {
   const handlePrev = () => {
     setPageImg(prev => Math.max(prev - 1, 1));
   };
-  const HandleSeeImg=(img)=>{
+  const HandleSeeImg = (img) => {
     setVisible(true)
     seSeeImg(img)
   }
   return (
     <div className={cx('home')}>
-      <div className={cx('banner')}>
-
-      </div>
+      <Banner />
       <div style={{ margin: "auto auto", width: "80%", }}>
         <div className={cx('general')} data-aos="fade-up" style={{ width: "100%", display: "flex", gap: 20, padding: "40px 0px" }}>
-          <div className={cx('box')}>
+          <div className={cx('box')} onClick={()=>navigate('/teaching_staff')}>
             <svg
               className={cx('icon')}
               aria-hidden="true"
@@ -101,7 +100,7 @@ export const Home = () => {
 
         <div className={cx('news')}>
           <div data-aos="fade-up-right" className={cx('newsImg')} >
-            <img width={"100%"} height={"100%"} src={dataNews[0]?.img?.url} alt="" />
+            <img width={"100%"} height={"100%"} style={{ objectFit: "cover" }} src={dataNews[0]?.img?.url} alt="" />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }} data-aos="fade-up-left">
             <h4 className={cx('titleNews')} style={{ color: "#0061bb", fontWeight: "600" }}> TIN TỨC VÀ SỰ KIỆN</h4>
@@ -114,7 +113,7 @@ export const Home = () => {
                 const time = `${day}/${month}/${year}`;
                 return (
                   <div key={index} className={cx('event')}>
-                    <img width={"100%"} height={"100%"} src={item?.img?.url} alt="" />
+                    <img width={"100%"} height={"100%"} style={{ objectFit: "cover" }} src={item?.img?.url} alt="" />
                     <div>
                       <h5>
                         {item.title.slice(0, 60)}
@@ -265,7 +264,7 @@ export const Home = () => {
             {data.map((item, index) => {
               return (
                 <div key={index} className={cx('boxImg')} data-aos="fade-up">
-                  <img onClick={() =>HandleSeeImg(item)} className={cx('imgLibrary')} src={item} alt="" />
+                  <img onClick={() => HandleSeeImg(item)} className={cx('imgLibrary')} src={item} alt="" />
                 </div>
               )
             })}

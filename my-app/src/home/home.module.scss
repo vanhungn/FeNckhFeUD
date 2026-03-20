@@ -26,6 +26,7 @@
 }
 
 .box {
+    cursor: pointer;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -214,6 +215,10 @@
 }
 
 @media(max-width:1280px) {
+    .home {
+        padding-top: 14vh;
+    }
+
     .partner {
         width: 250px !important;
     }
@@ -239,7 +244,7 @@
     }
 
     .home {
-        padding-top: 5vh;
+        padding-top: 15vh;
     }
 
     .library {
@@ -314,6 +319,10 @@
 
 
 @media(max-width:890px) {
+    .home {
+        padding-top: 8vh;
+    }
+
     .whyChoose {
         padding: 20px 60px !important;
 
@@ -351,6 +360,10 @@
 }
 
 @media(max-width:795px) {
+    .home {
+        padding-top: 8vh;
+    }
+
     .questionChoose {
         padding: 5px !important;
 
@@ -391,6 +404,10 @@
 }
 
 @media(max-width:540px) {
+    .home {
+        padding-top: 11vh;
+    }
+
     .general {
         display: grid !important;
         grid-template-columns: 1fr 1fr;
@@ -432,7 +449,41 @@
     }
 }
 
+@media (max-width: 1024px) and (min-height: 1000px) {
+    .home {
+        padding-top: 7vh;
+    }
+}
+
+@media (max-width:912px) {
+    .home {
+        padding-top: 7vh;
+    }
+}
+
+@media (max-width:375px) {
+    .home {
+        padding-top: 12vh;
+    }
+
+
+}
+
+@media (max-width:360px) {
+    .home {
+        padding-top: 20vh;
+    }
+}
+
 @media(max-width:431px) {
+    .home {
+        padding-top: 9vh;
+    }
+
+    .event {
+        grid-template-rows: 80px;
+    }
+
     .questionChoose {
         padding: 5px !important;
 

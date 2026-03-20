@@ -47,7 +47,7 @@ export const CreateNews = ({ dataTrans, path }) => {
         validationSchema: Yup.object({
             title: Yup.string().required('Bạn vui lòng nhập tiêu đề'),
             typeOf: Yup.string().required('Bạn vui lòng chọn loại thông tin'),
-            note: Yup.string().required('Bạn vui lòng nhập đoạn tóm tắt'),
+            
             img: Yup.mixed().required("Vui lòng chọn ảnh")
 
         }),
@@ -104,7 +104,6 @@ export const CreateNews = ({ dataTrans, path }) => {
             });
         }
     }, [formErrors]);
-    console.log(data)
     return (
         <>
             <Toaster position="top-right" />
@@ -128,14 +127,12 @@ export const CreateNews = ({ dataTrans, path }) => {
                                 <option value="generalNews">Tin tổng hợp</option>
                                 <option value="studyTrip">Du học</option>
                                 <option value="practice">Thực tập</option>
-                                <option value="toGuide">Hướng dẫn</option>
                                 <option value="notify">Thông báo</option>
                                 <option value="rules">Quy định</option>
                                 <option value="active">Hoạt động</option>
-                                <option value="studyGuide">Hướng dẫn học tập</option>
+                                <option value="studyGuide">Hướng dẫn</option>
                                 <option value="itClub">Câu lạc bộ IT</option>
                                 <option value="seminar">Hội thảo</option>
-                                <option value="topic">Đề tài</option>
                                 <option value="scientificResearchLecturer">Nghiên cứu khoa học Giảng viên</option>
                                 <option value="studentScientificResearch">Nghiên cứu khoa học Sinh viên</option>
                             </CFormSelect>
@@ -169,11 +166,7 @@ export const CreateNews = ({ dataTrans, path }) => {
                                 placeholder="Đoạn tóm tắt..."
                                 rows={3}
                             ></CFormTextarea>
-                            {formik.errors.typeOf && formik.touched.typeOf && (
-                                <div className={cx('error')}>
-                                    <p className={cx('pError')}>{formik.errors.typeOf}</p>
-                                </div>
-                            )}
+
                         </div>
 
                         <Input

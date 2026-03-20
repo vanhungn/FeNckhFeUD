@@ -91,7 +91,7 @@ export const Information = () => {
                 <div>
                     <CFormInput className={cx('search')} onChange={handleOnchangeSearch} type="text" size="lg" placeholder="Tìm kiếm tin tức" aria-label="lg input example" />
                 </div>
-                <div className={cx('ListboxNews')} style={{  marginTop: 30 ,paddingRight:150}}>
+                <div className={cx('ListboxNews')} >
                     <div>
                         <h1 className={cx('titleInfoContent')} style={{ color: "#0061bb", fontWeight: 600 }}>{banner[0]?.title}</h1>
                         <hr />

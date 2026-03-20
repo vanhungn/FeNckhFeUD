@@ -1,37 +1,33 @@
 const BANNER = [
     {
         title: "Nghiên cứu khoa học giảng viên",
-        img: "https://img.lovepik.com/photo/40006/4475.jpg_wh860.jpg",
+        img: "../../public/dreamina-2026-03-20-8987-A lecturer working in their university o....jpeg",
         keyName: "scientificResearchLecturer"
     },
     {
         title: "Nghiên cứu khoa học Sinh viên",
-        img: "https://haycafe.vn/wp-content/uploads/2022/01/Hinh-nen-cong-nghe-4K.jpg",
+        img: "../../public/dreamina-2026-03-20-9304-A group of students testing an education....jpeg",
         keyName: "studentScientificResearch"
     },
-    {
-        title: "Đề tài",
-        img: "https://t4.ftcdn.net/jpg/03/02/39/97/360_F_302399784_k69fNY2NhbWLYf3Xg4fUz50docoFAwjk.jpg",
-        keyName: "topic"
-    },
+   
     {
         title: "Hội thảo",
-        img: "https://inanbinh.vn/wp-content/uploads/2021/03/3d-illustration-mockup-nbblank-hardcover-book.jpg",
+        img: "../../public/dreamina-2026-03-20-4218-Phiên hỏi đáp hội thảo, người tham dự đặ....jpeg",
         keyName: "seminar"
     },
     {
         title: "Tin tổng hợp",
-        img: "https://cdn.pixabay.com/photo/2016/10/11/21/43/geometric-1732847_640.jpg",
+        img: "https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202401/Images/ts-20-20240122070627-e.jpg",
         keyName: "generalNews"
     },
     {
         title: "Tuyển sinh",
-        img: "https://thumbs.dreamstime.com/b/ai-robot-chatbot-speech-bubbles-technology-blue-background-hologram-ai-robot-chatbot-speech-bubbles-392913958.jpg",
+        img: "https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202512/Images/cntt-20251225090133-e.jpg",
         keyName: "enrollment"
     },
     {
         title: "Sự kiện",
-        img: "https://nextleveleventdesign.com/wp-content/uploads/2024/05/Event-Technology-FINAL.png    ",
+        img: "https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202305/Images/171243735-4788792477814219-5692127259793144093-n-20230515092019-e.jpg",
         keyName: "event"
     },
     {
@@ -39,9 +35,10 @@ const BANNER = [
         img: "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?cs=srgb&dl=pexels-joshsorenson-1714208.jpg&fm=jpg ",
         keyName: "practice"
     },
-    {
+    {   
+
         title: "Du học",
-        img: "https://t4.ftcdn.net/jpg/04/72/19/39/360_F_472193955_clqyJFAoBR1aJerpMD96ce84jhCcXZlu.jpg ",
+        img: "../../public/dreamina-2026-03-20-6676-Một nhóm bạn du học sinh từ nhiều quốc g....jpeg",
         keyName: "studyTrip"
     },
     {
@@ -51,27 +48,29 @@ const BANNER = [
     },
     {
         title: "Thông báo",
-        img: "https://img.freepik.com/free-photo/3d-render-low-poly-plexus-design-network-communications_1048-14542.jpg?semt=ais_se_enriched&w=740&q=80",
+        img: "https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202307/Images/tb23-20230731081622-e.jpg",
         keyName: "notify"
     },
     {
         title: "Quy định",
-        img: "https://www.chevron.com/-/media/chevron/homepage/images/american-ai-revolution-still.jpg?h=1080&hash=DDA91D7E5758869E5F6CDCA172F80DB1",
+        img: "../../public/dreamina-2026-03-20-9652-A large three-dimensional screen in a te....jpeg",
         keyName: "rules"
     },
     {
         title: "Hoạt động",
-        img: "https://t3.ftcdn.net/jpg/03/00/25/70/360_F_300257078_jOK2L3lIvnlHMoWrKAWtE7FBa4WI5jTf.jpg",
+        img: "https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202204/Images/tin1-20220416042543-e.jpg",
         keyName: "active"
     },
     {
+
         title: "Hướng dẫn học tập",
-        img: "https://t3.ftcdn.net/jpg/04/40/13/78/360_F_440137850_sBJOKpItVGgxB2XgCY4pxJECaU3QTEXC.jpg",
+        img: "../../public/dreamina-2026-03-20-1088-Chuyên gia IT có kinh nghiệm hướng dẫn l....jpeg",
         keyName: "studyGuide"
     },
     {
+
         title: "Câu lạc bộ IT",
-        img: "https://t3.ftcdn.net/jpg/07/40/25/24/360_F_740252413_FxJWQ8Gd7h9uuBwfK0hgrzBABrVyB6GM.jpg",
+        img: "../../public/dreamina-2026-03-20-7884-Phòng câu lạc bộ IT tương lai, các sinh ....jpeg",
         keyName: "itClub"
     },
 

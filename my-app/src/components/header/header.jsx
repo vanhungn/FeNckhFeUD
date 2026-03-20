@@ -231,7 +231,6 @@ export const Header = () => {
                                 <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
                             </svg>
                             <div className={cx('categorySmall')}>
-                                <p onClick={() => handleNews("topic")}>Đề tài</p>
                                 <p onClick={() => handleNews("seminar")}>Hội thảo</p>
                                 <p onClick={() => handleNews("scientificResearchLecturer")}>Nghiên cứu khoa học Giảng viên</p>
                                 <p onClick={() => handleNews("studentScientificResearch")}>Nghiên cứu khoa học Sinh viên</p>
@@ -277,7 +276,7 @@ export const Header = () => {
                                 <p onClick={() => handleNews("notify")}>Thông báo</p>
                                 <p onClick={() => handleNews("rules")}>Quy định</p>
                                 <p onClick={() => handleNews("active")}>Hoạt động</p>
-                                <p onClick={() => handleNews("studyGuide")}>Hướng dẫn học tập</p>
+                                <p onClick={() => handleNews("studyGuide")}>Hướng dẫn</p>
                                 <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
                             </div>
                         </div>
