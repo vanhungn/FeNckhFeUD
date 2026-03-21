@@ -206,6 +206,7 @@
     &:hover {
         .menuCategory {
             display: block;
+
         }
     }
 }
@@ -216,7 +217,7 @@
     width: 500%;
     position: absolute;
     top: 100%;
-    right: 0;
+    right: -100%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
     .boxCategoryBottomMenu {
@@ -239,6 +240,7 @@
                 height: auto;
                 opacity: 1;
                 margin-top: 0;
+                overflow: unset;
             }
         }
     }
@@ -247,7 +249,7 @@
 .categorySmallMenu {
     background-color: #fff;
     opacity: 0;
-    width: 180%;
+    width: 100%;
     height: 0;
     overflow: hidden;
     position: absolute;

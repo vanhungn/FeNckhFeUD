@@ -119,8 +119,7 @@ export const Home = () => {
                         {item.title.slice(0, 60)}
                         {item.title.length > 60 && "…"}
                       </h5>
-                      <p>  {item.note.slice(0, 90)}
-                        {item.note.length > 90 && "…"}</p>
+                     
                       <p style={{ color: "gray" }}>{time}</p>
                     </div>
                   </div>

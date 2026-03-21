@@ -140,6 +140,23 @@ export const Header = () => {
                                     >
                                         <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
                                     </svg>
+                                    <div className={cx('categorySmallMenu')} >
+                                        <div className={cx('categoryChildren1')} >
+                                            <p>Khoa học máy tính</p>
+                                            <div>
+                                                <p onClick={() => navigate("/computer_science")}>Khoa học máy tính</p>
+                                                <p onClick={() => navigate("/data_science")}>Trí tuệ nhân tạo và KH dữ liệu</p>
+                                            </div>
+                                        </div>
+                                        <div className={cx('categoryChildren1')} >
+                                            <p >Công nghệ thông tin</p>
+
+                                            <div>
+                                                <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
+                                                <p >Thiết kế đồ họa</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div className={cx('boxCategoryBottomMenu')}>
@@ -154,7 +171,13 @@ export const Header = () => {
                                         <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
                                     </svg>
 
+                                    <div className={cx('categorySmallMenu')}>
+                                        <p onClick={() => handleNews("seminar")}>Hội thảo</p>
+                                        <p onClick={() => handleNews("scientificResearchLecturer")}>Nghiên cứu khoa học Giảng viên</p>
+                                        <p onClick={() => handleNews("studentScientificResearch")}>Nghiên cứu khoa học Sinh viên</p>
 
+
+                                    </div>
 
                                 </div>
                                 <div className={cx('boxCategoryBottomMenu')}>
@@ -168,7 +191,14 @@ export const Header = () => {
                                     >
                                         <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
                                     </svg>
+                                    <div className={cx('categorySmallMenu')}>
+                                        <p onClick={() => handleNews("event")}>Sự kiện</p>
+                                        <p onClick={() => handleNews("generalNews")}>Tin tổng hợp</p>
+                                        <p onClick={() => handleNews("enrollment")}>Tuyển sinh</p>
 
+                                        <p onClick={() => handleNews("practice")}>Thực tập</p>
+                                        <p onClick={() => handleNews("studyTrip")}>Du học</p>
+                                    </div>
                                 </div>
                                 <div className={cx('boxCategoryBottomMenu')}>
                                     <p className={cx('title')}>SINH VIÊN</p>
@@ -181,13 +211,18 @@ export const Header = () => {
                                     >
                                         <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
                                     </svg>
+                                    <div className={cx('categorySmallMenu')}>
 
+                                        <p onClick={() => handleNews("notify")}>Thông báo</p>
+                                        <p onClick={() => handleNews("rules")}>Quy định</p>
+                                        <p onClick={() => handleNews("active")}>Hoạt động</p>
+                                        <p onClick={() => handleNews("studyGuide")}>Hướng dẫn</p>
+                                        <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                     <div className={cx("displayCategory")}>
                         <div className={cx('boxCategoryBottom')}>
                             <p className={cx('title')}>ĐÀO TẠO</p>
