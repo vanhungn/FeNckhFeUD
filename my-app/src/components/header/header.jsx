@@ -200,20 +200,20 @@ export const Header = () => {
                             >
                                 <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
                             </svg>
-                            <div className={cx('categorySmall')} style={{ overflow: "unset" }}>
+                            <div className={cx('categorySmall')} >
                                 <div className={cx('categoryChildren1')} >
                                     <p>Khoa học máy tính</p>
                                     <div>
-                                        <p onClick={() => navigate("/training/technology")}>Khoa học máy tính</p>
-                                        <p onClick={() => navigate("/training/technology")}>Trí tuệ nhân tạo và KH dữ liệu</p>
+                                        <p onClick={() => navigate("/computer_science")}>Khoa học máy tính</p>
+                                        <p onClick={() => navigate("/data_science")}>Trí tuệ nhân tạo và KH dữ liệu</p>
                                     </div>
                                 </div>
                                 <div className={cx('categoryChildren1')} >
                                     <p >Công nghệ thông tin</p>
 
                                     <div>
-                                        <p onClick={() => navigate("/training/design")}>Kỹ thuật phần mêm</p>
-                                        <p onClick={() => navigate("/training/design")}>Thiết kế đồ họa</p>
+                                        <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
+                                        <p >Thiết kế đồ họa</p>
                                     </div>
                                 </div>
                             </div>

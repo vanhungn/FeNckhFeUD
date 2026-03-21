@@ -1,0 +1,48 @@
+.computerScience {
+    padding: 20vh 10% 30px 10%;
+
+    img {
+        width: 100%;
+
+    }
+
+    p {
+        text-indent: 30px;
+    }
+}
+
+@media (max-width:1024px) {
+    .computerScience {
+        padding-top: 12vh;
+    }
+}
+
+@media (max-width: 1024px) and (min-height: 1000px) {
+    .computerScience {
+        padding-top: 10vh;
+    }
+}
+@media (max-width: 1024px) and (max-height: 800px) {
+  .computerScience {
+        padding-top: 20vh;
+    }
+}
+@media (max-width:540px) {
+    .computerScience {
+        padding-top: 13vh;
+    }
+
+    h1 {
+        font-size: 22px !important;
+    }
+
+    p {
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width:380px) {
+    .computerScience {
+        padding-top: 15vh;
+    }
+}

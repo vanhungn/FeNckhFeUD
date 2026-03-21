@@ -14,9 +14,7 @@ export const IntroduceDepartment = () => {
         <div>
             <div className={cx('banner')}>
                 <div >
-                    <h1 style={{ fontSize: "70px", fontWeight: "600", marginBottom: 40 }}>KHOA CÔNG NGHỆ THÔNG TIN</h1>
-                    <h2 style={{ marginBottom: 20 }}>KIẾN TẠO TƯƠNG LAI SỐ - ĐỨNG ĐẦU CÔNG NGHỆ</h2>
-                    <CButton className={cx("btnRegister")} style={{ backgroundColor: "rgba(6, 110, 195, 1)", color: "#fff", fontSize: "30px", padding: "10px 40px" }} > ĐĂNG KÝ NHẬN TƯ VẤN TUYỂN SINH</CButton>
+       
                 </div>
 
             </div>
@@ -32,7 +30,7 @@ export const IntroduceDepartment = () => {
             <div style={{ width: "80%", margin: "auto" }}>
                 <div className={cx('introduceContent')} style={{ marginTop: 50, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
                     <div data-aos="fade-up-right">
-                        <img width={"100%"} style={{ height: "100%", objectFit: "cover" }} src="../../public/1003.jpg" alt="" />
+                        <img width={"100%"} style={{ height: "100%", objectFit: "cover" }} src="../../public\499802068_1024876699798087_4673418439735648425_n.jpg" alt="" />
                     </div>
                     <div className={cx('content')} data-aos="fade-up-left">
                         <h5 style={{ color: "#0061bb" }}> GIỚI THIỆU CHUNG</h5>
