@@ -11,7 +11,7 @@ const editorJsHtml = EditorJSHTML({
 
     return `
       <figure class="editor-image">
-        <img src="${url}" alt="" width="90%" />
+        <img src="${url}" alt="" width="100%" />
         ${caption ? `<figcaption>${caption}</figcaption>` : ""}
       </figure>
     `;
@@ -42,7 +42,7 @@ const editorJsHtml = EditorJSHTML({
           <div class="embed-block">
             <iframe 
               src="${embed}"
-              width="${width || "100%"}"
+              width="${"100%"}"
               height="${height || 400}"
               frameborder="0"
               allowfullscreen>
