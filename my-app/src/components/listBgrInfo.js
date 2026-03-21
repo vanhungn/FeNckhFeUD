@@ -1,18 +1,18 @@
 const BANNER = [
     {
         title: "Nghiên cứu khoa học giảng viên",
-        img: "../../public/dreamina-2026-03-20-8987-A lecturer working in their university o....jpeg",
+        img: "/dreamina-2026-03-20-8987-A lecturer working in their university o....jpeg",
         keyName: "scientificResearchLecturer"
     },
     {
         title: "Nghiên cứu khoa học Sinh viên",
-        img: "../../public/dreamina-2026-03-20-9304-A group of students testing an education....jpeg",
+        img: "/dreamina-2026-03-20-9304-A group of students testing an education....jpeg",
         keyName: "studentScientificResearch"
     },
-   
+
     {
         title: "Hội thảo",
-        img: "../../public/dreamina-2026-03-20-4218-Phiên hỏi đáp hội thảo, người tham dự đặ....jpeg",
+        img: "/dreamina-2026-03-20-4218-Phiên hỏi đáp hội thảo, người tham dự đặ....jpeg",
         keyName: "seminar"
     },
     {
@@ -35,10 +35,10 @@ const BANNER = [
         img: "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?cs=srgb&dl=pexels-joshsorenson-1714208.jpg&fm=jpg ",
         keyName: "practice"
     },
-    {   
+    {
 
         title: "Du học",
-        img: "../../public/dreamina-2026-03-20-6676-Một nhóm bạn du học sinh từ nhiều quốc g....jpeg",
+        img: "/dreamina-2026-03-20-6676-Một nhóm bạn du học sinh từ nhiều quốc g....jpeg",
         keyName: "studyTrip"
     },
     {
@@ -53,7 +53,7 @@ const BANNER = [
     },
     {
         title: "Quy định",
-        img: "../../public/dreamina-2026-03-20-9652-A large three-dimensional screen in a te....jpeg",
+        img: "/dreamina-2026-03-20-9652-A large three-dimensional screen in a te....jpeg",
         keyName: "rules"
     },
     {
@@ -64,13 +64,13 @@ const BANNER = [
     {
 
         title: "Hướng dẫn học tập",
-        img: "../../public/dreamina-2026-03-20-1088-Chuyên gia IT có kinh nghiệm hướng dẫn l....jpeg",
+        img: "/dreamina-2026-03-20-1088-Chuyên gia IT có kinh nghiệm hướng dẫn l....jpeg",
         keyName: "studyGuide"
     },
     {
 
         title: "Câu lạc bộ IT",
-        img: "../../public/dreamina-2026-03-20-7884-Phòng câu lạc bộ IT tương lai, các sinh ....jpeg",
+        img: "/dreamina-2026-03-20-7884-Phòng câu lạc bộ IT tương lai, các sinh ....jpeg",
         keyName: "itClub"
     },
 

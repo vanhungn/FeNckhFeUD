@@ -16,12 +16,12 @@ function Banner() {
         >
             <SwiperSlide>
                 <img style={{ height: "auto", width: "100%", objectFit: "cover" }}
-                    src="../../../public/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
+                    src="/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
             </SwiperSlide>
 
             <SwiperSlide>
                 <img style={{ height: "auto", width: "100%", objectFit: "cover" }}
-                    src="../../../public/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
+                    src="/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
             </SwiperSlide>
         </Swiper>
     );

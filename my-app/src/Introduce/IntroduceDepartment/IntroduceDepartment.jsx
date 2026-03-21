@@ -14,7 +14,7 @@ export const IntroduceDepartment = () => {
         <div>
             <div className={cx('banner')}>
                 <div >
-       
+
                 </div>
 
             </div>
@@ -30,7 +30,7 @@ export const IntroduceDepartment = () => {
             <div style={{ width: "80%", margin: "auto" }}>
                 <div className={cx('introduceContent')} style={{ marginTop: 50, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
                     <div data-aos="fade-up-right">
-                        <img width={"100%"} style={{ height: "100%", objectFit: "cover" }} src="../../public\499802068_1024876699798087_4673418439735648425_n.jpg" alt="" />
+                        <img width={"100%"} style={{ height: "100%", objectFit: "cover" }} src="/499802068_1024876699798087_4673418439735648425_n.jpg" alt="" />
                     </div>
                     <div className={cx('content')} data-aos="fade-up-left">
                         <h5 style={{ color: "#0061bb" }}> GIỚI THIỆU CHUNG</h5>
@@ -70,7 +70,7 @@ export const IntroduceDepartment = () => {
                 <div data-aos="fade-up">
                     <h2 className={cx('titleContent')} style={{ fontWeight: "600", color: "#0061bb" }}> NGÀNH CÔNG NGHỆ THÔNG TIN (Mã ngành 7480201)</h2>
 
-                    <img width={"100%"} src="../../public/1000.jpg" alt="" />
+                    <img width={"100%"} src="/1000.jpg" alt="" />
                     <h4 className={cx('titleContent')} style={{ marginTop: 40 }}> NGÀNH CÔNG NGHỆ THÔNG TIN (7480201)</h4>
                     <h5>Ngành học làm chủ kỷ nguyên số</h5>
                     <p>------------------------</p>
