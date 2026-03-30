@@ -14,52 +14,13 @@ export const DataScience = () => {
 
             </p>
             <img src="https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202601/Images/n-kh-du-lieu-20260121095100-e.jpg" alt="" />
-
-            <br /> <br />
-            <p><b>Các vị trí công việc phổ biến:</b></p>
-            <p>- Nhà Khoa học Dữ liệu (Data Scientist): Xây dựng mô hình dự đoán phức tạp, phân tích sâu và tìm kiếm xu hướng.
-
-            </p>
-            <p>
-                - Nhà phân tích dữ liệu (Data Analyst): Thu thập, xử lý, trực quan hóa dữ liệu và tạo báo cáo hỗ trợ ra quyết định.
-            </p>
-            <p>
-                - Kỹ sư Dữ liệu (Data Engineer): Xây dựng và bảo trì hạ tầng, hệ thống đường ống dữ liệu (data pipeline).
-            </p>
-            <p>
-                - Kỹ sư Học máy (Machine Learning Engineer): Phát triển và triển khai các mô hình/thuật toán học máy.
-            </p>
-            <p>
-                - Nhà phát triển Business Intelligence (BI Developer/Analyst): Thiết kế chiến lược thông tin kinh doanh, tạo dashboard.
-            </p>
-            <p>
-                - Kỹ sư AI (AI Application Engineer/Researcher): Phát triển ứng dụng và nghiên cứu về Trí tuệ nhân tạo.
-            </p>
-            <p>
-                - Chuyên gia An ninh Dữ liệu (Data Security Analyst): Bảo vệ hệ thống và thông tin khỏi các mối đe dọa.
-            </p>
-            <img src="https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202601/Images/khdl1-20260128031509-e.jpg" alt="" />
-            <br /> <br />
-            <p>Lĩnh vực và môi trường làm việc:</p>
-            <p>- Công nghệ: Các tập đoàn công nghệ lớn (Google, Amazon, Microsoft), công ty phần mềm.</p>
-            <p>- Tài chính - Ngân hàng - Bảo hiểm: Phân tích rủi ro, dự báo thị trường, tối ưu hóa sản phẩm.</p>
-            <p>- Thương mại điện tử - Bán lẻ: Phân tích hành vi khách hàng, tối ưu hóa chiến dịch marketing.</p>
-            <p>- Y tế - Chăm sóc sức khỏe: Phân tích dữ liệu bệnh án, nghiên cứu y học.</p>
-            <p>- Sản xuất: Tối ưu hóa quy trình, nâng cao hiệu suất.</p>
-            <p>- Tư vấn, Giáo dục, Cơ quan Nhà nước: Nhiều lựa chọn đa dạng.</p>
-            <p>Mức lương của người làm trong ngành Khoa học dữ liệu: Mức lương hấp dẫn, có sự phân hóa theo kinh nghiệm, từ 12 - 50 triệu đồng/tháng tại Việt Nam, có thể cao hơn ở nước ngoài.
-
-            </p>
-            <p><b>Tìm hiểu thêm về ngành:</b></p>
-            <p>1. Ngành Khoa học dữ liệu là gì, ra trường làm gì?</p>
-            <p>2. Ngành Khoa học dữ liệu học gì? Tố chất để học ngành Khoa học dữ liệu?</p>
-            <p>3. Cơ hội việc làm ngành Khoa học dữ liệu</p>
-            <p>4. Ngành Khoa học dữ liệu khí thực hành, thực tập ở đâu?</p>
-            <p>5. Thời gian học ngành Khoa học dữ liệu là bao lâu?</p>
-            <p>6. Ngành Khoa học dữ liệu xét tuyển thế nào? Học phí bao nhiêu?</p>
-            <img src="https://media.viu.edu.vn/Media/2_TSVIU/FolderFunc/202601/Images/w-kh-du-lieu-20260121095656-e.jpg" alt="" />
             <br />
             <br />
+            <h5 style={{ fontWeight: 600, padding: 15, borderLeft: "4px blue solid" }}>Chương trình đào tạo Trí tuệ nhân tạo và Khoa học dữ liệu</h5>
+            <img src="/08a39c5d-d166-4d88-8bdb-129c3d36fec6.png" alt="" />
+            <img src="/40c3c0de-f604-4607-b10d-819aab81394d.png" alt="" />
+            <img src="/323dbca5-82d0-4a63-9692-cf4c06f42eae.png" alt="" />
+            <img src="/c467d330-4560-44a9-8046-ca53566da0d6.png" alt="" />
             <p><b>Xem thêm thông tin về VIU:</b></p>
             <p>💎 Link khám phá môi trường học tập VIU: <a href="http://tuyensinh.viu.edu.vn/kham-pha-viu.html" target="_blank" rel="noopener noreferrer">http://tuyensinh.viu.edu.vn/kham-pha-viu.html</a> </p>
             <p>💎 Link giới thiệu VIU: <a href="https://tuyensinh.viu.edu.vn/viu-ts2025.html" target="_blank" rel="noopener noreferrer">https://tuyensinh.viu.edu.vn/viu-ts2025.html</a> </p>

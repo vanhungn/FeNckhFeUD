@@ -62,7 +62,7 @@ export const Admin = () => {
                             {
                                 !sidebar ?
                                     <>
-                                        <img width={"100%"} height={"100px"} style={{ objectFit: "cover" }} src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-DH-Cong-Nghiep-Viet-Hung-300x200.png" alt="" />
+                                        <img width={"100%"} height={"100px"} style={{ objectFit: "cover" }} src="https://upload.wikimedia.org/wikipedia/vi/3/3b/Logo_viethung.png" alt="" />
                                         <svg onClick={() => setSidebar(true)} style={{ cursor: "pointer" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                             <circle cx="12" cy="12" r="10" />
                                             <path d="M13.5 16.5L10.5 12 13.5 7.5" />
@@ -97,9 +97,10 @@ export const Admin = () => {
                             <CIcon customClassName="nav-icon" icon={cilInfo} /> Thông tin{' '}
                         </CNavItem>
                     </NavLink>
-                    <NavLink style={{ textDecoration: "none" }} to={'/admin/diligence'}>
-                        <CNavItem className={cx(location.pathname === '/admin/diligence' ? "active" : "category")}>
-                            <CIcon customClassName="nav-icon" icon={cilCheckCircle} /> Chuyên cần{' '}
+                    
+                     <NavLink style={{ textDecoration: "none" }} to={'/admin/contact'}>
+                        <CNavItem className={cx(location.pathname === '/admin/contact' ? "active" : "category")}>
+                            <CIcon customClassName="nav-icon" icon={cilCheckCircle} /> Lien he{' '}
                         </CNavItem>
                     </NavLink>
                 </CSidebarNav>

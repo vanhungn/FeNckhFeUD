@@ -4,20 +4,15 @@ import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 const cx = classNames.bind(style)
 const TeachingStaff = () => {
-    const infoTeaching = [
-        {
-            name: "TS. An Hồng Sơn",
-            title: "Trưởng khoa",
-            img: "/z7633515215480_b3ea6135d7d37dbbadd76ec0769811ad.jpg"
-        },
+    const trees1 = [
         {
             name: "Ths. Vũ Hùng Cường",
-            title: "Phó khoa",
+            title: "Phó trưởng khoa",
             img: "/z7633514966770_bccfe4bdea3483a63e9664bbf1643e9f.jpg"
         },
         {
             name: "ThS. Phạm Thị Thu Hiếu",
-            title: "Phó khoa",
+            title: "Phó trưởng khoa",
             img: "/z7633514962457_49b838997e6d92f4643511d662120062.jpg"
         },
         {
@@ -30,6 +25,8 @@ const TeachingStaff = () => {
             title: "Trưởng bộ môn",
             img: "/z7633515614774_da739b1543ea8c71a715886b3b2351a5.jpg"
         },
+    ]
+    const tree2 = [
         {
             name: "ThS. Phạm Hồng Long",
             title: "Giảng viên",
@@ -85,71 +82,47 @@ const TeachingStaff = () => {
             img: "/z7633516092149_f8854617aa430db256ad95a8a4288785.jpg"
         },
     ]
-    const [skipPage, setSkipPage] = useState(1)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const filterPage = infoTeaching.slice((skipPage - 1) * 12, (skipPage - 1) * 12 + 12)
-    const totalPage = Math.ceil(infoTeaching.length / 12);
-    const arr = [];
-    for (let i = 1; i <= totalPage; i++) {
-        arr.push(i)
-    }
-    const HandlePage = (page) => {
-        setSkipPage(page)
-        setSearchParams({ page: page })
-    }
-    const handlePrevious = () => {
-        if (skipPage > 1) HandlePage(skipPage - 1);
-    }
 
-    const handleNext = () => {
-        if (skipPage < totalPage) HandlePage(skipPage + 1);
-    }
-
-    const handleFirstPage = () => HandlePage(1);
-    const handleLastPage = () => HandlePage(totalPage);
-    const ComponentPage = () => {
-        return (
-            <div style={{ display: totalPage === 0 ? "none" : "flex" }} className={cx('total')}>
-
-                <div className={cx('box')} onClick={() => handleFirstPage()}><span>{"<<"}</span></div>
-                <div className={cx('box')} onClick={() => handlePrevious()} ><span>{"<"}</span></div>
-
-                {arr.map((item, index) => {
-                    return (
-                        <div
-                            key={index}
-                            className={cx(skipPage === item ? "boxChoose" : "box")}
-                            onClick={() => HandlePage(item)}
-                        >
-                            <span>{item}</span>
-                        </div>
-                    );
-                })}
-
-                <div className={cx('box')} onClick={() => handleNext()}><span>{">"}</span></div>
-                <div className={cx('box')} onClick={() => handleLastPage()}><span>{">>"}</span></div>
-            </div>
-        )
-    }
     return (
         <div className={cx('teachingStaff')}>
             <h1>Giảng viên - Cán bộ</h1>
-            <div className={cx('boxImgTeaching')}>
-                {
-                    filterPage?.map((item) => {
-                        return (
-                            <div className={cx('boxTeaching')} >
+            <div className={cx('tree')}>
+                <div className={cx('tree0')}>
+                    <div className={cx('boxTeaching')} >
+                        <img src="/z7633515215480_b3ea6135d7d37dbbadd76ec0769811ad.jpg" alt="" />
+                        <p className={cx('nameTeaching')}>TS. An Hồng Sơn</p>
+                        <p >Trưởng khoa</p>
+                    </div>
+                </div>
+                <div className={cx('tree1')}>
+                    {
+                        trees1?.map((item, index) => {
+                            return (
+                                <div key={index} className={cx('boxTeaching')} >
+                                    <img src={item.img} alt="" />
+                                    <p className={cx('nameTeaching')}>{item.name}</p>
+                                    <p >{item.title}</p>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
 
-                                <img width={"100%"} height={"80%"} src={item.img} alt="" />
-                                <p style={{ textAlign: "center", marginTop: 15, fontWeight: 600, fontSize: "12px", color: "rgb(1, 84, 186)" }}>{item.name}</p>
-                                <p style={{ textAlign: "center", fontWeight: 600 }}>{item.title}</p>
+            <div className={cx('tree2')}>
+                {
+                    tree2?.map((item, index) => {
+                        return (
+                            <div key={index} className={cx('boxTeaching')} >
+                                <img src={item.img} alt="" />
+                                <p className={cx('nameTeaching')} >{item.name}</p>
+                                <p style={{ paddingTop: "10px" }} >{item.title}</p>
                             </div>
                         )
                     })
                 }
             </div>
 
-            <ComponentPage />
         </div>
     )
 }

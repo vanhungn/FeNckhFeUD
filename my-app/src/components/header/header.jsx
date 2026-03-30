@@ -41,7 +41,6 @@ export const Header = () => {
         };
         document.addEventListener("mousedown", handleClickOutside);
 
-        // cleanup khi component unmount
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
@@ -153,7 +152,7 @@ export const Header = () => {
 
                                             <div>
                                                 <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
-                                                <p >Thiết kế đồ họa</p>
+                                                <p onClick={()=>navigate("/graphic_design")} >Thiết kế đồ họa</p>
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +247,7 @@ export const Header = () => {
 
                                     <div>
                                         <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
-                                        <p >Thiết kế đồ họa</p>
+                                        <p onClick={()=> navigate("/graphic_design")}>Thiết kế đồ họa</p>
                                     </div>
                                 </div>
                             </div>

@@ -62,7 +62,7 @@ export const Dashboard = () => {
                     <h5>Chúc bạn một ngày tốt lành!</h5>
                 </div>
             </div>
-            <h3 style={{margin:15}}><b>Lịch sử làm bài</b> </h3>
+            <h3 style={{ margin: 15 }}><b>Lịch sử làm bài</b> </h3>
             <div
                 ref={listRef}
                 className={cx("listPractice")}
@@ -72,7 +72,7 @@ export const Dashboard = () => {
                         return (
                             <div className={cx('boxTitle')} key={index}>
                                 <h4>{item?.infoTheory?.chapter}</h4>
-                                <h5>Điểm: {item.core}</h5>
+                                <h5>Điểm: {item.core.toFixed(2)}</h5>
                                 <button type="button" onClick={() => handleDoAgain(item.theoryId)} className={cx('btnTitle')}>Làm lại</button>
                             </div>
                         )

@@ -105,3 +105,20 @@
     height: 100%;
     object-fit: cover;
 }
+
+@media (max-width:1280px) {
+    h5 {
+        font-size: 16px !important;
+    }
+
+    .node {
+        display: none;
+    }
+
+}
+
+@media (max-width:1024px) {
+    select {
+        font-size: 10px;
+    }
+}

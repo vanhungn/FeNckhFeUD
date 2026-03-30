@@ -116,7 +116,7 @@ export const News = () => {
                             <CFormInput onChange={handleOnchangeSearch} type="text" placeholder="Tìm kiếm tài liệu..." aria-label="default input example" />
                             <div style={{ display: "flex", gap: 15 }}>
                                 <CButton className={cx('buttonCreate')} onClick={() => handleTurnOn()} >+Tạo mới</CButton>
-                                <CFormSelect onChange={handleOnchangeType} style={{ width: "fit-content", margin: 0 }} aria-label="Large select example">
+                                <CFormSelect onChange={handleOnchangeType} style={{ width: "fit-content", margin: 0 }} size="sm" aria-label="Large select example">
                                     <option value="" className={cx('disabled-option')}>Chọn thông tin</option>
                                     <option value="event">Sự kiện</option>
                                     <option value="enrollment">Tuyển sinh</option>
@@ -154,7 +154,7 @@ export const News = () => {
                                                 <div>
                                                     <h5>{item.title}
                                                     </h5>
-                                                    <p>{item.note}
+                                                    <p className={cx('node')}>{item.note}
                                                     </p>
                                                     <p className={cx('timeNews')} >{time}</p>
                                                 </div>

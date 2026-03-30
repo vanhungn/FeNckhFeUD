@@ -125,3 +125,8 @@
         color: red;
     }
 }
+@media (max-width:1280px) {
+    .listAlgorithm{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

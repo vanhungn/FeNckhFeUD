@@ -102,7 +102,7 @@ export const Document = () => {
                         <h3>{item.course}</h3>
 
                         <select
-                            style={{ width: "100%", padding: 10, margin: "10px 0" }}
+                            style={{ width: "100%",height:40, padding: 5, margin: "10px 0" }}
                             onChange={handleOnchangeCode}
                         >
                             <option value="">Chọn tài liệu</option>

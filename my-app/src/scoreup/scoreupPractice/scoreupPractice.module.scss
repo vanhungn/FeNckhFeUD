@@ -85,3 +85,15 @@ h5 {
 .inputSearch {
     margin: 10px 0 10px 0 !important;
 }
+
+@media (max-width:1280px) {
+    .boxTitle {
+        grid-template-rows: 1.5fr 0.5fr;
+        h4{
+            font-size: 18px;
+        }
+        .btnTitle{
+            font-size: 16px !important;
+        }
+    }
+}

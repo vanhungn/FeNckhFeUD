@@ -89,7 +89,10 @@ export const ScoreUpPracticeTheory = () => {
             >
                 {data.map(item => (
                     <div key={item._id} className={cx("boxTitle")}>
-                        <h4>{item.course}</h4>
+                        <h4>
+                            {item.course.slice(0, 39)}
+                            {item.course.length > 30 && "..."}
+                        </h4>
                         <CButton
                             className={cx("btnTitle")}
                             onClick={() =>

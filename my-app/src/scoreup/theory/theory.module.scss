@@ -8,7 +8,6 @@
 
 .listPractice {
     margin-top: 20px;
-    flex: 1;
     overflow-y: auto;
     background-color: rgb(26, 78, 141);
     border-radius: 5px;
@@ -45,12 +44,13 @@
     background-color: rgb(242, 247, 253);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: grid;
-    grid-template-rows: 1fr 0.5fr;
+    grid-template-rows: 1.5fr 0.5fr;
     gap: 10px;
 
     h4,
     p {
         color: rgb(26, 78, 141);
+        text-align: center;
     }
 }
 
@@ -70,4 +70,23 @@ h5 {
 
 .listPractice::-webkit-scrollbar {
     display: none;
+}
+
+@media (max-width:1280px) {
+    .boxTitle {
+        h4 {
+            font-size: 18px;
+        }
+    }
+}
+
+@media (max-width:1024px) {
+    .boxTitle {
+        h4 {
+            font-size: 14px;
+        }
+        .btnTitle{
+            font-size: 10px;
+        }
+    }
 }
