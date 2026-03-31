@@ -1,0 +1,20 @@
+.zaloChat{
+    position: fixed;
+    bottom: 30px;
+    right: 90px;
+    background-color:#0084ff ;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 100;
+    animation: chat 1s linear 2s infinite alternate;
+
+}
+@keyframes chat{
+    from{
+        scale: (1);
+    }
+    to{
+        scale: (1.1);
+    }
+}
