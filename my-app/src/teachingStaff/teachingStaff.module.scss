@@ -71,15 +71,12 @@ h1 {
     }
 }
 
-@media (max-width:1220px) {}
-
-@media(max-width:1280px) {}
 
 @media (max-width:1024px) {
     .teachingStaff {
         padding-top: 18vh;
     }
-    
+
 }
 
 @media (max-width:912px) {
@@ -149,27 +146,31 @@ h1 {
         padding-top: 14vh;
     }
 
-    .boxTeaching {
-        width: 100px;
-
-    }
+    
 
     .tree0,
     .tree1,
     .tree2 {
-        .nameTeaching {
-            font-size: 10px !important;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap:20px;
+        .boxTeaching {
+            margin: 0 auto;
+            width: 75% !important;
+            .nameTeaching {
+                font-size: 14px !important;
+            }
+
+            p {
+                font-size: 11px !important;
+                line-height: 10px;
+            }
         }
 
-        p {
-            font-size: 9px !important;
-            line-height: 10px;
-        }
     }
 
-    .tree1 {
-        gap: 5px;
-    }
+   
 
+    
 
 }
