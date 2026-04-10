@@ -347,7 +347,7 @@ export const Home = () => {
         <img src={seeImg} alt="" />
       </CModal>
       <ChatBot />
-      <ZaloChatWidget/>
+      <ZaloChatWidget />
     </div >
   )
 }

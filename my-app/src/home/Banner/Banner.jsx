@@ -4,6 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
+import classNames from 'classnames/bind';
+import style from "./Banner.module.scss";
+const cx = classNames.bind(style)
+
 import { Autoplay } from 'swiper/modules';
 
 function Banner() {
@@ -12,15 +16,15 @@ function Banner() {
             modules={[Autoplay]}
             autoplay={{ delay: 3000 }}
             loop={true}
-            
+            className={cx('banner')}
         >
             <SwiperSlide>
-                <img style={{ height: "auto", width: "100%", objectFit: "cover" }}
+                <img className={cx('imgBanner')} 
                     src="/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
             </SwiperSlide>
 
             <SwiperSlide>
-                <img style={{ height: "auto", width: "100%", objectFit: "cover" }}
+                <img className={cx('imgBanner')} 
                     src="/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
             </SwiperSlide>
         </Swiper>
