@@ -68,6 +68,7 @@ export const News = () => {
             setLoading(true)
             const data = await Get(`/news?&skip=${page}&search=${search}&typeOf=${selectType}`)
             setDataNew(data.data.data)
+
             setColorToatal(page)
             setSearchParams({ page: page })
         } catch (error) {
@@ -100,6 +101,7 @@ export const News = () => {
             setSelectType(value)
             const data = await Get(`/news?typeOf=${value}&search=${search}`)
             setDataNew(data.data.data)
+            setTotalPage(data.data.total)
             setColorToatal(1)
             setSearchParams({ page: 1 })
         } catch (error) {
@@ -127,10 +129,8 @@ export const News = () => {
                                     <option value="notify">Thông báo</option>
                                     <option value="rules">Quy định</option>
                                     <option value="active">Hoạt động</option>
-                                    <option value="studyGuide">Hướng dẫn học tập</option>
                                     <option value="itClub">Câu lạc bộ IT</option>
                                     <option value="seminar">Hội thảo</option>
-                                    <option value="topic">Đề tài</option>
                                     <option value="scientificResearchLecturer">Nghiên cứu khoa học Giảng viên</option>
                                     <option value="studentScientificResearch">Nghiên cứu khoa học Sinh viên</option>
                                 </CFormSelect>

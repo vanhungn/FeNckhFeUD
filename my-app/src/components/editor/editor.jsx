@@ -20,7 +20,7 @@ const Editor = ({ style: customStyle, data, onChange, readOnly, resetEditor, set
     const editor = new EditorJS({
       holder: holderRef.current,
       tools: EditorjsTools,
-      data,
+      data:data&& data.blocks ? data : { blocks: [] },
       readOnly: readOnly,
       async onChange() {
         if (editorRef.current && !readOnly) {

@@ -9,6 +9,8 @@ import { CButton } from "@coreui/react";
 import BANNER from "../components/listBgrInfo";
 import { parseEditorJsToHtml } from "./parseEditorJs";
 import Editor from "../components/editor/editor";
+import { ChatBot } from "../components/Chatbot/Chatbot";
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 const cx = classNames.bind(style);
 
 export const InformationDetail = () => {
@@ -103,6 +105,8 @@ export const InformationDetail = () => {
 
 
             </div>
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     );
 };

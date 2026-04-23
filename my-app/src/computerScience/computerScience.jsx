@@ -1,5 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./computerScience.module.scss"
+import { ChatBot } from "../components/Chatbot/Chatbot";
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 const cx = classNames.bind(styles)
 
 export const ComputerScience = () => {
@@ -86,9 +88,11 @@ export const ComputerScience = () => {
                 <li>
                     - Chuyên viên phát triển Ứng dụng điện thoại di động.
                 </li>
-                
+
             </ul>
             <p>Trong quá trình làm việc, sinh viên có kỹ năng IT và quản lý tốt có cơ hội thăng tiến ở các vị trí cao hơn như: Kỹ sư cấp cao, Quản lý Dự án, Quản lý Kỹ thuật, Quản lý IT, Giám đốc Điều hành, Giám đốc Công nghệ…</p>
+            <ZaloChatWidget />
+            <ChatBot />
         </div>
     )
 }

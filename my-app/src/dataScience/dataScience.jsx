@@ -1,5 +1,7 @@
 import classNames from "classnames/bind";
 import style from "./dataScience.module.scss"
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
+import { ChatBot } from "../components/Chatbot/Chatbot";
 const cx = classNames.bind(style)
 
 export const DataScience = () => {
@@ -26,6 +28,8 @@ export const DataScience = () => {
             <p>💎 Link giới thiệu VIU: <a href="https://tuyensinh.viu.edu.vn/viu-ts2025.html" target="_blank" rel="noopener noreferrer">https://tuyensinh.viu.edu.vn/viu-ts2025.html</a> </p>
             <p>💎 Link giới thiệu 21 ngành đào tạo đại học chính quy: <a href="https://tuyensinh.viu.edu.vn/21nganhk50.html" target="_blank" rel="noopener noreferrer">https://tuyensinh.viu.edu.vn/21nganhk50.html</a></p>
             <p>💎 Link giới thiệu 3 cơ sở đào tạo: <a href="https://tuyensinh.viu.edu.vn/3cs.html" target="_blank" rel="noopener noreferrer">https://tuyensinh.viu.edu.vn/3cs.html</a> </p>
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     )
 }

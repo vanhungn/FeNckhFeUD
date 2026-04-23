@@ -14,15 +14,13 @@ import { Contact } from "./contact/contact";
 import { Admin } from "./admin/admin"
 import { Information } from "./information/infomation";
 import { InformationDetail } from "./informationDetail/informationDetail";
-import { TrainingTechnology } from "./training/trainingTechnology";
-import { TrainingDesign } from "./training/trainingDesign";
 import { InfoSearch } from "./inforSearch/inforSearch";
 import TeachingStaff from "./teachingStaff/teachingStaff";
 import { Facilities } from "./facilities/facilities";
 import { ComputerScience } from "./computerScience/computerScience";
 import { DataScience } from "./dataScience/dataScience";
-import { InformationTechnology } from "./informationTechnology/informationTechnology";
 import { GraphicDesign } from "./graphicDesign/graphicDesign";
+import { InformationTechnology } from "./informationTechnology/informationTechnology";
 import './App.css'
 import '@coreui/coreui/dist/css/coreui.min.css';
 
@@ -55,11 +53,11 @@ function App() {
           <Route path="/information" element={<Information />} />
           <Route path="/information/detail/:_id" element={<InformationDetail />} />
 
+          <Route path="/information_technology" element={<InformationTechnology />} />
           <Route path="/teaching_staff" element={<TeachingStaff />} />
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/computer_science" element={<ComputerScience />} />
           <Route path="/data_science" element={<DataScience />} />
-          <Route path="/information_technology" element={<InformationTechnology />} />
           <Route path="/graphic_design" element={<GraphicDesign />} />
           <Route path="/search" element={<InfoSearch />} />
           <Route path="/" element={<Home />} />

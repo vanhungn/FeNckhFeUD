@@ -4,6 +4,8 @@ import { CButton } from "@coreui/react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import ZaloChatWidget from "../../components/ZaloChatWidget/ZaloChatWidget";
+import { ChatBot } from "../../components/Chatbot/Chatbot";
 const cx = classNames.bind(style)
 
 export const IntroduceDepartment = () => {
@@ -83,7 +85,8 @@ export const IntroduceDepartment = () => {
                     <p><b>*Tư vấn nhóm lĩnh vực kỹ thuật:</b> 0984 430 936 (thầy Quân) - 0985 600 964 (thầy Thắng) - 0984 058 666 (thầy Nguyên) - 0966 578 558 (thầy Dũng)</p>
                 </div>
             </div>
-
+            <ZaloChatWidget />
+            <ChatBot />
 
         </div >
     )

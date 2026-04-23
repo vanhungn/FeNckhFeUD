@@ -34,7 +34,51 @@
 }
 
 
+.suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px 5px;
+}
 
+/* =========================
+   SUGGESTION BUTTON
+========================= */
+.suggestion-btn {
+    background: linear-gradient(135deg, #f8f5ff 0%, #f0ebff 100%);
+    border: 1px solid rgba(109, 79, 194, 0.2);
+    color: #0061bb;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(109, 79, 194, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.suggestion-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #0061bb 0%, #8b5cf6 100%);
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(109, 79, 194, 0.3);
+}
+
+/* Click effect */
+.suggestion-btn:active {
+    transform: scale(0.98);
+}
+
+/* Optional small icon effect */
+.suggestion-btn::before {
+    content: "💡";
+    margin-right: 8px;
+}
 .container {
     position: fixed;
     bottom: 30px;

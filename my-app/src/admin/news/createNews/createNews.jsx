@@ -23,7 +23,7 @@ export const CreateNews = ({ dataTrans, path }) => {
     const navigate = useNavigate()
     useEffect(() => {
         const interval = setInterval(() => {
-            if (Object.keys(data).length > 0) {
+            if (Object.keys(data || {}).length > 0) {
                 localStorage.setItem('InitialData', JSON.stringify(data))
             }
         }, 300000)
@@ -47,7 +47,7 @@ export const CreateNews = ({ dataTrans, path }) => {
         validationSchema: Yup.object({
             title: Yup.string().required('Bạn vui lòng nhập tiêu đề'),
             typeOf: Yup.string().required('Bạn vui lòng chọn loại thông tin'),
-            
+
             img: Yup.mixed().required("Vui lòng chọn ảnh")
 
         }),
@@ -59,7 +59,11 @@ export const CreateNews = ({ dataTrans, path }) => {
                 formData.append("note", values.note);
                 formData.append("typeOf", values.typeOf);
                 formData.append("content", JSON.stringify(data));
-                formData.append(values.img instanceof File ? "image" : "img", values.img instanceof File ? values.img : JSON.stringify(dataTrans?.img));
+                if (values.img instanceof File) {
+                    formData.append("image", values.img);
+                } else {
+                    formData.append("imageUrl", values.img);
+                }
                 const pathName = path ? path : "/news/create"
                 const create = await Post(pathName, formData)
                 if (create.status === 200) {
@@ -130,7 +134,7 @@ export const CreateNews = ({ dataTrans, path }) => {
                                 <option value="notify">Thông báo</option>
                                 <option value="rules">Quy định</option>
                                 <option value="active">Hoạt động</option>
-                                <option value="studyGuide">Hướng dẫn</option>
+                                <option value="toGuide">Hướng dẫn</option>
                                 <option value="itClub">Câu lạc bộ IT</option>
                                 <option value="seminar">Hội thảo</option>
                                 <option value="scientificResearchLecturer">Nghiên cứu khoa học Giảng viên</option>

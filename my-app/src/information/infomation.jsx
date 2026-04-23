@@ -6,6 +6,8 @@ import BANNER from "../components/listBgrInfo";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CFormInput } from "@coreui/react";
 import { TotalPage } from "../components/TotalPage/Totalpage";
+import { ChatBot } from "../components/Chatbot/Chatbot";
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 const cx = classNames.bind(style)
 
 export const Information = () => {
@@ -122,11 +124,12 @@ export const Information = () => {
                         }
                         <TotalPage page={totalPage} colorTotal={colorTotal} handlePage={handlePage} />
                     </div>
-                   
+
 
                 </div>
             </div>
-
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     )
 }

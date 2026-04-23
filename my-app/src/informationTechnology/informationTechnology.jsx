@@ -1,6 +1,9 @@
 import classNames from "classnames/bind";
 import style from "./informationTechnology.module.scss";
+import { ChatBot } from "../components/Chatbot/Chatbot";
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 const cx = classNames.bind(style)
+
 
 export const InformationTechnology = () => {
     return (
@@ -15,6 +18,8 @@ export const InformationTechnology = () => {
             <br />
             <br />
             <img src="/062c4bdc-cdcf-4764-b1f4-4b38e3bbc2d8.jpg" alt="" />
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     )
 }

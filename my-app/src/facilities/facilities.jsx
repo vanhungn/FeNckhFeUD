@@ -1,5 +1,7 @@
 import classNames from "classnames/bind";
 import style from "./facilities.module.scss";
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
+import { ChatBot } from "../components/Chatbot/Chatbot";
 const cx = classNames.bind(style)
 
 export const Facilities = () => {
@@ -108,6 +110,8 @@ export const Facilities = () => {
             <p>Link đăng kí xét tuyển: <a href="https://dkxettuyen.viu.edu.vn/" target="_blank" rel="noopener noreferrer">https://dkxettuyen.viu.edu.vn/</a> </p>
             <p>Fanpage: <a href="https://www.facebook.com/dhcnvh" target="_blank" rel="noopener noreferrer">https://www.facebook.com/dhcnvh</a></p>
             <p>* Link giới thiệu 3 cơ sở đào tạo: <a href="https://tuyensinh.viu.edu.vn/3cs.html" target="_blank" rel="noopener noreferrer">https://tuyensinh.viu.edu.vn/3cs.html</a> </p>
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     )
 }

@@ -2,6 +2,8 @@ import classNames from "classnames/bind"
 import style from "./teachingStaff.module.scss"
 import { useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget"
+import { ChatBot } from "../components/Chatbot/Chatbot"
 const cx = classNames.bind(style)
 const TeachingStaff = () => {
     const trees1 = [
@@ -122,7 +124,8 @@ const TeachingStaff = () => {
                     })
                 }
             </div>
-
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     )
 }

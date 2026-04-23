@@ -215,7 +215,7 @@ export const Header = () => {
                                         <p onClick={() => handleNews("notify")}>Thông báo</p>
                                         <p onClick={() => handleNews("rules")}>Quy định</p>
                                         <p onClick={() => handleNews("active")}>Hoạt động</p>
-                                        <p onClick={() => handleNews("studyGuide")}>Hướng dẫn</p>
+                                        <p onClick={() => handleNews("toGuide")}>Hướng dẫn</p>
                                         <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
                                     </div>
                                 </div>
@@ -310,7 +310,7 @@ export const Header = () => {
                                 <p onClick={() => handleNews("notify")}>Thông báo</p>
                                 <p onClick={() => handleNews("rules")}>Quy định</p>
                                 <p onClick={() => handleNews("active")}>Hoạt động</p>
-                                <p onClick={() => handleNews("studyGuide")}>Hướng dẫn</p>
+                                <p onClick={() => handleNews("toGuide")}>Hướng dẫn</p>
                                 <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
                             </div>
                         </div>

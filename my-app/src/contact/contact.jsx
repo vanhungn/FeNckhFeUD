@@ -8,7 +8,8 @@ import { Post } from "../baseService/baseService";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import LoadingButton from "../components/loadingButton/loadingButton";
-
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
+import { ChatBot } from "../components/Chatbot/Chatbot";
 const cx = classNames.bind(style)
 
 export const Contact = () => {
@@ -190,6 +191,8 @@ export const Contact = () => {
                     </CForm>
                 </div>
             </div>
+            <ZaloChatWidget />
+            <ChatBot />
         </div>
     )
 }

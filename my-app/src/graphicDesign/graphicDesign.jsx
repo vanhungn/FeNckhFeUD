@@ -1,5 +1,7 @@
 import classNames from "classnames/bind"
 import style from "./graphicDesign.module.scss"
+import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget"
+import { ChatBot } from "../components/Chatbot/Chatbot"
 const cx = classNames.bind(style)
 export const GraphicDesign = () => {
     return (
@@ -101,6 +103,8 @@ export const GraphicDesign = () => {
                     <b>Thực tập & dự án thực tế: </b>Hợp tác với doanh nghiệp, phát triển sản phẩm thực tế.
                 </li>
             </ul>
+            <ChatBot />
+            <ZaloChatWidget />
         </div>
     )
 }
