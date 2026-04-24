@@ -96,7 +96,7 @@ export const TheoryChapterQuestion = () => {
         callApi(1);
     }, []);
     return (
-        <div style={{ minHeight: '100vh', paddingBottom: 100 }}>
+        <div className={cx('question')} style={{ minHeight: '100vh', paddingBottom: 100 }}>
             <Toaster position="top-right" />
 
             {/* Header info */}

@@ -129,7 +129,7 @@ export const ContactAdmin = () => {
                                             <CTableDataCell>{item?.phone}</CTableDataCell>
                                             <CTableDataCell>{item?.email}</CTableDataCell>
                                             <CTableDataCell>{item?.title}</CTableDataCell>
-                                            <CTableDataCell>{item?.content}</CTableDataCell>
+                                            <CTableDataCell style={{ maxWidth: "300px" }} >{item?.content}</CTableDataCell>
                                             <CTableDataCell> <CIcon onClick={() => handelDelete(item._id)} className={cx('iconDelete')} icon={cilTrash} /> </CTableDataCell>
                                         </CTableRow>
                                     )

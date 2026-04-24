@@ -1,0 +1,12 @@
+.theoryAdmin {
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.news::-webkit-scrollbar {
+    display: none;
+}

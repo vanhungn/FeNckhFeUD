@@ -95,7 +95,7 @@ export const Information = () => {
                 </div>
                 <div className={cx('ListboxNews')} >
                     <div>
-                        <h1 className={cx('titleInfoContent')} style={{ color: "#0061bb", fontWeight: 600 }}>{banner[0]?.title}</h1>
+                        <h1 className={cx('titleInfoContent')} style={{ color: "#0061bb", fontWeight: 600, margin: 20 }}>{banner[0]?.title}</h1>
                         <hr />
                         {
                             dataNews?.map((item, index) => {

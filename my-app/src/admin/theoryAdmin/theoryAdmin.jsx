@@ -5,6 +5,9 @@ const cx = classNames.bind(style)
 
 export const TheoryAdmin = () => {
     return (
-        <DocumentAdmin path="/admin/theory/chapter/" title="Câu hỏi trắc nghiệm" headerDocx={false} bin={false} />
+        <div className={cx('theoryAdmin')}>
+            <DocumentAdmin path="/admin/theory/chapter/" title="Câu hỏi trắc nghiệm" headerDocx={false} bin={false} />
+
+        </div>
     )
 }

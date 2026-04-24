@@ -97,10 +97,10 @@ export const Admin = () => {
                             <CIcon customClassName="nav-icon" icon={cilInfo} /> Thông tin{' '}
                         </CNavItem>
                     </NavLink>
-                    
-                     <NavLink style={{ textDecoration: "none" }} to={'/admin/contact'}>
+
+                    <NavLink style={{ textDecoration: "none" }} to={'/admin/contact'}>
                         <CNavItem className={cx(location.pathname === '/admin/contact' ? "active" : "category")}>
-                            <CIcon customClassName="nav-icon" icon={cilCheckCircle} /> Lien he{' '}
+                            <CIcon customClassName="nav-icon" icon={cilCheckCircle} /> Liên hệ{' '}
                         </CNavItem>
                     </NavLink>
                 </CSidebarNav>
