@@ -8,6 +8,7 @@ import { CFormInput } from "@coreui/react";
 import { TotalPage } from "../components/TotalPage/Totalpage";
 import { ChatBot } from "../components/Chatbot/Chatbot";
 import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
+import Banner from "../home/Banner/Banner";
 const cx = classNames.bind(style)
 
 export const Information = () => {
@@ -78,7 +79,7 @@ export const Information = () => {
     return (
         <div className={cx('information')}>
             <div className={cx('banner')}>
-                <img src={banner[0]?.img} alt="" />
+                <Banner url={banner[0]?.img} />
                 <div className={cx('contentBanner')}>
                     <h3 className={cx('titleInfo')}>{banner[0]?.title}</h3>
                     <div>
@@ -90,9 +91,7 @@ export const Information = () => {
                 <div className={cx('shadow')}></div>
             </div>
             <div style={{ width: "80%", margin: "auto", paddingTop: 40 }}>
-                <div>
-                    <CFormInput className={cx('search')} onChange={handleOnchangeSearch} type="text" size="lg" placeholder="Tìm kiếm tin tức" aria-label="lg input example" />
-                </div>
+
                 <div className={cx('ListboxNews')} >
                     <div>
                         <h1 className={cx('titleInfoContent')} style={{ color: "#0061bb", fontWeight: 600, margin: 20 }}>{banner[0]?.title}</h1>

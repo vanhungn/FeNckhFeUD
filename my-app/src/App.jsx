@@ -21,6 +21,7 @@ import { ComputerScience } from "./computerScience/computerScience";
 import { DataScience } from "./dataScience/dataScience";
 import { GraphicDesign } from "./graphicDesign/graphicDesign";
 import { InformationTechnology } from "./informationTechnology/informationTechnology";
+import { StudentSupportForm } from "./studentSupportForm/studentSupportForm";
 import './App.css'
 import '@coreui/coreui/dist/css/coreui.min.css';
 
@@ -60,6 +61,7 @@ function App() {
           <Route path="/data_science" element={<DataScience />} />
           <Route path="/graphic_design" element={<GraphicDesign />} />
           <Route path="/search" element={<InfoSearch />} />
+          <Route path="/form" element={<StudentSupportForm />} />
           <Route path="/" element={<Home />} />
         </Route>
 

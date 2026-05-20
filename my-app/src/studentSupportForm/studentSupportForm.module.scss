@@ -1,0 +1,24 @@
+.studentSupportForm {
+    padding-top: 20vh;
+}
+
+.tableCategoryStudentSupportForm {
+    width: 75%;
+    margin: auto;
+}
+
+.titleTable {
+    color: #0061bb !important;
+}
+
+@media (max-width:1024px) {
+    .studentSupportForm {
+        padding-top: 12vh;
+    }
+}
+
+@media (max-width:540px) {
+    .studentSupportForm {
+        padding-top: 15vh;
+    }
+}

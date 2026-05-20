@@ -55,11 +55,14 @@ export const Header = () => {
                 <div className={cx('boxCategory')} onClick={() => navigate('/introduce/department')}>
                     <span>Giới thiệu</span>
                 </div>
+                <div className={cx('boxCategory')} onClick={() => navigate('/contact')}>
+                    <span>Liên hệ</span>
+                </div>
                 <div className={cx('boxCategory')} onClick={() => navigate('/code_lap')}>
                     <span>CodeLap</span>
                 </div>
-                <div className={cx('boxCategory')} onClick={() => navigate('/contact')}>
-                    <span>Liên hệ</span>
+                <div className={cx('boxCategory')} onClick={() => navigate('/form')}>
+                    <span>Biểu mẫu</span>
                 </div>
                 <div className={cx('boxCategory')}>
                     <div>
@@ -152,7 +155,7 @@ export const Header = () => {
 
                                             <div>
                                                 <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
-                                                <p onClick={()=>navigate("/graphic_design")} >Thiết kế đồ họa</p>
+                                                <p onClick={() => navigate("/graphic_design")} >Thiết kế đồ họa</p>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +250,7 @@ export const Header = () => {
 
                                     <div>
                                         <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
-                                        <p onClick={()=> navigate("/graphic_design")}>Thiết kế đồ họa</p>
+                                        <p onClick={() => navigate("/graphic_design")}>Thiết kế đồ họa</p>
                                     </div>
                                 </div>
                             </div>

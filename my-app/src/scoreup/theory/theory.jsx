@@ -26,7 +26,7 @@ export const ScoreUpPracticeTheory = () => {
 
         try {
             const res = await Get(
-                `/document?skip=${pageNumber}&limit=${LIMIT}&search=${keyword}`
+                `/document/list?typeOf=tai_lieu&skip=${pageNumber}&limit=${LIMIT}&search=${keyword}`
             );
 
             const newData = res?.data?.data || [];

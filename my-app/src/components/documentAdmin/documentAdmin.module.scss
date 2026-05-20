@@ -49,7 +49,7 @@
         margin: 0;
         padding: 0;
         color: red;
-        font-size: 12px;
+        font-size: 12px !important;
         font-family: 'Roboto', sans-serif;
     }
 }
@@ -58,6 +58,12 @@
     width: 150px;
 }
 
+.selectTypeOf {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 @media (max-width:1280px) {
 

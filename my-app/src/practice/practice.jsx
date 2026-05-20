@@ -78,6 +78,8 @@ export const Practice = () => {
 
                 if (login?.status === 200) {
                     if (login?.data?.token) {
+                        localStorage.removeItem("token")
+                        localStorage.removeItem("user")
                         localStorage.setItem('token', JSON.stringify(login.data.token));
                         localStorage.setItem('user', JSON.stringify(login?.data?.data));
                         console.log("✅ Token saved, navigating to dashboard");

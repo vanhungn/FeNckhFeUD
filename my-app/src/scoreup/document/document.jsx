@@ -29,7 +29,7 @@ export const Document = () => {
 
         try {
 
-            const res = await Get(`/document?limit=${LIMIT}&skip=${pageNumber}&search=${search}`);
+            const res = await Get(`/document/list?limit=${LIMIT}&skip=${pageNumber}&search=${search}&typeOf=tai_lieu`);
             const newData = res?.data?.data || [];
 
             setDataAlgorithm(prev =>
@@ -102,7 +102,7 @@ export const Document = () => {
                         <h3>{item.course}</h3>
 
                         <select
-                            style={{ width: "100%",height:40, padding: 5, margin: "10px 0" }}
+                            style={{ width: "100%", height: 40, padding: 5, margin: "10px 0" }}
                             onChange={handleOnchangeCode}
                         >
                             <option value="">Chọn tài liệu</option>

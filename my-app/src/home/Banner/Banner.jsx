@@ -10,7 +10,7 @@ const cx = classNames.bind(style)
 
 import { Autoplay } from 'swiper/modules';
 
-function Banner() {
+function Banner({ url }) {
     return (
         <Swiper
             modules={[Autoplay]}
@@ -19,13 +19,13 @@ function Banner() {
             className={cx('banner')}
         >
             <SwiperSlide>
-                <img className={cx('imgBanner')} 
-                    src="/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
+                <img className={cx('imgBanner')}
+                    src={url} />
             </SwiperSlide>
 
             <SwiperSlide>
-                <img className={cx('imgBanner')} 
-                    src="/Gemini_Generated_Image_5ni23e5ni23e5ni2.png" />
+                <img className={cx('imgBanner')}
+                    src={url} />
             </SwiperSlide>
         </Swiper>
     );

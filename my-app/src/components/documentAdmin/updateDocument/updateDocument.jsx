@@ -3,7 +3,7 @@ import style from "./updateDocument.module.scss"
 import CIcon from "@coreui/icons-react";
 import { cilColorBorder, cilTrash } from "@coreui/icons";
 import LoadingButton from "../../loadingButton/loadingButton";
-import { CButton, CFormTextarea } from "@coreui/react";
+import { CButton, CFormSelect, CFormTextarea } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup"
@@ -21,17 +21,20 @@ export const UpdateDocument = ({ path, toast, dataDocument, bin, callApi }) => {
     const formikUpdate = useFormik({
         initialValues: {
             title: dataDocument?.course || "",
-            code: dataDocument?.codeCourse || ""
+            code: dataDocument?.codeCourse || "",
+            typeOf: dataDocument?.typeOf || "",
+
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
             title: Yup.string().required('Bạn vui lòng nhập tên tài liệu'),
-            code: Yup.string().required('Bạn vui lòng nhập mã tài liệu')
+            code: Yup.string().required('Bạn vui lòng nhập mã tài liệu'),
+            typeOf: Yup.string().required('Bạn vui lòng chọn thể loại tài liệu'),
         }),
         onSubmit: async (value) => {
             try {
                 setLoading(true)
-                const update = await Post(`/document/update/${dataDocument._id}`, { course: value.title, codeCourse: value.code })
+                const update = await Post(`/document/update/${dataDocument._id}`, { course: value.title, codeCourse: value.code, typeOf: value.typeOf })
                 if (update.status === 200) {
                     toast.success('Thành công')
                     setUpdate("")
@@ -85,11 +88,29 @@ export const UpdateDocument = ({ path, toast, dataDocument, bin, callApi }) => {
                     <Input
                         onChange={formikUpdate.handleChange}
                         name={"code"}
-                        styleInput={{textAlign:"center"}}
+                        styleInput={{ textAlign: "center" }}
                         className={cx('code')}
                         value={formikUpdate.values.code}
                         disabled={update === dataDocument._id ? false : true}
                     />
+                    <CFormSelect
+                        style={{ marginTop: 15 }}
+                        name="typeOf"
+                        id=""
+                        value={formikUpdate.values.typeOf}
+                        onBlur={formikUpdate.handleBlur}
+                        onChange={formikUpdate.handleChange}
+                        disabled={update === dataDocument._id ? false : true}
+                    >
+                        <option value="">----Chọn----</option>
+                        <option value="tai_lieu">Tài liệu</option>
+                        <option value="bieu_mau">Biểu mẫu</option>
+                    </CFormSelect>
+                    {formikUpdate.touched.typeOf && formikUpdate.errors.typeOf && (
+                        <div className={cx('error')}>
+                            <p className={cx('pError')} >{formikUpdate.errors.typeOf}</p>
+                        </div>
+                    )}
                     <div style={{ marginTop: 15, display: update === dataDocument._id ? "flex" : "none", gap: 10, justifyContent: "center" }}>
                         <CButton type='button' color="danger" style={{ color: '#fff', fontSize: 12 }} onClick={() => handleCancel()} >Hủy</CButton>
                         <CButton type={loading ? 'button' : 'submit'} className={cx('buttonCreate')} >

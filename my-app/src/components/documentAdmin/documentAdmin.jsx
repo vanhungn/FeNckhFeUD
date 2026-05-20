@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Delete, Get, Post } from '../../baseService/baseService';
 import classNames from 'classnames/bind';
 import style from "./documentAdmin.module.scss"
-import { CFormInput, CButton, CFormTextarea } from '@coreui/react'
+import { CFormInput, CButton, CFormTextarea, CFormSelect } from '@coreui/react'
 import { cilColorBorder, cilTrash } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { TotalPage } from '../../components/TotalPage/Totalpage';
@@ -13,7 +13,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Input } from '../../components/inputs/inputs';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import * as Yup from "yup"
 import LoadingButton from '../../components/loadingButton/loadingButton';
 import LoadingComponent from '../../components/loadingComponent/loadingComponent';
@@ -53,13 +53,13 @@ export const DocumentAdmin = ({ path, title, headerDocx, bin }) => {
         setImg(newImgs);
         setChooseFile("")
     };
-  
+
     const handleAddImage = () => {
         setImg([...img, null]);
     };
     const handlePage = async (page) => {
         try {
-            console.log(page)
+
             const data = await Get(`/document/list?limit=12&skip=${page}`)
             setDataDocument(data.data.data)
             setColorToatal(page)
@@ -83,10 +83,12 @@ export const DocumentAdmin = ({ path, title, headerDocx, bin }) => {
         initialValues: {
             course: "",
             codeCourse: "",
+            typeOf: ""
         },
         validationSchema: Yup.object({
             course: Yup.string().required('Bạn vui lòng nhập tên bộ môn'),
-            codeCourse: Yup.string().required('Bạn vui lòng nhập mã bộ môn')
+            codeCourse: Yup.string().required('Bạn vui lòng nhập mã bộ môn'),
+            typeOf: Yup.string().required('Bạn vui lòng chọn thể loại tài liệu'),
         }),
         onSubmit: async (value) => {
 
@@ -102,9 +104,10 @@ export const DocumentAdmin = ({ path, title, headerDocx, bin }) => {
                         formData.append('file', file);
                     }
                 });
-            
+
                 formData.append('course', value.course);
                 formData.append('codeCourse', value.codeCourse);
+                formData.append('typeOf', value.typeOf)
                 const create = await Post("/document/create", formData)
                 if (create.status === 200) {
                     toast.success('Thành công')
@@ -131,7 +134,7 @@ export const DocumentAdmin = ({ path, title, headerDocx, bin }) => {
         const data = img.filter((q, idex) => idex !== index)
         setImg(data)
     }
- 
+
     return (
         <div className={cx('eDocument')} >
             <Toaster position="top-right" />
@@ -173,6 +176,26 @@ export const DocumentAdmin = ({ path, title, headerDocx, bin }) => {
                                 placeholder={"Bạn vui lòng nhập mã bộ môn..."}
                             />
                         </div>
+                        <div className={cx('selectTypeOf')} >
+                            <p style={{ margin: 0 }}> <b>Thể loại *</b> </p>
+                            <CFormSelect
+
+                                name="typeOf"
+                                id=""
+                                value={formik.values.typeOf}
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                            >
+                                <option value="">----Chọn----</option>
+                                <option value="tai_lieu">Tài liệu</option>
+                                <option value="bieu_mau">Biểu mẫu</option>
+                            </CFormSelect>
+                            {formik.touched.typeOf && formik.errors.typeOf && (
+                                <div className={cx('error')}>
+                                    <p className={cx('pError')} >{formik.errors.typeOf}</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
                     <div>
                         <div className={cx("inputImg")}>
@@ -210,7 +233,7 @@ export const DocumentAdmin = ({ path, title, headerDocx, bin }) => {
                                 <p className={cx('pError')}>{chooseFile}</p>
                             </div>
                         </div>
-                       
+
                     </div>
                     <div style={{ display: "flex", justifyContent: "flex-end", gap: 15 }}>
                         <CButton type='button' color="danger" style={{ color: '#fff' }} onClick={() => handleTurnOn()} >Hủy</CButton>

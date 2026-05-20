@@ -25,6 +25,8 @@ export const LoginAdmin = () => {
             try {
                 const login = await Post('/users/login', value)
                 if (login.status === 200) {
+                    localStorage.removeItem("token")
+                    localStorage.removeItem("user")
                     localStorage.setItem('token', JSON.stringify(login?.data?.accessToken))
                     localStorage.setItem('user', JSON.stringify(login?.data?.data))
                     navigate("/admin/document")
