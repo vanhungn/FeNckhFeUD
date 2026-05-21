@@ -81,12 +81,12 @@ export const Information = () => {
             <div className={cx('banner')}>
                 <Banner url={banner[0]?.img} />
                 <div className={cx('contentBanner')}>
-                    <h3 className={cx('titleInfo')}>{banner[0]?.title}</h3>
-                    <div>
+                    {/* <h3 className={cx('titleInfo')}>{banner[0]?.title}</h3> */}
+                    {/* <div>
                         <span style={{ cursor: "pointer" }} onClick={() => navigate("/")}> <u>Trang chủ</u></span>
                         <span style={{ margin: "0px 5px" }}>/</span>
                         <span>{banner[0]?.title}</span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={cx('shadow')}></div>
             </div>

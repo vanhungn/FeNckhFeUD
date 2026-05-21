@@ -49,7 +49,7 @@ export const InformationDetail = () => {
                 style={{ backgroundImage: `url(https://i.pinimg.com/736x/81/71/90/81719096602acfff9ffb0fcea33e5de0.jpg)` }}
             >
                 <div className={cx("contentBanner")}>
-                    <h3>{dataDetail?.title}</h3>
+                    {/* <h3>{dataDetail?.title}</h3>
                     <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                         <p className={cx("time")}>
                             <CIcon icon={cilAlarm} size="lg" /> <span>{time}</span>
@@ -57,7 +57,7 @@ export const InformationDetail = () => {
                         <CButton onClick={() => handleNavigate(titleNavigate?.keyName)} className={cx("btnNavigate")} type="button">
                             {titleNavigate?.title}
                         </CButton>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={cx("shadow")}></div>
             </div>
