@@ -3,7 +3,7 @@ import style from "./header.module.scss"
 import CIcon from "@coreui/icons-react";
 import { cilHouse, cilSearch } from "@coreui/icons";
 import { CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CFormInput } from "@coreui/react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { LoginAdmin } from "../loginAdmin/loginAdmin";
 import { useEffect, useRef, useState } from "react";
 
@@ -61,8 +61,9 @@ export const Header = () => {
                 <div className={cx('boxCategory')} onClick={() => navigate('/code_lap')}>
                     <span>CodeLap</span>
                 </div>
-                <div className={cx('boxCategory')} onClick={() => navigate('/form')}>
-                    <span>Biểu mẫu</span>
+                <div className={cx('boxCategory')} >
+                    <Link style={{textDecoration:"none",color:"#fff"}}to="https://daotao.viu.edu.vn/sinh-vien/dm-tin-tuc/bieu-mau-sinh-vien.html">
+                        Biểu mẫu  </Link>
                 </div>
                 <div className={cx('boxCategory')}>
                     <div>
