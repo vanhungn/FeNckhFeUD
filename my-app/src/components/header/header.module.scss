@@ -274,6 +274,44 @@
     display: flex;
 }
 
+.ChangeLanguage {
+    padding: 0 0 0 10px;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+}
+
+.boxChangeLanguage {
+
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 120px;
+    position: absolute;
+    top: 125%;
+    left: 0;
+    z-index: 100;
+    height: fit-content;
+
+    .boxSelectLanguage {
+        padding: 5px;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+
+        &:hover {
+            background-color: rgb(217, 217, 217);
+        }
+
+        .imgLanguege {
+            border-radius: 50%;
+        }
+    }
+
+}
+
+.hoverLaCo:hover {
+    background-color: gray;
+}
 
 @media (max-width:1220px) {
     .logo {

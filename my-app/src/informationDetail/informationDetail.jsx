@@ -11,9 +11,11 @@ import { parseEditorJsToHtml } from "./parseEditorJs";
 import Editor from "../components/editor/editor";
 import { ChatBot } from "../components/Chatbot/Chatbot";
 import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style);
 
 export const InformationDetail = () => {
+    const { t } = useTranslation();
     const [dataDetail, setDataDetail] = useState(null);
     const [suggest, setSuggest] = useState([]);
     const [resetEditor, setResetEditor] = useState(true)
@@ -75,7 +77,7 @@ export const InformationDetail = () => {
                     </div>
 
                     <div style={{ padding: "0 30px" }}>
-                        <h4 className={cx('title')} style={{ color: "#0061bb", fontWeight: 600, fontSize: 30 }}>Tin cùng chuyên mục</h4>
+                        <h4 className={cx('title')} style={{ color: "#0061bb", fontWeight: 600, fontSize: 30 }}>{t("Related_articles")}</h4>
                         <div>
                             {
                                 suggest?.map((item, index) => {

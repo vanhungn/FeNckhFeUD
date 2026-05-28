@@ -8,9 +8,11 @@ import * as Yup from "yup"
 import { Post } from "../../baseService/baseService";
 import { Mars } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 
 export const LoginAdmin = () => {
+    const { t } = useTranslation();
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
@@ -43,7 +45,7 @@ export const LoginAdmin = () => {
         <div className={cx('formLogin')}>
             <Toaster position="top-right" />
             <CForm onSubmit={formik.handleSubmit}>
-                <h3 style={{ color: "#0061bb", fontWeight: 600, textAlign: "center" }}>Đăng nhập</h3>
+                <h3 style={{ color: "#0061bb", fontWeight: 600, textAlign: "center" }}>{t("Login")}</h3>
                 <div>
                     <Input
                         type={"email"}
@@ -68,7 +70,7 @@ export const LoginAdmin = () => {
                         style={{ gap: 0 }}
                     />
                 </div>
-                <CButton className={cx('btnLogin')} type="submit">Đăng nhập</CButton>
+                <CButton className={cx('btnLogin')} type="submit">{t("Btn_Login")}</CButton>
             </CForm>
         </div>
     )

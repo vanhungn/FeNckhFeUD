@@ -10,9 +10,12 @@ import { useState } from "react";
 import LoadingButton from "../components/loadingButton/loadingButton";
 import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 import { ChatBot } from "../components/Chatbot/Chatbot";
+import { useTranslation } from "react-i18next";
+
 const cx = classNames.bind(style)
 
 export const Contact = () => {
+    const { t } = useTranslation();
     const [loading, setLoading] = useState(false)
     const [location, setLocation] = useState("https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d452.0096718738645!2d105.44380261559887!3d21.111110774780382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345f3390d8a149%3A0x372b9b5e16ee7935!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBWaeG7h3QgLSBIdW5n!5e0!3m2!1svi!2s!4v1765420403880!5m2!1svi!2s")
 
@@ -55,34 +58,34 @@ export const Contact = () => {
     return (
         <div className={cx('contact')}>
             <Toaster position="top-right" />
-            <h3 className={cx('titleContact')}>Liên hệ với Chúng tôi</h3>
+            <h3 className={cx('titleContact')}>{t("Contact_Us")}</h3>
             <div className={cx('addressContact')}>
                 <div className={cx('boxContact')}>
-                    <h4>Địa chỉ</h4>
+                    <h4>{t("Address")}</h4>
                     <div className={cx('info')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="12" cy="10" r="2.4" fill="currentColor" />
                         </svg>
-                        <span >Số 16 Hữu Nghị, phường Tùng Thiện, TP. Hà Nội</span>
+                        <span >{t("16_Huu_Nghi_Street,_Tung_Thien_Ward,_Hanoi_City")}</span>
                     </div>
                     <div className={cx('info')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="12" cy="10" r="2.4" fill="currentColor" />
                         </svg>
-                        <span >Số 88, đường 419 - Tây Phương, TP. Hà Nội</span>
+                        <span >{t("88_419th_Street_-_Tay_Phuong_Ward,_Hanoi_City")}</span>
                     </div>
                     <div className={cx('info')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="12" cy="10" r="2.4" fill="currentColor" />
                         </svg>
-                        <span > Số 27 Lê Văn Lương, phường Thanh Xuân, TP. Hà Nội</span>
+                        <span >{t("27_Le_Van_Luong_Street,_Thanh_Xuan_Ward,_Hanoi_City")}</span>
                     </div>
                 </div>
                 <div className={cx('boxContact')}>
-                    <h4>Số điện thoại</h4>
+                    <h4>{t("Phone_number")}</h4>
                     <div className={cx('info')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.8 3h2.4l2.4 6-1.8 1.2c1.2 2.4 3 4.2 5.4 5.4l1.2-1.8 6 2.4v2.4c0 1.2-1.2 2.4-2.4 2.4C9.6 21 3 14.4 3 6C3 4.2 3.6 3 4.8 3z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -104,20 +107,19 @@ export const Contact = () => {
             <div className={cx('mapAndFormContact')}>
                 <div>
                     <CFormSelect style={{ width: "fit-content", marginBottom: "10px" }} onChange={handleOnchangeMap}>
-                        <option value='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1005.6143356454379!2d105.60678294650644!3d21.021011039499594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313450b0f9bfffff%3A0xa2288163515f820c!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBDw7RuZyBOZ2hp4buHcCBWaeG7h3QgSHVuZyAy!5e0!3m2!1svi!2s!4v1765420152364!5m2!1svi!2s'>Cơ sở Sơn Tây</option>
-                        <option value='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2736.8481651520833!2d105.6074826975361!3d21.021651773447307!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313450b0f9bfffff%3A0xa2288163515f820c!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBDw7RuZyBOZ2hp4buHcCBWaeG7h3QgSHVuZyAy!5e0!3m2!1svi!2sus!4v1765420612502!5m2!1svi!2sus'>Cơ sở Thạch Thất</option>
-                        <option value='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1862.3491548659256!2d105.80231225913481!3d21.00472715605994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ad05e1b3a375%3A0x14291da3deed9287!2sCenter%20Point!5e0!3m2!1svi!2sus!4v1765420720267!5m2!1svi!2sus'>Cơ sở Lê Văn Lương</option>
+                        <option value='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1005.6143356454379!2d105.60678294650644!3d21.021011039499594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313450b0f9bfffff%3A0xa2288163515f820c!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBDw7RuZyBOZ2hp4buHcCBWaeG7h3QgSHVuZyAy!5e0!3m2!1svi!2s!4v1765420152364!5m2!1svi!2s'>{t("Son_Tay_facility")}</option>
+                        <option value='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2736.8481651520833!2d105.6074826975361!3d21.021651773447307!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313450b0f9bfffff%3A0xa2288163515f820c!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBDw7RuZyBOZ2hp4buHcCBWaeG7h3QgSHVuZyAy!5e0!3m2!1svi!2sus!4v1765420612502!5m2!1svi!2sus'>{t("Thach_That_facility")}</option>
+                        <option value='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1862.3491548659256!2d105.80231225913481!3d21.00472715605994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ad05e1b3a375%3A0x14291da3deed9287!2sCenter%20Point!5e0!3m2!1svi!2sus!4v1765420720267!5m2!1svi!2sus'>{t("Le_Van_Luong_facility")}</option>
                     </CFormSelect>
                     <iframe src={location} className={cx('map')} width="600" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
                 <div>
-                    <p>Cảm ơn bạn đã quan tâm đến chúng tôi! Nếu bạn có bất kỳ câu hỏi, góp ý hoặc cần hỗ trợ, xin vui lòng điền vào biểu mẫu dưới đây. Nhấp vào nút "Gửi Tin Nhắn" để hoàn tất quá trình.
-                        Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Xin cảm ơn!
+                    <p>{t("Thank_you")}
                     </p>
                     <CForm onSubmit={formik.handleSubmit}>
                         <div style={{ display: 'grid', gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                            <Input placeholder={"Họ và tên"}
+                            <Input placeholder={t("placeholderName")}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.name}
@@ -129,7 +131,7 @@ export const Contact = () => {
                                 name={"name"}
                             />
 
-                            <Input placeholder={"Số điện thoại"}
+                            <Input placeholder={t("Phone_number")}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.phone}
@@ -153,7 +155,7 @@ export const Contact = () => {
                             type={"text"}
                             name={"email"}
                         />
-                        <Input placeholder={"Tiêu đề"}
+                        <Input placeholder={t("Title")}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.title}
@@ -167,7 +169,7 @@ export const Contact = () => {
                         <div style={{ marginTop: 15 }}>
                             <CFormTextarea
                                 id="exampleFormControlTextarea1"
-                                placeholder="Nội dung"
+                                placeholder={t("Content")}
                                 rows={3}
                                 name={"content"}
                                 onChange={formik.handleChange}
@@ -183,7 +185,7 @@ export const Contact = () => {
                         <div className={cx('boxBtnContact')}>
                             <CButton type={loading ? 'button' : 'submit'} className={cx('btnContact')} style={{ backgroundColor: "#0061bb", color: "#fff", padding: 10 }} >
                                 {
-                                    loading ? <LoadingButton /> : <>Gửi tin nhắn</>
+                                    loading ? <LoadingButton /> : <>{t("Send_a_message")}</>
                                 }
                             </CButton>
                         </div>

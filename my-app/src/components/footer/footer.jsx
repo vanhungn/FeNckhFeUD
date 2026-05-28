@@ -2,33 +2,35 @@ import classNames from "classnames/bind";
 import style from "./footer.module.scss"
 import CIcon from "@coreui/icons-react";
 import { cilLibraryBuilding } from "@coreui/icons";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 export const Footer = () => {
+    const { t } = useTranslation();
     return (
         <div className={cx('footer')}>
             <div className={cx('info')} style={{ display: "grid", gridTemplateColumns: "1.5fr 0.5fr 1fr", width: "100%" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
-                    <h3 className={cx('titleAddress')}>Địa chỉ liên hệ</h3>
+                    <h3 className={cx('titleAddress')}>{t("Contact_address")}</h3>
                     <div className={cx('infoAddress')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="12" cy="10" r="2.4" fill="currentColor" />
                         </svg>
-                        <span >Cơ sở Sơn Tây: Số 16 Hữu Nghị, phường Tùng Thiện, TP. Hà Nội</span>
+                        <span >{t("Son_Tay_Branch_No._16_Huu Nghi_Street,_Tung Thien Ward,_Hanoi_City")}</span>
                     </div>
                     <div className={cx('infoAddress')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="12" cy="10" r="2.4" fill="currentColor" />
                         </svg>
-                        <span >Cơ sở Thạch Thất: Số 88, đường 419 - Tây Phương, TP. Hà Nội </span>
+                        <span >{t("Thach_That_Branch_No._88,_419_Street_-_Tay_Phuong_Ward,_Hanoi_City")}</span>
                     </div>
                     <div className={cx('infoAddress')}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M12 21s-7-4.5-7-10a7 7 0 1 1 14 0c0 5.5-7 10-7 10z" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                             <circle cx="12" cy="10" r="2.4" fill="currentColor" />
                         </svg>
-                        <span >Cơ sở Thanh Xuân: Số 27 Lê Văn Lương, phường Thanh Xuân, TP. Hà Nội</span>
+                        <span >{t("Thanh_Xuan_Branch:_27_Le _Van_Luong_Street,_Thanh_Xuan_Ward,_Hanoi_City")}</span>
                     </div>
                 </div>
                 <div></div>
@@ -72,13 +74,10 @@ export const Footer = () => {
 
             </div>
             <div>
-                <p style={{ textAlign: "center", marginTop: 35 }}>Ban Tuyển sinh - Đại học công nghiệp Việt Hung</p>
+                <p style={{ textAlign: "center", marginTop: 35 }}>{t("Admissions_Office_-_Vietnam-Hungary_Industrial_University")}</p>
             </div>
             <div className={cx('lobby')}>
             </div>
-
-
-
         </div>
     )
 }

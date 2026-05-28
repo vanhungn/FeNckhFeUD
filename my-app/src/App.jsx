@@ -24,7 +24,7 @@ import { InformationTechnology } from "./informationTechnology/informationTechno
 import { StudentSupportForm } from "./studentSupportForm/studentSupportForm";
 import './App.css'
 import '@coreui/coreui/dist/css/coreui.min.css';
-
+import "./i18n.js";
 function App() {
   const { pathname } = useLocation();
   const ScrollToTop = () => {

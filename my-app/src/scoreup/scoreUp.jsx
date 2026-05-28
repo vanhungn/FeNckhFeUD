@@ -26,9 +26,11 @@ import { useMsal } from "@azure/msal-react";
 import { ReadDocument } from "./readDocument/readDocument";
 import { TheoryOfDocument } from "./theoryOfDocument/theoryOfDocument";
 import { ModalUpdateUser } from "../components/modalUpdate/modalUpdateUser";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 
 export const ScoreUp = () => {
+    const { t } = useTranslation()
     const [sidebar, setSidebar] = useState(false)
     const { instance } = useMsal();
     const location = useLocation()
@@ -91,7 +93,7 @@ export const ScoreUp = () => {
                     </NavLink>
                     <NavLink style={{ textDecoration: "none" }} to={'/scoreup/document'}>
                         <CNavItem className={cx(location.pathname === '/scoreup/document' ? "active" : 'category')} >
-                            <CIcon customClassName="nav-icon" icon={cilFile} /> Tài liệu{' '}
+                            <CIcon customClassName="nav-icon" icon={cilFile} /> {t("Document")}
                             <CBadge color="primary ms-auto">NEW</CBadge>
                         </CNavItem>
                     </NavLink>
@@ -99,7 +101,7 @@ export const ScoreUp = () => {
                     <CNavGroup
                         toggler={
                             <>
-                                <CIcon customClassName="nav-icon" icon={cilTask} /> Luyện tập
+                                <CIcon customClassName="nav-icon" icon={cilTask} /> {t("Practice")}
                             </>
                         }
                     >
@@ -109,7 +111,7 @@ export const ScoreUp = () => {
                                 <span className="nav-icon">
                                     <span className="nav-icon-bullet"></span>
                                 </span>{' '}
-                                Thuật toán
+                                {t("Algorithm")}
                             </CNavItem>
                         </NavLink>
                         <NavLink style={{ textDecoration: "none" }} to={'/scoreup/practice/theory'}></NavLink>
@@ -120,7 +122,7 @@ export const ScoreUp = () => {
                                 <span className="nav-icon">
                                     <span className="nav-icon-bullet"></span>
                                 </span>{' '}
-                                Lý thuyết
+                                {t("Theory")}
                             </CNavItem>
                         </NavLink>
                     </CNavGroup>
@@ -130,7 +132,7 @@ export const ScoreUp = () => {
                 </CSidebarNav>
                 <CSidebarHeader className="border-top">
                     <div onClick={handleLogout} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 10, color: "gray" }}>
-                        <CSidebarToggler /> <span style={{ display: sidebar ? "none" : "block" }} >Đăng Xuất</span>
+                        <CSidebarToggler /> <span style={{ display: sidebar ? "none" : "block" }} >{t("LogOut")}</span>
                     </div>
 
                 </CSidebarHeader>

@@ -4,9 +4,11 @@ import { Code } from "../../components/Code/Code";
 import { useEffect, useState } from "react";
 import { Get } from "../../baseService/baseService";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 
 export const AlgorithmAndData = () => {
+    const { t } = useTranslation()
     const [detail, setDetail] = useState({})
     const { code } = useParams()
 
@@ -29,7 +31,7 @@ export const AlgorithmAndData = () => {
                 <div>
                     <p>{detail?.suggest}</p>
                 </div>
-                <h5>Ví dụ:</h5>
+                <h5>{t("For_example")}:</h5>
                 <div className={cx('output')}>
 
                     <h6>Input:</h6>

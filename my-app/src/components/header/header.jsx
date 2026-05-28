@@ -6,6 +6,7 @@ import { CDropdown, CDropdownItem, CDropdownMenu, CDropdownToggle, CFormInput } 
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { LoginAdmin } from "../loginAdmin/loginAdmin";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(style)
 
@@ -14,7 +15,9 @@ export const Header = () => {
     const [turnOn, setTurnOn] = useState(false)
     const [turnOnSearch, setTurnOnSearch] = useState(false)
     const [valueSearch, setValueSearch] = useState('')
+    const [turnOnSelectChangeLanguage, setTurnOnSelectChangeLanguage] = useState(false);
     const outSize = useRef(null)
+    const { t, i18n } = useTranslation();
     const handleNews = (query) => {
         navigate(`/information?info=${query}`)
     }
@@ -45,26 +48,30 @@ export const Header = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+    const HandlerTurnOnLanguage = () => {
+        turnOnSelectChangeLanguage ? setTurnOnSelectChangeLanguage(false) : setTurnOnSelectChangeLanguage(true);
+    }
     return (
         <div className={cx('header')}>
             <div className={cx('categoryTop')}>
                 <div className={cx('boxCategory')} onClick={() => navigate('/')}>
                     <CIcon icon={cilHouse} />
-                    <span>Trang chủ</span>
+                    <span>{t("Home")}</span>
                 </div>
                 <div className={cx('boxCategory')} onClick={() => navigate('/introduce/department')}>
-                    <span>Giới thiệu</span>
+                    <span>{t("Introduction")}</span>
                 </div>
                 <div className={cx('boxCategory')} onClick={() => navigate('/contact')}>
-                    <span>Liên hệ</span>
+                    <span>{t("Contact")}</span>
                 </div>
                 <div className={cx('boxCategory')} onClick={() => navigate('/code_lap')}>
                     <span>CodeLap</span>
                 </div>
-                <div className={cx('boxCategory')} >
-                    <Link style={{textDecoration:"none",color:"#fff"}}to="https://daotao.viu.edu.vn/sinh-vien/dm-tin-tuc/bieu-mau-sinh-vien.html">
-                        Biểu mẫu  </Link>
+                <div className={cx('boxCategory')}>
+                    <Link style={{ textDecoration: "none", color: "#fff" }} to="https://daotao.viu.edu.vn/sinh-vien/dm-tin-tuc/bieu-mau-sinh-vien.html">
+                        {t("Form")}  </Link>
                 </div>
+
                 <div className={cx('boxCategory')}>
                     <div>
                         <svg onClick={() => handleTurnOnSearch()} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -102,7 +109,22 @@ export const Header = () => {
                     }
 
                 </div>
+                <div className={cx('ChangeLanguage')} onClick={() => HandlerTurnOnLanguage()}>
+                    <img width={24} src="/icons8-vietnam-48.png" alt="" />
+                    {turnOnSelectChangeLanguage && (
+                        <div className={cx('boxChangeLanguage')} >
+                            <div className={cx('boxSelectLanguage')} onClick={() => i18n.changeLanguage("vi")}>
+                                <img className={cx('imgLanguege')} width={"30px"} src="/icons8-vietnam-48.png" alt="" />
+                                {t("Vietnamese")}
+                            </div>
+                            <div className={cx('boxSelectLanguage')} onClick={() => i18n.changeLanguage("en")} >
+                                <img className={cx('imgLanguege')} width={"30px"} src="/icons8-english-48.png" alt="" />
+                                {t("EngLish")}
+                            </div>
+                        </div>
 
+                    )}
+                </div>
             </div>
             <div className={cx('category')}>
                 <div className={cx('boxLogo')} onClick={() => navigate('/')}  >
@@ -133,7 +155,7 @@ export const Header = () => {
                             </svg>
                             <div className={cx('menuCategory')}>
                                 <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>ĐÀO TẠO</p>
+                                    <p className={cx('title')}>{t("TRAIN")}</p>
                                     <svg
                                         className={cx('iconDown')}
                                         xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +185,7 @@ export const Header = () => {
 
                                 </div>
                                 <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>NGHIÊN CỨU</p>
+                                    <p className={cx('title')}>{t("STUDY")}</p>
                                     <svg
                                         className={cx('iconDown')}
                                         xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +206,7 @@ export const Header = () => {
 
                                 </div>
                                 <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>THÔNG TIN</p>
+                                    <p className={cx('title')}>{t("INFORMATION")}</p>
                                     <svg
                                         className={cx('iconDown')}
                                         xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +226,7 @@ export const Header = () => {
                                     </div>
                                 </div>
                                 <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>SINH VIÊN</p>
+                                    <p className={cx('title')}>{t("STUDENT")}</p>
                                     <svg
                                         className={cx('iconDown')}
                                         xmlns="http://www.w3.org/2000/svg"
@@ -228,7 +250,7 @@ export const Header = () => {
                     </div>
                     <div className={cx("displayCategory")}>
                         <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>ĐÀO TẠO</p>
+                            <p className={cx('title')}>{t("TRAIN")}</p>
                             <svg
                                 className={cx('iconDown')}
                                 xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +280,7 @@ export const Header = () => {
 
                         </div>
                         <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>NGHIÊN CỨU</p>
+                            <p className={cx('title')}>{t("STUDY")}</p>
                             <svg
                                 className={cx('iconDown')}
                                 xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +301,7 @@ export const Header = () => {
 
                         </div>
                         <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>THÔNG TIN</p>
+                            <p className={cx('title')}>{t("INFORMATION")}</p>
                             <svg
                                 className={cx('iconDown')}
                                 xmlns="http://www.w3.org/2000/svg"
@@ -299,7 +321,7 @@ export const Header = () => {
                             </div>
                         </div>
                         <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>SINH VIÊN</p>
+                            <p className={cx('title')}>{t("STUDENT")}</p>
                             <svg
                                 className={cx('iconDown')}
                                 xmlns="http://www.w3.org/2000/svg"

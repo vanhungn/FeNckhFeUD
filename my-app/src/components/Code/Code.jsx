@@ -5,9 +5,11 @@ import EXTENSION_MAP from "../ExtensionMap";
 import Editor from '@monaco-editor/react';
 import { useState } from "react";
 import { Post } from "../../baseService/baseService";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(style)
 export const Code = () => {
+    const { t } = useTranslation();
     const [code, setCode] = useState(LIST_LANGUAGE[0].source);
     const [language, setLanguage] = useState(LIST_LANGUAGE[0].codeName);
     const [displayLanguage, setDisplayLanguage] = useState('c++ (cpp17)')
@@ -142,14 +144,14 @@ export const Code = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                 </svg>
-                                <span>Đang chạy...</span>
+                                <span>{t("Running")}...</span>
                             </div>
                         ) : (
                             <div className={cx('startCode')}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                 </svg>
-                                <span>Chạy code</span>
+                                <span>{t("Run_code")}</span>
                             </div>
 
                         )}

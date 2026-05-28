@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Get } from "../../baseService/baseService";
 import { CButton, CFormInput } from "@coreui/react";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(style);
 const LIMIT = 12;
 
 export const ScoreUpPracticeTheory = () => {
+    const { t } = useTranslation()
     const navigate = useNavigate();
     const listRef = useRef(null);
     const loadingRef = useRef(false);
@@ -71,8 +73,8 @@ export const ScoreUpPracticeTheory = () => {
         <div className={cx("practice")}>
             <div className={cx("imgBgr")}>
                 <div className={cx("contentBgrImg")}>
-                    <h1>Xin chào, meow!</h1>
-                    <h5>Lướt xuống để bắt đầu luyện tập!</h5>
+                    <h1>{t("Hello_meow")}</h1>
+                    <h5>{t("Scroll_down_to_start_practicing")}</h5>
                 </div>
             </div>
             <CFormInput
@@ -99,7 +101,7 @@ export const ScoreUpPracticeTheory = () => {
                                 navigate(`/scoreup/list/theory/${item._id}`)
                             }
                         >
-                            Luyện tập
+                            {t("Practice")}
                         </CButton>
                     </div>
                 ))}

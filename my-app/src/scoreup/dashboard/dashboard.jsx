@@ -3,10 +3,12 @@ import style from './dashboard.module.scss';
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Get } from "../../baseService/baseService";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 const LIMIT = 12;
 
 export const Dashboard = () => {
+    const { t } = useTranslation()
     const [dataHistory, setDataHistory] = useState([])
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
@@ -58,11 +60,11 @@ export const Dashboard = () => {
         <div className={cx('practice')}>
             <div className={cx('imgBgr')}>
                 <div className={cx('contentBgrImg')}>
-                    <h1>Xin chào, meow!</h1>
-                    <h5>Chúc bạn một ngày tốt lành!</h5>
+                    <h1>{t("Hello_meow")}</h1>
+                    <h5>{t("Have_a_good_day")}</h5>
                 </div>
             </div>
-            <h3 style={{ margin: 15 }}><b>Lịch sử làm bài</b> </h3>
+            <h3 style={{ margin: 15 }}><b>{t('History_of_completing_the_assignment')}</b> </h3>
             <div
                 ref={listRef}
                 className={cx("listPractice")}
@@ -72,7 +74,7 @@ export const Dashboard = () => {
                         return (
                             <div className={cx('boxTitle')} key={index}>
                                 <h4>{item?.infoTheory?.chapter}</h4>
-                                <h5>Điểm: {item.core.toFixed(2)}</h5>
+                                <h5>{t("Score")}: {item.core.toFixed(2)}</h5>
                                 <button type="button" onClick={() => handleDoAgain(item.theoryId)} className={cx('btnTitle')}>Làm lại</button>
                             </div>
                         )

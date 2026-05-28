@@ -78,6 +78,7 @@
 
 .boxIntroduce {
     height: fit-content;
+    max-width: 200px;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -218,9 +219,11 @@
     .home {
         padding-top: 14vh;
     }
-    .banner{
+
+    .banner {
         height: 80vh;
     }
+
     .partner {
         width: 250px !important;
     }
@@ -241,7 +244,7 @@
         }
     }
 
-    
+
     .home {
         padding-top: 15vh;
     }

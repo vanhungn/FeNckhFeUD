@@ -105,7 +105,7 @@ export const Document = () => {
                             style={{ width: "100%", height: 40, padding: 5, margin: "10px 0" }}
                             onChange={handleOnchangeCode}
                         >
-                            <option value="">Chọn tài liệu</option>
+                            <option value="">{t("Select_document")}</option>
                             {item.docx.map(doc => (
                                 <option key={doc._id} value={doc._id}>
                                     {doc.name}
@@ -118,7 +118,7 @@ export const Document = () => {
                             className={cx("btnTitle")}
                             onClick={() => handleDoHomework(item._id)}
                         >
-                            Xem tài liệu
+                            {t("See_document")}
                         </button>
                     </div>
                 ))}

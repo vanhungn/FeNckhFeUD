@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Get } from "../../baseService/baseService";
 import { CButton, CFormInput } from "@coreui/react";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 const LIMIT = 12;
 export const ScoreUpPractice = () => {
+    const { t } = useTranslation()
     const navigate = useNavigate()
     const [dataAlgorithm, setDataAlgorithm] = useState([])
     const listRef = useRef(null);
@@ -22,7 +24,7 @@ export const ScoreUpPractice = () => {
         loadingRef.current = true
         try {
             const data = await Get(`/problem?skip=${pageNumber}&limit=12&search=${keyword}`)
-            const newData = data?.data?.data||[]
+            const newData = data?.data?.data || []
             setDataAlgorithm(prev =>
                 pageNumber === 1 ? newData : [...prev, ...newData]
             );
@@ -45,12 +47,12 @@ export const ScoreUpPractice = () => {
         CallApi(page);
     }, [page]);
     useEffect(() => {
-        
+
         CallApi(1);
     }, []);
     useEffect(() => {
         // 🔥 reset infinite scroll khi search đổi
-       setPage(1);
+        setPage(1);
         setHasMore(true);
         setDataAlgorithm([]);
         listRef.current && (listRef.current.scrollTop = 0);
@@ -67,11 +69,11 @@ export const ScoreUpPractice = () => {
         <div className={cx('practice')}>
             <div className={cx('imgBgr')}>
                 <div className={cx('contentBgrImg')}>
-                    <h1>Xin chào, meow!</h1>
-                    <h5>Lướt xuống để bắt đầu luyện tập!</h5>
+                    <h1>{t("Hello_meow")}</h1>
+                    <h5>{t("Scroll_down_to_start_practicing")}</h5>
                 </div>
             </div>
-            <CFormInput className={cx("inputSearch")} onChange={handleSearch} style={{ width: "50%", margin: "15px 0 0 0 ", boxShadow: "rgb(83, 144, 219) 0px 8px 24px" }} placeholder="Tìm kiếm..." />
+            <CFormInput className={cx("inputSearch")} onChange={handleSearch} style={{ width: "50%", margin: "15px 0 0 0 ", boxShadow: "rgb(83, 144, 219) 0px 8px 24px" }} placeholder={t("Placeholder_Search")} />
             <div className={cx('listPractice')}
                 ref={listRef}
                 onScroll={handleScroll}
@@ -82,7 +84,7 @@ export const ScoreUpPractice = () => {
                         return (
                             <div key={index} className={cx('boxTitle')}>
                                 <h4>{list.title}</h4>
-                                <CButton className={cx('btnTitle')} type="button" onClick={() => handleDoHomework(list._id)} > Luyện tập </CButton>
+                                <CButton className={cx('btnTitle')} type="button" onClick={() => handleDoHomework(list._id)} > {t("Practice")} </CButton>
                             </div>
                         )
                     })

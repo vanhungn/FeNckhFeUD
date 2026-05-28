@@ -6,9 +6,11 @@ import { useParams } from "react-router-dom";
 import { SolidQuestion } from "../../components/SolidQuestion/SolidQuestion";
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react'
 import { ModalInform } from "../../components/Modal/Modal";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style);
 
 export const DoTheory = () => {
+    const { t } = useTranslation()
     const [answers, setAnswers] = useState({}); // lưu key đã chọn: { questionIndex: key }
     const [submitted, setSubmitted] = useState(false);
     const { code } = useParams();
@@ -60,7 +62,7 @@ export const DoTheory = () => {
 
                     <div style={{ display: submitted ? "flex" : "none", justifyContent: "flex-end", margin: "40px 0 0 0 " }}>
                         <h5>
-                            Điểm: {result}
+                            {t("Score")}: {result}
                         </h5>
 
                     </div>
@@ -73,10 +75,10 @@ export const DoTheory = () => {
                                 title={item.question}
                                 explain={submitted ? item.explain : ""}
                                 img={item.imgUrl}
-                                options={item.options} 
+                                options={item.options}
                                 selected={answers[index]}
                                 onSelect={handleSelect}
-                                answer={item} 
+                                answer={item}
                                 submitted={submitted}
                             />
                         ))}
@@ -88,7 +90,7 @@ export const DoTheory = () => {
             </form>
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "20px 10px", borderLeft: "1px black solid" }}>
                 <div>
-                    <h5>Số câu hỏi:</h5>
+                    <h5>{t("Number_of_questions")}:</h5>
                     <div className={cx('showSelect')}>
                         {
                             dataTheory.list?.map((item, index) => {
@@ -106,10 +108,10 @@ export const DoTheory = () => {
 
                 <div style={{ display: "flex", flexDirection: "column", margin: '20px', gap: 20 }}>
                     <CButton style={{ cursor: "pointer", backgroundColor: "#0061bb", color: "#fff", }} disabled={submitted} onClick={() => setVisible(!visible)}>
-                        Nộp bài
+                        {t("Submit")}
                     </CButton>
                     <CButton style={{ cursor: "pointer" }} color="danger" onClick={() => window.location.reload()}>
-                        Làm lại
+                        {t("Redo")}
                     </CButton>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { Get } from "../baseService/baseService";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames/bind";
 import style from "./practice.module.scss";
+import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(style);
 
@@ -14,7 +15,7 @@ export const Practice = () => {
     const navigate = useNavigate();
     const [authError, setAuthError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const { t } = useTranslation()
     // ✅ Xử lý authentication với backend sau khi login Microsoft thành công
     useEffect(() => {
         const authenticateWithBackend = async () => {
@@ -154,8 +155,8 @@ export const Practice = () => {
         <div className={cx('practice')}>
             <div className={cx('practiceContainer')}>
                 <div className={cx('loginForm')}>
-                    <h1>Đăng nhập</h1>
-                    <p>Đăng nhập vào tài khoản của bạn để tiếp cận với kho bài tập lập trình đồ sộ và bổ ích. Hành trình của bạn bắt đầu từ đây!</p>
+                    <h1>{t("Btn_Login")}</h1>
+                    <p>{t("LoginMicrosoft")}</p>
 
                     {/* Hiển thị lỗi nếu có */}
                     {authError && (
