@@ -9,6 +9,7 @@ import { TotalPage } from "../components/TotalPage/Totalpage";
 import { ChatBot } from "../components/Chatbot/Chatbot";
 import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 import Banner from "../home/Banner/Banner";
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style)
 
 export const Information = () => {
@@ -18,6 +19,7 @@ export const Information = () => {
     const [totalPage, setTotalPage] = useState(0)
     const [colorTotal, setColorToatal] = useState(1)
     const [searchParams, setSearchParams] = useSearchParams()
+    const { t, i18n } = useTranslation();
     const type = searchParams.get('info')
     const navigate = useNavigate()
     const callApi = async () => {
@@ -107,11 +109,11 @@ export const Information = () => {
                                     <div key={index} className={cx('boxNews')} onClick={() => handleNavigateDetail(item._id)} >
                                         <img className={cx('imgNews')} src={item.img.url} alt="" />
                                         <div className={cx('contentNews')}>
-                                            <h5 style={{ color: "#0061bb", fontWeight: 600 }}>{item.title}
+                                            <h5 style={{ color: "#0061bb", fontWeight: 600 }}>{i18n.language == 'vi' ? item.title : item.titleEN}
                                             </h5>
-                                            <p>
-                                                {item.note.slice(0, 180)}
-                                                {item.note.length > 180 && "…"}
+                                            <p> 
+                                                {i18n.language == 'vi' ? item?.note?.slice(0, 180) : item?.noteEN?.slice(0, 180)}
+                                                {i18n.language == 'vi' ? item?.note.length > 180 && "…" : item?.noteEN?.length > 180 && "…"}
                                             </p>
                                             <p className={cx('timeNews')} style={{ color: "gray" }}>{time}</p>
                                         </div>

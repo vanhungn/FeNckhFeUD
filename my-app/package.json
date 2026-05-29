@@ -47,6 +47,7 @@
     "formik": "^2.4.6",
     "framer-motion": "^12.23.24",
     "i18next": "^26.3.0",
+    "i18next-browser-languagedetector": "^8.2.1",
     "lucide-react": "^0.554.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

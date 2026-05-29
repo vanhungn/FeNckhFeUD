@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style);
 
 export const InformationDetail = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [dataDetail, setDataDetail] = useState(null);
     const [suggest, setSuggest] = useState([]);
     const [resetEditor, setResetEditor] = useState(true)
@@ -71,7 +71,7 @@ export const InformationDetail = () => {
                         <div
                             className="post-content"
                             dangerouslySetInnerHTML={{
-                                __html: parseEditorJsToHtml(dataDetail?.content),
+                                __html: parseEditorJsToHtml(i18n.language == 'vi' ? dataDetail?.content : dataDetail?.contentEN),
                             }}
                         />
                     </div>
