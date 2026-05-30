@@ -22,7 +22,7 @@ export const Home = () => {
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
   const [seeImg, seSeeImg] = useState('')
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const handleNext = () => {
     setPageImg(prev => Math.min(prev + 1, MAX_PAGE));
@@ -120,7 +120,7 @@ export const Home = () => {
                     <img width={"100%"} height={"100%"} style={{ objectFit: "cover" }} src={item?.img?.url} alt="" />
                     <div>
                       <h5>
-                        {item.title.slice(0, 60)}
+                        {i18n.language === 'vi' ? item.title.slice(0, 60) : item.titleEN.slice(0, 60)}
                         {item.title.length > 60 && "…"}
                       </h5>
 
@@ -330,7 +330,7 @@ export const Home = () => {
               <Link style={{ textDecoration: "none" }} to={"https://iuh.edu.vn/"} target="_blank">
                 <img style={{ width: "100%" }} height={"180px"} src="https://viu.edu.vn/media/xEVYHt2V5jVCAyBvU4GLctwZPShm8D4BljYd-vZaSp0fJw4Fh87h4FrDRU9jD94X.jpg" alt="" />
 
-                <p>Đại học Công nghiệp Việt Trì</p>
+                <p>{t("Viet_Tri_Industrial_University")}</p>
               </Link>
 
             </div>

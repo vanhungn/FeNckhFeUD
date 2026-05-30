@@ -110,7 +110,7 @@ export const Header = () => {
 
                 </div>
                 <div className={cx('ChangeLanguage')} onClick={() => HandlerTurnOnLanguage()}>
-                    <img width={24} src="/icons8-vietnam-48.png" alt="" />
+                    <img width={24} src={i18n.language === "vi" ? "/icons8-vietnam-48.png" : "/icons8-english-48.png"} alt="" />
                     {turnOnSelectChangeLanguage && (
                         <div className={cx('boxChangeLanguage')} >
                             <div className={cx('boxSelectLanguage')} onClick={() => i18n.changeLanguage("vi")}>
@@ -340,6 +340,7 @@ export const Header = () => {
                                 <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
                             </div>
                         </div>
+                        
                     </div>
 
                 </div>
