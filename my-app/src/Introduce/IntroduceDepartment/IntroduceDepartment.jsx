@@ -39,11 +39,9 @@ export const IntroduceDepartment = () => {
                     <div className={cx('content')} data-aos="fade-up-left">
                         <h5 style={{ color: "#0061bb" }}>{t("GENERAL_INTRODUCTION")}</h5>
                         <h2 style={{ fontWeight: "600", color: "#0061bb" }}>{t("FACULTY_OF_INFORMATION_TECHNOLOGY")}</h2>
-                        <p >Khoa Công nghệ thông tin tiền thân là Bộ môn Công nghệ thông tin được thành lập từ năm 2004, thuộc trường Công nghệ, Đại học Kinh tế Quốc dân.
-                            Trong hơn 20 năm đào tạo, Khoa tập chung đào tạo chuyên sâu, cung cấp cho thị trường lao động hàng nghìn cử nhân thuộc lĩnh vực Công nghệ thông tin và Khoa học máy tính có trình độ chuyên môn cao, có kỹ năng làm việc đáp ứng rất tốt các nhu cầu của xã hội cũng như thường xuyên có các hoạt động nghiên cứu khoa học, kết hợp với các đơn vị trong và ngoài nước thực hiện các dự án, đề tài.
+                        <p >{t("CONTENT1FACULTY_OF_INFORMATION")}
                         </p>
-                        <p >Với lợi thế đào tạo ngành Công nghệ trong ngôi trường hiện đại bậc nhất Việt Nam, là trung tâm đào tạo nghiên cứu hàng đầu về kinh tế, quản lý và quản trị kinh doanh, Chương trình đào tạo có sự kết hợp giữa kiến thức kỹ thuật và kiến thức kinh tế kinh doanh phong phú.
-                            Sinh viên tin tại Khoa có cơ hội trang bị cho mình thêm các kiến thức, kỹ năng về kinh tế và quản lý ngoài các kỹ năng chuyên môn, sẽ là điểm mạnh của các em khi ra trường làm việc.
+                        <p >{t("CONTENT2FACULTY_OF_INFORMATION")}
                         </p>
                     </div>
 

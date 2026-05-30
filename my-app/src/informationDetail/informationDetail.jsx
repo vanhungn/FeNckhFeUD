@@ -86,13 +86,16 @@ export const InformationDetail = () => {
                                     const month = (d.getMonth() + 1).toString().padStart(2, "0");
                                     const year = d.getFullYear();
                                     const time = `${day}/${month}/${year}`;
+                                    console.log(item.noteEN);
                                     return (
                                         <div key={index} className={cx('boxNews')}>
                                             <img className={cx('imgNews')} src={item.img.url} alt="" />
                                             <div style={{ marginTop: 10 }}>
-                                                <h5>{item.title}
+                                                <h5><b>
+                                                    {i18n.language === 'vi' ? item.title : item.titleEN}
+                                                </b>
                                                 </h5>
-                                                <p>{item.note}
+                                                <p>{i18n.language === "vi" ? item.note : item.noteEN}
                                                 </p>
                                                 <p className={cx('timeNews')} >{time}</p>
                                             </div>
