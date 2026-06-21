@@ -29,3 +29,28 @@
         display: none;
     }
 }
+
+.message {
+    width: 250%;
+    position: absolute;
+    top: -130%;
+    right: -10px;
+    color: #000;
+    border: 1px rgb(157, 157, 157) solid;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.message::after {
+    position: absolute;
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: rotate(-45deg);
+    bottom: -10%;
+    left: 85px;
+    border-left: 1px gray solid;
+    border-bottom: 1px gray solid;
+    background-color: #fff;
+}
