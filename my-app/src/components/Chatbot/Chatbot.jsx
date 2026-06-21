@@ -13,7 +13,8 @@ import { Post } from '../../baseService/baseService';
 import classNames from 'classnames/bind';
 import style from "./Chatbot.module.scss";
 import CIcon from '@coreui/icons-react';
-import { cilArrowTop, cilMic } from '@coreui/icons'
+import { cilArrowTop, cilMic, cilX } from '@coreui/icons';
+
 const cx = classNames.bind(style);
 
 export const ChatBot = () => {
@@ -29,6 +30,7 @@ export const ChatBot = () => {
     const [isTranscribing, setIsTranscribing] = useState(false);
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
+    const cancelledRef = useRef(false); // ✅ Thêm ref này để theo dõi trạng thái hủy
 
     const suggestions = [
         'Tuyển sinh',
@@ -88,13 +90,11 @@ export const ChatBot = () => {
         setIsOpen(!isOpen);
     };
 
-    // Hàm kiểm tra xem text có chứa ký tự tiếng Việt không
     const isVietnamese = (text) => {
         const vnRegex = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i;
         return vnRegex.test(text);
     };
 
-    // Hàm để bot đọc văn bản đa ngôn ngữ
     const speakText = (text) => {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
@@ -108,31 +108,36 @@ export const ChatBot = () => {
         }
     };
 
-    // Bấm 1 lần để bắt đầu ghi âm, bấm lại để dừng và gửi đi transcribe
     const handleVoiceClick = async () => {
-        // Nếu bot đang đọc dở, bấm mic sẽ bắt bot im lặng ngay lập tức
         window.speechSynthesis.cancel();
 
-        // Nếu đang ghi âm -> bấm lần 2 để DỪNG
+        // Đang ghi âm -> bấm lần 2 để DỪNG (và transcribe)
         if (isRecording) {
             mediaRecorderRef.current?.stop();
             return;
         }
 
-        // Chưa ghi âm -> bấm lần 1 để BẮT ĐẦU
+        // Chưa ghi âm -> bắt đầu ghi
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const mediaRecorder = new MediaRecorder(stream);
             mediaRecorderRef.current = mediaRecorder;
             audioChunksRef.current = [];
+            cancelledRef.current = false; // ✅ Reset trạng thái hủy mỗi lần bắt đầu ghi mới
 
             mediaRecorder.ondataavailable = (e) => {
                 if (e.data.size > 0) audioChunksRef.current.push(e.data);
             };
 
             mediaRecorder.onstop = async () => {
-                // Dừng tất cả track của mic (tắt đèn ghi âm trên trình duyệt)
+                // Dừng tất cả track của mic
                 stream.getTracks().forEach((track) => track.stop());
+
+                // ✅ Kiểm tra xem có bị hủy không, nếu hủy thì không transcribe
+                if (cancelledRef.current) {
+                    cancelledRef.current = false; // reset lại cho lần sau
+                    return;
+                }
 
                 const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
                 await transcribeAudio(audioBlob);
@@ -146,7 +151,13 @@ export const ChatBot = () => {
         }
     };
 
-    // Gửi file audio lên backend để lấy transcript, KHÔNG tự động gửi tin nhắn
+    // ✅ cancelRecording: set state trước, rồi mới stop để tránh race condition
+    const cancelRecording = () => {
+        cancelledRef.current = true;   // đánh dấu là hủy
+        setIsRecording(false);          // cập nhật UI ngay
+        mediaRecorderRef.current?.stop(); // rồi mới dừng recorder
+    };
+
     const transcribeAudio = async (audioBlob) => {
         setIsRecording(false);
         setIsTranscribing(true);
@@ -204,7 +215,7 @@ export const ChatBot = () => {
                         style={{
                             background: 'linear-gradient(135deg, #6a4cff, #0056b3)',
                             height: '3.8rem',
-                            padding: '0 1rem'
+                            padding: '15px'
                         }}
                     >
                         <div className="d-flex align-items-center gap-2">
@@ -225,25 +236,6 @@ export const ChatBot = () => {
                                 </div>
                             </div>
                         </div>
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            style={{
-                                background: 'rgba(255,255,255,0.15)',
-                                border: 'none',
-                                color: 'white',
-                                fontSize: '1.3rem',
-                                cursor: 'pointer',
-                                width: '28px',
-                                height: '28px',
-                                borderRadius: '50%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                lineHeight: 1
-                            }}
-                        >
-                            &times;
-                        </button>
                     </CCardHeader>
 
                     {/* Body */}
@@ -361,6 +353,26 @@ export const ChatBot = () => {
                                 className="border-0 bg-transparent shadow-none"
                                 style={{ color: '#495057', fontSize: '0.9rem' }}
                             />
+
+                            {/* Nút Hủy ghi âm */}
+                            {isRecording && (
+                                <CButton
+                                    onClick={cancelRecording}
+                                    className="rounded-circle d-flex align-items-center justify-content-center p-0"
+                                    style={{
+                                        width: '38px',
+                                        height: '38px',
+                                        marginLeft: '4px',
+                                        background: '#9e9e9e',
+                                        border: 'none',
+                                        color: 'white'
+                                    }}
+                                    title="Hủy ghi âm"
+                                >
+                                    <CIcon icon={cilX} />
+                                </CButton>
+                            )}
+
                             {/* Nút Micro */}
                             <CButton
                                 onClick={handleVoiceClick}
@@ -386,7 +398,6 @@ export const ChatBot = () => {
                                 {isTranscribing ? (
                                     <span className="spinner-border spinner-border-sm" role="status"></span>
                                 ) : isRecording ? (
-                                    // Icon "dừng" (hình vuông) để user biết bấm lại để kết thúc
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                         <rect x="5" y="5" width="14" height="14" rx="2" />
                                     </svg>
