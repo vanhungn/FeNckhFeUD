@@ -59,7 +59,7 @@ export const Home = () => {
   }
   return (
     <div className={cx('home')}>
-      <Banner url={"/Gemini_Generated_Image_5ni23e5ni23e5ni2.png"} />
+      {/* <Banner url={"/Gemini_Generated_Image_5ni23e5ni23e5ni2.png"} /> */}
       <div style={{ margin: "auto auto", width: "80%", }}>
         <div className={cx('general')} data-aos="fade-up" style={{ width: "100%", display: "flex", gap: 20, padding: "40px 0px" }}>
           <div className={cx('box')} onClick={() => navigate('/teaching_staff')}>

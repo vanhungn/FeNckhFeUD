@@ -9,7 +9,7 @@ import {
     CNavItem,
     CNavTitle,
 } from '@coreui/react'
-import { cilCheckCircle, cilFile, cilInfo, cilLan, cilLibrary } from '@coreui/icons'
+import { cilCheckCircle, cilFile, cilInfo, cilLan, cilLibrary,cilPencil  } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { AdminDocument } from './adminDocument/adminDocument';
 import { DocumentAdminDetail } from './documentAdminDetail/documentAdminDetail';
@@ -25,6 +25,7 @@ import { ContactAdmin } from './contact/contact';
 import { Diligence } from './diligence/diligence';
 import style from "./admin.module.scss"
 import { NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { EditMenuAndBanner } from './editMenuAndBanner/editMenuAndBanner';
 import { useEffect, useState } from 'react';
 const cx = classNames.bind(style)
 
@@ -77,6 +78,11 @@ export const Admin = () => {
                     </CSidebarBrand>
                 </CSidebarHeader>
                 <CSidebarNav>
+                     <NavLink style={{ textDecoration: "none" }} to={'/admin/edit'}>
+                        <CNavItem className={cx(location.pathname === '/admin/edit' ? "active" : "category")} >
+                            <CIcon customClassName="nav-icon" icon={cilPencil} /> Edit
+                        </CNavItem>
+                    </NavLink>
                     <NavLink style={{ textDecoration: "none" }} to={'/admin/document'}>
                         <CNavItem className={cx(location.pathname === '/admin/document' ? "active" : "category")} >
                             <CIcon customClassName="nav-icon" icon={cilFile} /> Tài liệu
@@ -125,6 +131,7 @@ export const Admin = () => {
                     <Route path='/news/update/:_id' element={<UpdateNews />}></Route>
                     <Route path='/contact' element={<ContactAdmin />} />
                     <Route path='/diligence' element={<Diligence />} />
+                    <Route path='/edit' element={<EditMenuAndBanner />} />
                 </Routes>
             </div>
         </div>

@@ -1,0 +1,16 @@
+.titleEdit{
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding-bottom: 12px;
+  border-bottom: 0.5px solid #eee;
+}
+.edit{
+    padding: 10px;
+}
+.groupTypeAndLocation{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap:20px;
+}

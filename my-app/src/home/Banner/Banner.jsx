@@ -12,22 +12,28 @@ import { Autoplay } from 'swiper/modules';
 
 function Banner({ url }) {
     return (
-        <Swiper
+        <div className={cx("bannerWrapper")}>
+            <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 3000 }}
-            loop={true}
+            loop={url?.length > 1} 
             className={cx('banner')}
-        >
-            <SwiperSlide>
-                <img className={cx('imgBanner')}
-                    src={url} />
-            </SwiperSlide>
-
-            <SwiperSlide>
-                <img className={cx('imgBanner')}
-                    src={url} />
-            </SwiperSlide>
-        </Swiper>
+                >
+                    {
+                        url?.length>0?
+                        url?.map((item,index)=>{
+                            return( <SwiperSlide>
+                        <img className={cx('imgBanner')}
+                            src={item.img} />
+                    </SwiperSlide>)
+                        }):<SwiperSlide>
+                        <img className={cx('imgBanner')}/>
+                    </SwiperSlide>
+                    }
+                    
+                </Swiper>
+        </div>
+        
     );
 }
 
