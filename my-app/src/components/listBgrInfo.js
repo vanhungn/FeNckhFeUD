@@ -12,7 +12,7 @@ const BANNER = [
 
     {
         title: "Hội thảo",
-        img: "/Gemini_Generated_Image_i0oeb6i0oeb6i0oe.png",
+        img: ["/Gemini_Generated_Image_i0oeb6i0oeb6i0oe.png"],
         keyName: "seminar"
     },
     {

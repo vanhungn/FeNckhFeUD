@@ -1,21 +1,25 @@
 .category {
-    padding: 0px 100px;
+    padding: 0px 20px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     display: flex;
     justify-content: space-between;
 }
+
 .boxLogo {
+    padding: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 10px
 }
+
 .logo {
     width: 60px;
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 .nameVN {
     margin-bottom: 5px;
     color: #0061bb;
@@ -28,9 +32,11 @@
     font-size: 16px;
     font-weight: 600;
 }
+
 .displayCategory {
     display: flex;
 }
+
 .boxCategoryBottom {
     padding: 30px;
     height: 100%;
@@ -58,25 +64,26 @@
         }
     }
 }
+
 .categoryChildren1 {
     position: relative;
 
-    > div {
+    >div {
         border-radius: 5px;
         display: none;
         position: absolute;
         width: 100%;
         height: fit-content;
-        right: 100%; 
+        right: 100%;
         top: 0;
         background-color: #fff;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         z-index: 200;
-       
+
     }
 
     &:hover {
-        > div {
+        >div {
             display: block;
         }
     }
@@ -122,10 +129,12 @@
 .iconDown {
     color: rgb(17, 17, 17);
 }
+
 .editorWrap {
     flex: 1;
     background: #fff;
     border-top: 1px solid #e5e7eb;
+
     :global(.nav-tabs) {
         border-bottom: 1px solid #e5e7eb;
         padding: 0 16px;
@@ -142,6 +151,7 @@
         border-left: 1px solid #fff;
         border-right: 1px solid #fff;
         font-weight: 600;
+
         &:hover {
             border-top: 1px solid #fff;
             border-left: 1px solid #fff;
@@ -154,45 +164,57 @@
         padding: 0;
     }
 }
-.active{
+
+.active {
     color: rgb(26, 78, 141) !important;
-    border-bottom:2px solid  rgb(26, 78, 141)!important;
+    border-bottom: 2px solid rgb(26, 78, 141) !important;
 }
 
 .tabs {
     position: relative;
-    
+
 }
-.nav{
+
+.nav {
     display: grid;
     grid-template-columns: 1fr 0.1fr;
 }
-.btnSave{
-          border-bottom: 1px solid #e5e7eb;
+
+.btnSave {
+    border-bottom: 1px solid #e5e7eb;
 }
-.lblTitleEdit, .lblTitleEdit1, .lblTitleEdit2{
+
+.lblTitleEdit,
+.lblTitleEdit1,
+.lblTitleEdit2,
+.lblTitleEdit2Wrap {
     width: fit-content;
     padding: 5px 20px;
     display: flex;
-    gap:10px;
+    gap: 10px;
     align-items: center;
-    border-radius:3px ;
-    &:hover{
+    border-radius: 3px;
+
+    &:hover {
         background-color: #f8f9fa;
-      .setting{
+
+        .setting {
             display: block;
         }
     }
 }
-.boxMenu{
+
+.boxMenu {
     display: flex;
-    gap:10px;
+    gap: 10px;
     align-items: center;
 }
-.setting{
+
+.setting {
     display: none;
 }
-.editFormMenu{
+
+.editFormMenu {
     padding: 20px;
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -200,45 +222,35 @@
 
 
 
-.bordermenu{
-    border-left:1px dashed #e5e7eb;
-    margin-left:14px ;
-    
+.bordermenu {
+    border-left: 1px dashed #e5e7eb;
+    margin-left: 14px;
+
 }
-.btnAdd{
+
+.btnAdd {
     width: fit-content;
     padding: 2px 5px;
-    border:1px solid #e5e7eb;
-    background-color:#fff ;
-    &:hover{
-        background-color:#f8f9fa !important;
-    }
-}
+    border: 1px solid #e5e7eb;
+    background-color: #fff;
 
-.menuCollapse {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.3s ease;
-
-    & > div {
-        min-height: 0;
-        overflow: hidden;
-    }
-
-    &.open {
-        grid-template-rows: 1fr;
+    &:hover {
+        background-color: #f8f9fa !important;
     }
 }
 
 .iconDown {
     transition: transform 0.2s ease;
+
     &.open {
         transform: rotate(180deg);
     }
 }
-.formEdit{
-    border-left:1px solid #e5e7eb ;
+
+.formEdit {
+    border-left: 1px solid #e5e7eb;
 }
+
 .emptyDisplay {
     display: flex;
     flex-direction: column;
@@ -250,25 +262,112 @@
     border-radius: 8px;
     margin: 16px;
 }
-.iconTrash{
-    &:hover{
+
+.iconTrash {
+    &:hover {
         color: red !important;
     }
 }
-.boxIcon{
-    &:hover{
-       
+
+.boxIcon {
+    &:hover {
+
         background-color: #0061bb;
-        border-radius:5px ;
-        .iconCilArrowTop{
+        border-radius: 5px;
+
+        .iconCilArrowTop {
             color: #fff;
         }
     }
 }
-.menu{
+
+.menu {
     display: flex;
     flex-wrap: wrap;
-   
-   
 
+
+
+}
+
+
+.logoWrap {
+    position: relative;
+    display: inline-block;
+
+    &:hover .logoOverlay {
+        opacity: 1;
+    }
+}
+
+.logoOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 12px;
+    border-radius: 50%; // bỏ nếu logo không phải hình tròn
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none; // để click xuyên qua overlay, thẳng vào logoWrap
+}
+
+.bannerItem {
+    position: relative;
+    width: 160px;
+    height: 90px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+
+    &:hover .bannerControls {
+        opacity: 1;
+    }
+}
+
+.bannerPreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerControls {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    svg {
+        color: #fff;
+        cursor: pointer;
+    }
+}
+
+.bannerAddBox {
+    width: 160px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #888;
+    font-size: 12px;
+
+    &:hover {
+        border-color: #0061bb;
+        color: #0061bb;
+    }
 }

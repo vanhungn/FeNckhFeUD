@@ -21,6 +21,7 @@ export const Home = () => {
   const MAX_PAGE = Math.ceil(TOTAL / PER_PAGE);
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
+  const [banner, setBanner] = useState([])
   const [seeImg, seSeeImg] = useState('')
   const { t, i18n } = useTranslation();
 
@@ -41,8 +42,11 @@ export const Home = () => {
   useEffect(() => {
     const callApi = async () => {
       try {
-        const data = await Get("/news?limit=3")
-        setDataNews(data.data.data)
+        const dataBanner = await Get("/menu")
+        setBanner(dataBanner?.data?.data)
+        const data = await Get(`/news?limit=3&type=tin_tuc`)
+        const result = data?.data?.data.filter((item) => item.kindOf === "tin_tuc")
+        setDataNews(data?.data?.data)
       } catch (error) {
         console.log(error)
       }
@@ -57,9 +61,10 @@ export const Home = () => {
     setVisible(true)
     seSeeImg(img)
   }
+  console.log(banner)
   return (
     <div className={cx('home')}>
-      {/* <Banner url={"/Gemini_Generated_Image_5ni23e5ni23e5ni2.png"} /> */}
+      <Banner url={banner[0]?.banner} />
       <div style={{ margin: "auto auto", width: "80%", }}>
         <div className={cx('general')} data-aos="fade-up" style={{ width: "100%", display: "flex", gap: 20, padding: "40px 0px" }}>
           <div className={cx('box')} onClick={() => navigate('/teaching_staff')}>

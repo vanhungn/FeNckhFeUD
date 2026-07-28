@@ -1,97 +1,543 @@
 import classNames from "classnames/bind";
 import style from "./formEdit.module.scss";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { CForm } from "@coreui/react";
+
+import {
+  CFormSelect
+} from "@coreui/react";
+
+import CIcon from "@coreui/icons-react";
+
+import {
+  cilPlus,
+  cilTrash,
+  cilArrowTop,
+  cilArrowBottom
+} from "@coreui/icons";
+
 import { Input } from "../../../components/inputs/inputs";
+
+import { useEffect, useRef } from "react";
+
 
 const cx = classNames.bind(style);
 
+
+
 const getConfig = (dataEdit) => {
-  if ("title" in dataEdit) return {
-    init: { title: dataEdit?.title || "" },
-    validate: { title: Yup.string().required("Bạn vui lòng nhập tiêu đề") },
-    name: "title",
-    nameType: null,
-    nameLocation: null,
-  };
-  if ("titleMenu" in dataEdit) return {
-    init: {
-      titleMenu: dataEdit?.titleMenu || "",
-      typeof: dataEdit?.typeof || "",
-      location: dataEdit?.location || null,
-    },
-    validate: { titleMenu: Yup.string().required("Bạn vui lòng nhập tiêu đề") },
-    name: "titleMenu",
-    nameType: "typeof",
-    nameLocation: "location",
-  };
-  if ("titleChildrenMenu" in dataEdit) return {
-    init: {
-      titleChildrenMenu: dataEdit?.titleChildrenMenu || "",
-      typeofChildrenMenu: dataEdit?.typeofChildrenMenu || "",
-      locationChildrenMenu: dataEdit?.locationChildrenMenu || null,
-    },
-    validate: { titleChildrenMenu: Yup.string().required("Bạn vui lòng nhập tiêu đề") },
-    name: "titleChildrenMenu",
-    nameType: "typeofChildrenMenu",
-    nameLocation: "locationChildrenMenu",
-  };
+
+  if (!dataEdit)
+    return null;
+
+
+
+  // cấp 1
+  if ("title" in dataEdit) {
+
+    return {
+
+      init: {
+        title: dataEdit.title || "",
+        kindOf: dataEdit.kindOf || ""
+      },
+
+      validate: {
+        title:
+          Yup.string()
+            .required("Bạn vui lòng nhập tiêu đề")
+      },
+
+      name: "title",
+
+      nameType: null,
+
+      nameLocation: null
+    };
+
+  }
+
+
+
+
+  // cấp 2
+  if ("titleMenu" in dataEdit) {
+
+    return {
+
+      init: {
+
+        titleMenu:
+          dataEdit.titleMenu || "",
+
+        typeof:
+          dataEdit.typeof || "",
+
+        location:
+          dataEdit.location || ""
+
+      },
+
+
+      validate: {
+
+        titleMenu:
+          Yup.string()
+            .required("Bạn vui lòng nhập tiêu đề")
+
+      },
+
+
+      name: "titleMenu",
+
+      nameType: "typeof",
+
+      nameLocation: "location"
+
+    };
+
+  }
+
+
+
+
+
+  // cấp 3
+  if ("titleChildrenMenu" in dataEdit) {
+
+    return {
+
+      init: {
+
+        titleChildrenMenu:
+          dataEdit.titleChildrenMenu || "",
+
+        typeofChildrenMenu:
+          dataEdit.typeofChildrenMenu || "",
+
+        locationChildrenMenu:
+          dataEdit.locationChildrenMenu || ""
+
+      },
+
+
+      validate: {
+
+        titleChildrenMenu:
+          Yup.string()
+            .required("Bạn vui lòng nhập tiêu đề")
+
+      },
+
+
+      name: "titleChildrenMenu",
+
+      nameType: "typeofChildrenMenu",
+
+      nameLocation: "locationChildrenMenu"
+
+    };
+
+  }
+
+
   return null;
+
 };
 
-export const FormEdit = ({ dataEdit }) => {
-  // Lấy config trước
+
+
+
+
+
+const toSlug = (str) => {
+
+  if (!str)
+    return "";
+
+
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .replace(/\s+/g, "_")
+    .replace(/[^a-zA-Z0-9_]/g, "")
+    .toLowerCase();
+
+};
+
+
+
+
+
+
+
+
+
+export const FormEdit = ({
+
+  dataEdit,
+
+  onChange,
+
+  onAddBannerTop,
+
+  onRemoveBannerTop,
+
+  onMoveBannerTop
+
+}) => {
+
+
   const config = getConfig(dataEdit);
 
-  // Gọi useFormik ở top level — không đặt trong if/else
+
+  const inputBannerRef = useRef();
+
+
+
+
   const formik = useFormik({
-    initialValues: config?.init ?? {},
+
+    initialValues:
+      config?.init || {},
+
+
     enableReinitialize: true,
-    validationSchema: Yup.object(config?.validate ?? {}),
-    onSubmit: async (values) => {
-      console.log(values);
-    },
+
+
+    validationSchema:
+      Yup.object(
+        config?.validate || {}
+      ),
+
+
+    onSubmit: () => { }
+
   });
 
-  if (!config) return null;
 
-  const { name, nameType, nameLocation } = config;
-  const err = formik.errors[name] && formik.touched[name];
-  const logError = formik.errors[name];
-  const toSlug = (str) => {
-    if (!str) return ""  
-  return str
-    .normalize("NFD")                         
-    .replace(/[\u0300-\u036f]/g, "")          
-    .replace(/đ/g, "d").replace(/Đ/g, "D")    
-    .replace(/\s+/g, "_")                   
-    .replace(/[^a-zA-Z0-9_]/g, "")        
-    .toLowerCase()                      
-}
 
- const nameTy = toSlug(formik.values[name])
+
+
+  const name = config?.name;
+
+  const nameType = config?.nameType;
+
+  const nameLocation = config?.nameLocation;
+
+
+
+
+
+
+
+  useEffect(() => {
+
+
+    if (!dataEdit)
+      return;
+
+
+    onChange({
+
+      ...dataEdit,
+
+      ...formik.values
+
+    });
+
+
+  }, [formik.values]);
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+
+
+    if (
+
+      dataEdit &&
+
+      dataEdit._id === undefined &&
+
+      nameType &&
+
+      formik.values[name]
+
+    ) {
+
+
+      formik.setFieldValue(
+
+        nameType,
+
+        toSlug(
+          formik.values[name]
+        )
+
+      );
+
+    }
+
+
+  }, [
+
+    formik.values[name]
+
+  ]);
+
+
+
+
+
+
+
+  if (!config)
+    return null;
+
+
+
+
+
+
+
+
+  const handleUploadBannerTop = (e) => {
+
+
+    const files =
+      Array.from(
+        e.target.files || []
+      );
+
+
+    if (files.length) {
+
+      onAddBannerTop(files);
+
+    }
+
+
+    e.target.value = "";
+
+  };
+
+
+
+
+
+
+
+
 
   return (
+
     <div className={cx("edit")}>
-      <CForm onSubmit={formik.handleSubmit}>
-        <div className={cx("titleEdit")}>THÔNG TIN CHUNG</div>
-        <div>
-          <Input
-            name={name}
-            value={formik.values[name] || ""}
-            placeholder="Tiêu đề..."
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            errors={err}
-            logError={logError}
-          />
-        </div>
+
+
+
+      <div className={cx("titleEdit")}>
+
+        THÔNG TIN CHUNG
+
+      </div>
+
+
+
+
+
+
+
+      <Input
+
+        name={name}
+
+        value={
+          formik.values[name] || ""
+        }
+
+
+        placeholder="Tiêu đề..."
+
+
+        onChange={
+          formik.handleChange
+        }
+
+
+        onBlur={
+          formik.handleBlur
+        }
+
+
+        errors={
+          formik.errors[name]
+          &&
+          formik.touched[name]
+        }
+
+
+        logError={
+          formik.errors[name]
+        }
+
+      />
+
+
+
+
+
+
+
+
+
+      {
+        "title" in dataEdit &&
+
+
+        <CFormSelect
+
+          style={{
+            marginTop: 20
+          }}
+
+
+          value={
+            dataEdit.kindOf || ""
+          }
+
+
+          onChange={(e) =>
+
+
+            onChange({
+
+              ...dataEdit,
+
+              kindOf:
+                e.target.value
+
+            })
+
+          }
+
+
+        >
+
+          <option value="">
+
+            -- Chọn loại --
+
+          </option>
+
+
+          <option value="tin_tuc">
+
+            Tin tức
+
+          </option>
+
+
+          <option value="mon_hoc">
+
+            Môn học
+
+          </option>
+
+
+        </CFormSelect>
+
+
+      }
+
+
+
+
+
+
+
+
+
+      {
+        (nameType || nameLocation)
+
+        &&
+
+
         <div className={cx("groupTypeAndLocation")}>
-          <Input value={nameTy} disabled />
-          <Input value={ formik.values[nameLocation ]} disabled />
+
+
+
+          {
+            nameType &&
+
+
+            <Input
+
+              value={
+                formik.values[nameType] || ""
+              }
+
+
+              disabled
+
+
+              placeholder="Type"
+
+            />
+
+
+          }
+
+
+
+
+
+          {
+            nameLocation &&
+
+
+            <Input
+
+              value={
+                formik.values[nameLocation] || ""
+              }
+
+
+              disabled
+
+
+              placeholder="Location"
+
+            />
+
+
+          }
+
+
+
         </div>
-      </CForm>
+
+
+      }
+      
+
+
+
+
     </div>
+
+
   );
+
+
 };

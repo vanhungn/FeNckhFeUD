@@ -1,7 +1,7 @@
 import Editor from "../../../components/editor/editor"
 import classNames from "classnames/bind";
 import style from "./createNews.module.scss"
-import { Post } from "../../../baseService/baseService";
+import { Get, Post } from "../../../baseService/baseService";
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useRef, useState } from "react";
 import { CButton, CForm, CFormSelect, CFormTextarea } from "@coreui/react";
@@ -9,16 +9,19 @@ import { Input } from "../../../components/inputs/inputs";
 import { useFormik } from "formik";
 import * as Yup from "yup"
 import LoadingButton from "../../../components/loadingButton/loadingButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 const cx = classNames.bind(style)
 
-export const CreateNews = ({ dataTrans, path }) => {
+export const CreateNews = ({ dataTrans, path, typeUpdate }) => {
     const lcData = JSON.parse(localStorage.getItem("InitialData"))
     const [data, setData] = useState(lcData)
     const [readOnly, setReadOnly] = useState(false)
     const [loading, setLoading] = useState(false)
     const [resetEditor, setResetEditor] = useState(true)
     const [formErrors, setFormErrors] = useState({});
+    const [searchParams] = useSearchParams();
+    const type = searchParams.get("type") || typeUpdate;
+    const [dataMenu, setDataMenu] = useState([])
     const newsRef = useRef(null);
     const navigate = useNavigate()
     useEffect(() => {
@@ -36,6 +39,29 @@ export const CreateNews = ({ dataTrans, path }) => {
             localStorage.setItem('InitialData', JSON.stringify(dataTrans?.content))
         }
     }, [dataTrans])
+    useEffect(() => {
+        const callMenu = async () => {
+            const dataMenu = await Get("/menu");
+            const menu = dataMenu?.data?.data[0]?.menu;
+            const result = menu.flatMap(item => [
+                ...item.menu1.map(menu => ({
+                    title: menu.titleMenu,
+                    typeof: menu.typeof,
+                    kindOf: item.kindOf
+                })),
+                ...item.menu1.flatMap(menu =>
+                    menu.menu2.map(child => ({
+                        title: child.titleChildrenMenu,
+                        typeof: child.typeofChildrenMenu,
+                        kindOf: item.kindOf
+                    }))
+                )
+            ]);
+            const dataFilter = result?.filter((item) => type === "subject" ? item?.kindOf === "mon_hoc" : item?.kindOf === "tin_tuc")
+            setDataMenu(dataFilter);
+        }
+        callMenu()
+    }, [])
     const formik = useFormik({
         initialValues: {
             title: dataTrans?.title || "",
@@ -45,24 +71,25 @@ export const CreateNews = ({ dataTrans, path }) => {
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
-            title: Yup.string().required('Bạn vui lòng nhập tiêu đề'),
+            ...(type === "article" && {
+                title: Yup.string().required("Bạn vui lòng nhập tiêu đề"),
+                img: Yup.mixed().required("Vui lòng chọn ảnh")
+            }),
             typeOf: Yup.string().required('Bạn vui lòng chọn loại thông tin'),
-
-            img: Yup.mixed().required("Vui lòng chọn ảnh")
-
         }),
         onSubmit: async (values) => {
             try {
                 setLoading(true)
                 const formData = new FormData();
-                formData.append("title", values.title);
-                formData.append("note", values.note);
+                formData.append("title", values.title || "");
+                formData.append("note", values.note || "");
                 formData.append("typeOf", values.typeOf);
+                formData.append("kindOf", type);
                 formData.append("content", JSON.stringify(data));
                 if (values.img instanceof File) {
                     formData.append("image", values.img);
                 } else {
-                    formData.append("imageUrl", values.img);
+                    formData.append("imageUrl", values.img || "");
                 }
                 const pathName = path ? path : "/news/create"
                 const create = await Post(pathName, formData)
@@ -126,19 +153,13 @@ export const CreateNews = ({ dataTrans, path }) => {
 
                             >
                                 <option value="" className={cx('disabled-option')}>Chọn thông tin</option>
-                                <option value="event">Sự kiện</option>
-                                <option value="enrollment">Tuyển sinh</option>
-                                <option value="generalNews">Tin tổng hợp</option>
-                                <option value="studyTrip">Du học</option>
-                                <option value="practice">Thực tập</option>
-                                <option value="notify">Thông báo</option>
-                                <option value="rules">Quy định</option>
-                                <option value="active">Hoạt động</option>
-                                <option value="toGuide">Hướng dẫn</option>
-                                <option value="itClub">Câu lạc bộ IT</option>
-                                <option value="seminar">Hội thảo</option>
-                                <option value="scientificResearchLecturer">Nghiên cứu khoa học Giảng viên</option>
-                                <option value="studentScientificResearch">Nghiên cứu khoa học Sinh viên</option>
+                                {
+                                    dataMenu?.map((item, index) => {
+                                        return (
+                                            item.typeof !== "" && <option key={index} value={item.typeof}>{item.title}</option>
+                                        )
+                                    })
+                                }
                             </CFormSelect>
                             {formik.errors.typeOf && formik.touched.typeOf && (
                                 <div className={cx('error')}>
@@ -146,8 +167,6 @@ export const CreateNews = ({ dataTrans, path }) => {
                                 </div>
                             )}
                         </div>
-
-
                         <Input
                             name="title"
                             value={formik.values.title}
@@ -158,48 +177,56 @@ export const CreateNews = ({ dataTrans, path }) => {
                             logError={formik.errors.title}
 
                         />
-                        <div>
-                            <CFormTextarea
-                                name="note"
-                                value={formik.values.note}
+                        {type === "article" && (
+                            <div>
 
-                                style={{ marginTop: 20 }}
-                                onBlur={formik.handleChange}
-                                onChange={formik.handleChange}
-                                id="exampleFormControlTextarea1"
-                                placeholder="Đoạn tóm tắt..."
-                                rows={3}
-                            ></CFormTextarea>
+                                <div>
+                                    <CFormTextarea
+                                        name="note"
+                                        value={formik.values.note}
 
-                        </div>
+                                        style={{ marginTop: 20 }}
+                                        onBlur={formik.handleChange}
+                                        onChange={formik.handleChange}
+                                        id="exampleFormControlTextarea1"
+                                        placeholder="Đoạn tóm tắt..."
+                                        rows={3}
+                                    ></CFormTextarea>
 
-                        <Input
-                            type="file"
-                            id={"imgNews"}
-                            name="img"
-                            accept="image/*"
-                            style={{ display: "none" }}
-                            onChange={(e) => formik.setFieldValue("img", e.target.files[0])}
-                            errors={formik.errors.img && formik.touched.img}
-                            logError={formik.errors.img}
-                        />
-                        <label htmlFor={`imgNews`} className={cx("uploadLabel")}>
-                            {formik.values.img ? "Đổi ảnh" : "Chọn ảnh"}
-                        </label>
-                        <div>
-                            {formik.values.img && (
-                                <img style={{ maxWidth: 300 }}
-                                    src={formik.values.img instanceof File ? URL.createObjectURL(formik.values.img) : formik.values.img}
-                                    alt="preview"
-                                    className={cx("previewImg")}
-                                />
-                            )}
-                            {formik.errors.img && formik.touched.img && (
-                                <div className={cx('error')}>
-                                    <p className={cx('pError')}>{formik.errors.img}</p>
                                 </div>
-                            )}
-                        </div>
+
+                                <Input
+                                    type="file"
+                                    id={"imgNews"}
+                                    name="img"
+                                    accept="image/*"
+                                    style={{ display: "none" }}
+                                    onChange={(e) => formik.setFieldValue("img", e.target.files[0])}
+                                    errors={formik.errors.img && formik.touched.img}
+                                    logError={formik.errors.img}
+                                />
+                                <label htmlFor={`imgNews`} className={cx("uploadLabel")}>
+                                    {formik.values.img ? "Đổi ảnh" : "Chọn ảnh"}
+                                </label>
+                                <div>
+                                    {formik.values.img && (
+                                        <img style={{ maxWidth: 300 }}
+                                            src={formik.values.img instanceof File ? URL.createObjectURL(formik.values.img) : formik.values.img}
+                                            alt="preview"
+                                            className={cx("previewImg")}
+                                        />
+                                    )}
+                                    {formik.errors.img && formik.touched.img && (
+                                        <div className={cx('error')}>
+                                            <p className={cx('pError')}>{formik.errors.img}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                        )}
+
+
                     </div>
                     <div style={{ margin: "20px 0 20px 0" }}>
 

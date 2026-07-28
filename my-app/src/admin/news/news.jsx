@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { CButton, CFormInput, CFormSelect } from "@coreui/react";
 import { Delete, Get } from "../../baseService/baseService";
 import { TotalPage } from "../../components/TotalPage/Totalpage";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { data, useNavigate, useSearchParams } from "react-router-dom";
 import { cilColorBorder, cilTrash } from '@coreui/icons'
 import CIcon from "@coreui/icons-react";
 import LoadingComponent from "../../components/loadingComponent/loadingComponent";
@@ -25,12 +25,31 @@ export const News = () => {
     const newsRef = useRef(null);
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const [dataMenu, setDataMenu] = useState([])
     const callData = async () => {
         try {
             setLoading(true)
             const data = await Get('/news')
             setDataNew(data.data.data)
             setTotalPage(data.data.total)
+            const dataMenu = await Get("/menu");
+            const menu = dataMenu?.data?.data[0]?.menu;
+            const result = menu.flatMap(item => [
+                ...item.menu1.map(menu => ({
+                    title: menu.titleMenu,
+                    typeof: menu.typeof,
+                    kindOf: item.kindOf
+                })),
+                ...item.menu1.flatMap(menu =>
+                    menu.menu2.map(child => ({
+                        title: child.titleChildrenMenu,
+                        typeof: child.typeofChildrenMenu,
+                        kindOf: item.kindOf
+                    }))
+                )
+            ]);
+
+            setDataMenu(result);
         } catch (error) {
             console.log(error)
         } finally {
@@ -40,8 +59,6 @@ export const News = () => {
     useEffect(() => {
         callData()
     }, [])
-
-
     const handleOnchangeSearch = async (e) => {
         try {
             setLoading(true)
@@ -75,8 +92,8 @@ export const News = () => {
             console.log(error)
         } finally { setLoading(false) }
     }
-    const handleTurnOn = () => {
-        navigate("/admin/news/create")
+    const handleTurnOn = (type) => {
+        navigate(`/admin/news/create?type=${type}`)
         localStorage.removeItem('InitialData')
     }
     const handleNavigateUpdate = (id) => {
@@ -117,22 +134,17 @@ export const News = () => {
                         <div className={cx('headerDocument')}>
                             <CFormInput onChange={handleOnchangeSearch} type="text" placeholder="Tìm kiếm tài liệu..." aria-label="default input example" />
                             <div style={{ display: "flex", gap: 15 }}>
-                                <CButton className={cx('buttonCreate')} onClick={() => handleTurnOn()} >+Tạo mới</CButton>
+                                <CButton className={cx('buttonCreate')} onClick={() => handleTurnOn("article")} >+Tạo mới tin tức</CButton>
+                                <CButton className={cx('buttonCreate')} onClick={() => handleTurnOn("subject")} >+Tạo mới thông tin môn học</CButton>
                                 <CFormSelect onChange={handleOnchangeType} style={{ width: "fit-content", margin: 0 }} size="sm" aria-label="Large select example">
                                     <option value="" className={cx('disabled-option')}>Chọn thông tin</option>
-                                    <option value="event">Sự kiện</option>
-                                    <option value="enrollment">Tuyển sinh</option>
-                                    <option value="generalNews">Tin tổng hợp</option>
-                                    <option value="studyTrip">Du học</option>
-                                    <option value="practice">Thực tập</option>
-                                    <option value="toGuide">Hướng dẫn</option>
-                                    <option value="notify">Thông báo</option>
-                                    <option value="rules">Quy định</option>
-                                    <option value="active">Hoạt động</option>
-                                    <option value="itClub">Câu lạc bộ IT</option>
-                                    <option value="seminar">Hội thảo</option>
-                                    <option value="scientificResearchLecturer">Nghiên cứu khoa học Giảng viên</option>
-                                    <option value="studentScientificResearch">Nghiên cứu khoa học Sinh viên</option>
+                                    {
+                                        dataMenu?.map((item, index) => {
+                                            return (
+                                                item?.typeof !== "" && <option key={index} value={item.typeof}>{item.title}</option>
+                                            )
+                                        })
+                                    }
                                 </CFormSelect>
                             </div>
                         </div>
@@ -140,7 +152,6 @@ export const News = () => {
                     {
                         loading ? <LoadingComponent /> :
                             <div className={cx('listNews')}>
-
                                 {
                                     dataNew?.map((item, index) => {
                                         const d = new Date(item.createdAt);
@@ -150,7 +161,7 @@ export const News = () => {
                                         const time = `${day}/${month}/${year}`;
                                         return (
                                             <div key={index} className={cx('boxNews')}>
-                                                <img className={cx('imgNews')} src={item.img.url} alt="" />
+                                                <img className={cx('imgNews')} src={item?.img?.url||"https://png.pngtree.com/thumb_back/fh260/background/20250512/pngtree-blue-gradient-soft-background-vector-image_17280771.jpg"} alt="" />
                                                 <div>
                                                     <h5>{item.title}
                                                     </h5>

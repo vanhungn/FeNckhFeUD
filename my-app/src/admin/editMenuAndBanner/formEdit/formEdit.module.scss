@@ -1,16 +1,81 @@
-.titleEdit{
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  padding-bottom: 12px;
-  border-bottom: 0.5px solid #eee;
+.titleEdit {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid #eee;
 }
-.edit{
+
+.edit {
     padding: 10px;
 }
-.groupTypeAndLocation{
+
+.groupTypeAndLocation {
     display: grid;
-    grid-template-columns: 1fr 1fr ;
-    gap:20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.bannerItem {
+    position: relative;
+    width: 160px;
+    height: 90px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+
+    &:hover .bannerControls {
+        opacity: 1;
+    }
+}
+
+.bannerPreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bannerControls {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    svg {
+        color: #fff;
+        cursor: pointer;
+    }
+}
+
+.bannerAddBox {
+    width: 160px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #888;
+    font-size: 12px;
+
+    &:hover {
+        border-color: #0061bb;
+        color: #0061bb;
+    }
+}
+
+.bannerEditWrap {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
 }

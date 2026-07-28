@@ -107,20 +107,22 @@
 .categoryChildren1 {
     position: relative;
 
-    div {
+    >div {
         border-radius: 5px;
         display: none;
         position: absolute;
-        width: 110%;
+        width: 100%;
         height: fit-content;
         right: 100%;
         top: 0;
         background-color: #fff;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        z-index: 200;
 
     }
 
     &:hover {
-        div {
+        >div {
             display: block;
         }
     }
@@ -158,8 +160,7 @@
     margin: 0;
     color: rgb(17, 17, 17);
     font-size: 16px;
-
-
+    text-transform: uppercase;
 }
 
 .iconDown {

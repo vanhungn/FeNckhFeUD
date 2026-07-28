@@ -21,7 +21,8 @@ export const UpdateNews = () => {
     useEffect(() => {
         callData()
     }, [])
+    const type = data.kindOf === "tin_tuc" ? "article" : "subject"
     return (
-        <CreateNews dataTrans={data} path={`/news/update/${_id}`} />
+        <CreateNews typeUpdate={type} dataTrans={data} path={`/news/update/${_id}?type=${type}`} />
     )
 }

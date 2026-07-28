@@ -9,7 +9,7 @@ import {
     CNavItem,
     CNavTitle,
 } from '@coreui/react'
-import { cilCheckCircle, cilFile, cilInfo, cilLan, cilLibrary,cilPencil  } from '@coreui/icons'
+import { cilCheckCircle, cilFile, cilInfo, cilLan, cilLibrary, cilPencil } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import { AdminDocument } from './adminDocument/adminDocument';
 import { DocumentAdminDetail } from './documentAdminDetail/documentAdminDetail';
@@ -41,12 +41,12 @@ export const Admin = () => {
     const pathQuestion = location.pathname.split("/")
     pathQuestion.pop()
     const joinQuestion = pathQuestion.join('/')
-    console.log(joinQuestion)
+    console.log(location.pathname)
     useEffect(() => {
-        if (joinQuestion === '/admin/theory/question') {
+        if (joinQuestion === '/admin') {
             setSidebar(true)
         }
-    }, [])
+    }, [location.pathname])
     const handleLogout = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -78,7 +78,7 @@ export const Admin = () => {
                     </CSidebarBrand>
                 </CSidebarHeader>
                 <CSidebarNav>
-                     <NavLink style={{ textDecoration: "none" }} to={'/admin/edit'}>
+                    <NavLink style={{ textDecoration: "none" }} to={'/admin/edit'}>
                         <CNavItem className={cx(location.pathname === '/admin/edit' ? "active" : "category")} >
                             <CIcon customClassName="nav-icon" icon={cilPencil} /> Edit
                         </CNavItem>

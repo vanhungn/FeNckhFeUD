@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import style from "./informationDetail.module.scss";
 import { useEffect, useState } from "react";
 import { Get } from "../baseService/baseService";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import CIcon from "@coreui/icons-react";
 import { cilAlarm } from "@coreui/icons";
 import { CButton } from "@coreui/react";
@@ -21,7 +21,8 @@ export const InformationDetail = () => {
     const [resetEditor, setResetEditor] = useState(true)
     const navigate = useNavigate()
     const { _id } = useParams();
-
+    const [searchParams] = useSearchParams();
+    const type = searchParams.get("type");
     const callApi = async () => {
         try {
             const res = await Get(`/news/detail/${_id}`);
@@ -35,6 +36,9 @@ export const InformationDetail = () => {
     useEffect(() => {
         callApi();
     }, []);
+      useEffect(() => {
+        callApi();
+    }, [_id]);
     const d = new Date(dataDetail?.createdAt);
     const time = `${d.getDate().toString().padStart(2, "0")}/${(d.getMonth() + 1)
         .toString()
@@ -47,8 +51,15 @@ export const InformationDetail = () => {
     return (
         <div className={cx("information")}>
             <div
-                className={cx("banner")}
-                style={{ backgroundImage: `url(https://i.pinimg.com/736x/81/71/90/81719096602acfff9ffb0fcea33e5de0.jpg)` }}
+                className={cx(type === "mon_hoc" ? "" : "banner")}
+                style={
+                    type !== "mon_hoc"
+                        ? {
+                            backgroundImage:
+                                "url(https://i.pinimg.com/736x/81/71/90/81719096602acfff9ffb0fcea33e5de0.jpg)"
+                        }
+                        : {}
+                }
             >
                 <div className={cx("contentBanner")}>
                     {/* <h3>{dataDetail?.title}</h3>
@@ -61,11 +72,13 @@ export const InformationDetail = () => {
                         </CButton>
                     </div> */}
                 </div>
-                <div className={cx("shadow")}></div>
+                {type !== "mon_hoc" && (
+                    <div className={cx("shadow")}></div>
+                )}
             </div>
 
             <div style={{ width: "80%", margin: "auto", paddingTop: "30px" }}>
-                <div className={cx('contentInfo')} style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
+                <div className={cx('contentInfo')} style={{ display: type !== "mon_hoc" ? "grid" : "block", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
                     <div className={cx('editor-lock')}>
 
                         <div
@@ -76,42 +89,44 @@ export const InformationDetail = () => {
                         />
                     </div>
 
-                    <div style={{ padding: "0 30px" }}>
-                        <h4 className={cx('title')} style={{ color: "#0061bb", fontWeight: 600, fontSize: 30 }}>{t("Related_articles")}</h4>
-                        <div>
-                            {
-                                suggest?.map((item, index) => {
-                                    const d = new Date(item.createdAt);
-                                    const day = d.getDate().toString().padStart(2, "0");
-                                    const month = (d.getMonth() + 1).toString().padStart(2, "0");
-                                    const year = d.getFullYear();
-                                    const time = `${day}/${month}/${year}`;
-                                    console.log(item.noteEN);
-                                    return (
-                                        <div key={index} className={cx('boxNews')}>
-                                            <img className={cx('imgNews')} src={item.img.url} alt="" />
-                                            <div style={{ marginTop: 10 }}>
-                                                <h5><b>
-                                                    {i18n.language === 'vi' ? item.title : item.titleEN}
-                                                </b>
-                                                </h5>
-                                                <p>{i18n.language === "vi" ? item.note : item.noteEN}
-                                                </p>
-                                                <p className={cx('timeNews')} >{time}</p>
-                                            </div>
+                    {type !== "mon_hoc" && (
+                        <div style={{ padding: "0 30px" }}>
+                            <h4 className={cx('title')} style={{ color: "#0061bb", fontWeight: 600, fontSize: 30 }}>{t("Related_articles")}</h4>
+                            <div>
+                                {
+                                    suggest?.map((item, index) => {
+                                        const d = new Date(item.createdAt);
+                                        const day = d.getDate().toString().padStart(2, "0");
+                                        const month = (d.getMonth() + 1).toString().padStart(2, "0");
+                                        const year = d.getFullYear();
+                                        const time = `${day}/${month}/${year}`;
+                                        console.log(item.noteEN);
+                                        return (
+                                            <div key={index} className={cx('boxNews')}>
+                                                <img className={cx('imgNews')} src={item.img.url} alt="" />
+                                                <div style={{ marginTop: 10 }}>
+                                                    <h5><b>
+                                                        {i18n.language === 'vi' ? item.title : item.titleEN}
+                                                    </b>
+                                                    </h5>
+                                                    <p>{i18n.language === "vi" ? item.note : item.noteEN}
+                                                    </p>
+                                                    <p className={cx('timeNews')} >{time}</p>
+                                                </div>
 
-                                        </div>
-                                    )
-                                })
-                            }
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
 
             </div>
             <ChatBot />
             <ZaloChatWidget />
-        </div>
+        </div >
     );
 };

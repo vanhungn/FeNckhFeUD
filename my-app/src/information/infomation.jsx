@@ -8,8 +8,8 @@ import { CFormInput } from "@coreui/react";
 import { TotalPage } from "../components/TotalPage/Totalpage";
 import { ChatBot } from "../components/Chatbot/Chatbot";
 import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
-import Banner from "../home/Banner/Banner";
 import { useTranslation } from "react-i18next";
+import Banner from "../home/Banner/Banner";
 const cx = classNames.bind(style)
 
 export const Information = () => {
@@ -21,11 +21,14 @@ export const Information = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const { t, i18n } = useTranslation();
     const type = searchParams.get('info')
+    const [dataBanner, setDataBanner] = useState([])
     const navigate = useNavigate()
     const callApi = async () => {
         try {
             setLoading(true)
             const data = await Get(`/news?limit=6&typeOf=${type}`)
+            const ban = await Get("/menu")
+            setDataBanner(ban?.data.data)
             setDataNews(data.data.data)
             setTotalPage(data.data.total)
             setCounts(data.data.counts)
@@ -39,10 +42,14 @@ export const Information = () => {
     useEffect(() => {
         callApi()
     }, [type])
-    const banner = BANNER.filter((q) => q.keyName === searchParams.get('info'))
+    const banner =
+        dataBanner?.[0]?.bannerTopPic?.filter(
+            (item) => item.typeofTopPic === searchParams.get("info")
+        ) ?? [];
+
     const handlePage = async (page) => {
         try {
-            console.log(page)
+
             const data = await Get(`/news?limit=6&skip=${page}&typeOf=${type}`)
             setDataNews(data.data.data)
             setColorToatal(page)
@@ -81,7 +88,7 @@ export const Information = () => {
     return (
         <div className={cx('information')}>
             <div className={cx('banner')}>
-                <Banner url={banner[0]?.img} />
+                <Banner url={banner[0]?.banner} />
                 <div className={cx('contentBanner')}>
                     {/* <h3 className={cx('titleInfo')}>{banner[0]?.title}</h3> */}
                     {/* <div>
@@ -96,7 +103,7 @@ export const Information = () => {
 
                 <div className={cx('ListboxNews')} >
                     <div>
-                        <h1 className={cx('titleInfoContent')} style={{ color: "#0061bb", fontWeight: 600, margin: 20 }}>{banner[0]?.title}</h1>
+                        <h1 className={cx('titleInfoContent')} style={{ color: "#0061bb", fontWeight: 600, margin: 20 }}>{""}</h1>
                         <hr />
                         {
                             dataNews?.map((item, index) => {
@@ -111,7 +118,7 @@ export const Information = () => {
                                         <div className={cx('contentNews')}>
                                             <h5 style={{ color: "#0061bb", fontWeight: 600 }}>{i18n.language == 'vi' ? item.title : item.titleEN}
                                             </h5>
-                                            <p> 
+                                            <p>
                                                 {i18n.language == 'vi' ? item?.note?.slice(0, 180) : item?.noteEN?.slice(0, 180)}
                                                 {i18n.language == 'vi' ? item?.note.length > 180 && "…" : item?.noteEN?.length > 180 && "…"}
                                             </p>

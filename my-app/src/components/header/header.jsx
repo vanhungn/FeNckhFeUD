@@ -7,6 +7,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { LoginAdmin } from "../loginAdmin/loginAdmin";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Get } from "../../baseService/baseService";
 
 const cx = classNames.bind(style)
 
@@ -18,8 +19,16 @@ export const Header = () => {
     const [turnOnSelectChangeLanguage, setTurnOnSelectChangeLanguage] = useState(false);
     const outSize = useRef(null)
     const { t, i18n } = useTranslation();
-    const handleNews = (query) => {
-        navigate(`/information?info=${query}`)
+    const [dataMenu, setDataMenu] = useState([])
+    const handleNews = async (query, kindOf) => {
+        if (kindOf === "mon_hoc") {
+            const dataNews = await Get(`/news?typeOf=${query}`)
+            console.log(dataNews)
+            navigate(`/information/detail/${dataNews.data.data[0]._id}?type=mon_hoc`)
+        } else {
+            navigate(`information?info=${query}`)
+        }
+
     }
     const handleTurnOn = () => {
         turnOn ? setTurnOn(false) : setTurnOn(true)
@@ -33,6 +42,14 @@ export const Header = () => {
     const handleSubmitSearch = () => {
         navigate(`/search?search=${valueSearch}`)
     }
+    const callData = async () => {
+        try {
+            const data = await Get('/menu')
+            setDataMenu(data?.data?.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     useEffect(() => {
         const handleClickOutside = (event) => {
             // nếu click mà không nằm trong outSize
@@ -43,7 +60,7 @@ export const Header = () => {
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
-
+        callData()
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
@@ -122,229 +139,119 @@ export const Header = () => {
                                 {t("EngLish")}
                             </div>
                         </div>
-
                     )}
                 </div>
             </div>
-            <div className={cx('category')}>
-                <div className={cx('boxLogo')} onClick={() => navigate('/')}  >
-                    <img className={cx('logo')} src="https://i.ibb.co/6R0P3cZw/logokhoa.jpg" alt="" />
-                    <div >
-                        <p className={cx("nameVN")}>KHOA CÔNG NGHỆ THÔNG TIN</p>
-                        <p className={cx('nameEl')}> Faculty of Information Technology</p>
-                    </div>
-                </div>
-                <div className={cx('listCategory')}>
-                    <div className={cx('displayMenu')}>
-                        <div className={cx('menu')}>
+            {
+                dataMenu?.map((product, index) => {
+                    return (
+                        <div key={index} className={cx('category')}>
+                            <div className={cx('boxLogo')} onClick={() => navigate('/')}  >
+                                <img className={cx('logo')} src={product.logo} alt="" />
+                                <div >
+                                    <p className={cx("nameVN")}>KHOA CÔNG NGHỆ THÔNG TIN</p>
+                                    <p className={cx('nameEl')}> Faculty of Information Technology</p>
+                                </div>
+                            </div>
+                            <div className={cx('listCategory')}>
+                                <div className={cx('displayMenu')}>
+                                    <div className={cx('menu')}>
 
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <line x1="3" y1="12" x2="21" y2="12" />
-                                <line x1="3" y1="18" x2="21" y2="18" />
-                            </svg>
-                            <div className={cx('menuCategory')}>
-                                <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>{t("TRAIN")}</p>
-                                    <svg
-                                        className={cx('iconDown')}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="15"
-                                        height="15"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                                    </svg>
-                                    <div className={cx('categorySmallMenu')} >
-                                        <div className={cx('categoryChildren1')} >
-                                            <p>Khoa học máy tính</p>
-                                            <div>
-                                                <p onClick={() => navigate("/computer_science")}>Khoa học máy tính</p>
-                                                <p onClick={() => navigate("/data_science")}>Trí tuệ nhân tạo và KH dữ liệu</p>
-                                            </div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <line x1="3" y1="6" x2="21" y2="6" />
+                                            <line x1="3" y1="12" x2="21" y2="12" />
+                                            <line x1="3" y1="18" x2="21" y2="18" />
+                                        </svg>
+                                        <div className={cx('menuCategory')}>
+                                            {
+                                                product?.menu?.map((item, index) => {
+                                                    return (
+                                                        <div key={index} className={cx('boxCategoryBottomMenu')}>
+                                                            <p className={cx('title')}>{i18n.language === "vi" ? item.title : item.titleEN}</p>
+                                                            <svg
+                                                                className={cx('iconDown')}
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                width="15"
+                                                                height="15"
+                                                                viewBox="0 0 12 12"
+                                                            >
+                                                                <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
+                                                            </svg>
+                                                            <div className={cx('categorySmallMenu')} >
+                                                                {
+                                                                    item?.menu1?.map((item1, index1) => {
+                                                                        return (
+                                                                            <div key={index1} className={cx('categoryChildren1')} >
+                                                                                <p onClick={() => item1?.typeof !== "" && handleNews(item1?.typeof, item.kindOf)}>{i18n.language === "vi" ? item1.titleMenu : item1.titleMenuEN}</p>
+                                                                                <div>
+                                                                                    {item1?.menu2?.map((item2, index2) => (
+                                                                                        <div style={{ borderRadius: 5 }} key={index2}>
+                                                                                            <p onClick={() => handleNews(item2?.typeofChildrenMenu, item.kindOf)}>{i18n.language === "vi" ? item2.titleChildrenMenu : item2.titleChildrenMenuEN}</p>
+                                                                                        </div>
+                                                                                    ))}
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+
+                                                        </div>
+                                                    )
+                                                })
+                                            }
                                         </div>
-                                        <div className={cx('categoryChildren1')} >
-                                            <p >Công nghệ thông tin</p>
-
-                                            <div>
-                                                <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
-                                                <p onClick={() => navigate("/graphic_design")} >Thiết kế đồ họa</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>{t("STUDY")}</p>
-                                    <svg
-                                        className={cx('iconDown')}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="15"
-                                        height="15"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                                    </svg>
-
-                                    <div className={cx('categorySmallMenu')}>
-                                        <p onClick={() => handleNews("seminar")}>Hội thảo</p>
-                                        <p onClick={() => handleNews("scientificResearchLecturer")}>Nghiên cứu khoa học Giảng viên</p>
-                                        <p onClick={() => handleNews("studentScientificResearch")}>Nghiên cứu khoa học Sinh viên</p>
-
-
-                                    </div>
-
-                                </div>
-                                <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>{t("INFORMATION")}</p>
-                                    <svg
-                                        className={cx('iconDown')}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="15"
-                                        height="15"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                                    </svg>
-                                    <div className={cx('categorySmallMenu')}>
-                                        <p onClick={() => handleNews("event")}>Sự kiện</p>
-                                        <p onClick={() => handleNews("generalNews")}>Tin tổng hợp</p>
-                                        <p onClick={() => handleNews("enrollment")}>Tuyển sinh</p>
-
-                                        <p onClick={() => handleNews("practice")}>Thực tập</p>
-                                        <p onClick={() => handleNews("studyTrip")}>Du học</p>
                                     </div>
                                 </div>
-                                <div className={cx('boxCategoryBottomMenu')}>
-                                    <p className={cx('title')}>{t("STUDENT")}</p>
-                                    <svg
-                                        className={cx('iconDown')}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="15"
-                                        height="15"
-                                        viewBox="0 0 12 12"
-                                    >
-                                        <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                                    </svg>
-                                    <div className={cx('categorySmallMenu')}>
+                                <div className={cx("displayCategory")}>
+                                    {
+                                        product?.menu?.map((item, mIndex) => {
+                                            return (
+                                                <div key={mIndex} className={cx('boxCategoryBottom')}>
+                                                    <p className={cx('title')}>{i18n.language === "vi" ? item.title : item.titleEN}</p>
+                                                    <svg className={cx('iconDown')} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 12 12">
+                                                        <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
+                                                    </svg>
+                                                    <div className={cx('categorySmall')}>
+                                                        {
+                                                            item.menu1.map((item1, index1) => (
+                                                                <div key={index1} className={cx('categoryChildren1')}>
+                                                                    <p onClick={() => item1?.typeof !== "" && handleNews(item1?.typeof, item.kindOf)}>{i18n.language === "vi" ? item1.titleMenu : item1.titleMenuEN}</p>
+                                                                    <div>
+                                                                        {item1?.menu2?.map((item2, index2) => (
+                                                                            <div style={{ borderRadius: 5 }} key={index2}>
+                                                                                <p onClick={() => handleNews(item2?.typeofChildrenMenu, item.kindOf)}>{i18n.language === "vi" ? item2.titleChildrenMenu : item2.titleChildrenMenuEN}</p>
+                                                                            </div>
+                                                                        ))}
+                                                                    </div>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
 
-                                        <p onClick={() => handleNews("notify")}>Thông báo</p>
-                                        <p onClick={() => handleNews("rules")}>Quy định</p>
-                                        <p onClick={() => handleNews("active")}>Hoạt động</p>
-                                        <p onClick={() => handleNews("toGuide")}>Hướng dẫn</p>
-                                        <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
-                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
-                    </div>
-                    <div className={cx("displayCategory")}>
-                        <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>{t("TRAIN")}</p>
-                            <svg
-                                className={cx('iconDown')}
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="15"
-                                viewBox="0 0 12 12"
-                            >
-                                <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                            </svg>
-                            <div className={cx('categorySmall')} >
-                                <div className={cx('categoryChildren1')} >
-                                    <p>Khoa học máy tính</p>
-                                    <div>
-                                        <p onClick={() => navigate("/computer_science")}>Khoa học máy tính</p>
-                                        <p onClick={() => navigate("/data_science")}>Trí tuệ nhân tạo và KH dữ liệu</p>
-                                    </div>
-                                </div>
-                                <div className={cx('categoryChildren1')} >
-                                    <p >Công nghệ thông tin</p>
+                    )
+                })
+            }
 
-                                    <div>
-                                        <p onClick={() => navigate("/information_technology")}>Kỹ thuật phần mêm</p>
-                                        <p onClick={() => navigate("/graphic_design")}>Thiết kế đồ họa</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>{t("STUDY")}</p>
-                            <svg
-                                className={cx('iconDown')}
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="15"
-                                viewBox="0 0 12 12"
-                            >
-                                <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                            </svg>
-                            <div className={cx('categorySmall')}>
-                                <p onClick={() => handleNews("seminar")}>Hội thảo</p>
-                                <p onClick={() => handleNews("scientificResearchLecturer")}>Nghiên cứu khoa học Giảng viên</p>
-                                <p onClick={() => handleNews("studentScientificResearch")}>Nghiên cứu khoa học Sinh viên</p>
-
-
-                            </div>
-
-
-                        </div>
-                        <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>{t("INFORMATION")}</p>
-                            <svg
-                                className={cx('iconDown')}
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="15"
-                                viewBox="0 0 12 12"
-                            >
-                                <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                            </svg>
-                            <div className={cx('categorySmall')}>
-                                <p onClick={() => handleNews("event")}>Sự kiện</p>
-                                <p onClick={() => handleNews("generalNews")}>Tin tổng hợp</p>
-                                <p onClick={() => handleNews("enrollment")}>Tuyển sinh</p>
-
-                                <p onClick={() => handleNews("practice")}>Thực tập</p>
-                                <p onClick={() => handleNews("studyTrip")}>Du học</p>
-                            </div>
-                        </div>
-                        <div className={cx('boxCategoryBottom')}>
-                            <p className={cx('title')}>{t("STUDENT")}</p>
-                            <svg
-                                className={cx('iconDown')}
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="15"
-                                viewBox="0 0 12 12"
-                            >
-                                <path d="M2 4 L6 8 L10 4 Z" fill="currentColor" />
-                            </svg>
-                            <div className={cx('categorySmall')}>
-
-                                <p onClick={() => handleNews("notify")}>Thông báo</p>
-                                <p onClick={() => handleNews("rules")}>Quy định</p>
-                                <p onClick={() => handleNews("active")}>Hoạt động</p>
-                                <p onClick={() => handleNews("toGuide")}>Hướng dẫn</p>
-                                <p onClick={() => handleNews("itClub")}>Câu lạc bộ IT</p>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                </div>
-            </div>
         </div>
     )
 }
