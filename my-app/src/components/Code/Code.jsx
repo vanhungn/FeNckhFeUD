@@ -27,7 +27,7 @@ export const Code = () => {
                 language: language,
                 stdin: input, // 👈 phần nhập từ người dùng
             });
-            setOutput(data.data?.output || "Không có kết quả");
+            setOutput(data.data?.output);
         } catch (error) {
             console.log(error)
         } finally {

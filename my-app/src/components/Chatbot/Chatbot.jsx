@@ -14,12 +14,14 @@ import classNames from 'classnames/bind';
 import style from "./Chatbot.module.scss";
 import CIcon from '@coreui/icons-react';
 import { cilArrowTop, cilMic, cilX } from '@coreui/icons';
-
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style);
 
 export const ChatBot = () => {
+    const { t, i18n } = useTranslation();
+
     const [messages, setMessages] = useState([
-        { role: 'bot', text: '👋 Xin chào! Tôi là chatbot Khoa CNTT - Việt Hung' }
+        { role: 'bot', text: t("greeting") }
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -33,10 +35,10 @@ export const ChatBot = () => {
     const cancelledRef = useRef(false); // ✅ Thêm ref này để theo dõi trạng thái hủy
 
     const suggestions = [
-        'Tuyển sinh',
-        'Ngành học CNTT',
-        'Học phí',
-        'Cơ hội việc làm'
+        t("admissions"),
+        t("itMajors"),
+        t("tuition"),
+        t("careerOpportunities"),
     ];
 
     const scrollToBottom = () => {
@@ -69,12 +71,12 @@ export const ChatBot = () => {
 
             setMessages([...newMessages, {
                 role: 'bot',
-                text: data.answer || 'Đã nhận được phản hồi từ server.'
+                text: data.answer || t("serverResponse")
             }]);
 
         } catch (error) {
             console.error('Lỗi API:', error);
-            setMessages([...newMessages, { role: 'bot', text: 'Xin lỗi, hệ thống đang gặp sự cố!' }]);
+            setMessages([...newMessages, { role: 'bot', text: t("serverError") }]);
         } finally {
             setIsLoading(false);
         }
@@ -104,7 +106,7 @@ export const ChatBot = () => {
             utterance.pitch = 1;
             window.speechSynthesis.speak(utterance);
         } else {
-            console.warn("Trình duyệt không hỗ trợ đọc văn bản.");
+            console.warn(t("browserSpeechError"));
         }
     };
 
@@ -147,7 +149,7 @@ export const ChatBot = () => {
             setIsRecording(true);
         } catch (err) {
             console.error("Lỗi truy cập microphone:", err);
-            alert("Không thể truy cập microphone. Vui lòng cấp quyền và thử lại!");
+            alert(t("microphoneError"));
         }
     };
 
@@ -176,11 +178,11 @@ export const ChatBot = () => {
                 setInputValue(data.transcript);
                 inputRef.current?.focus();
             } else {
-                alert(data.error || "Không nhận diện được nội dung âm thanh.");
+                alert(data.error || t("speechRecognitionError"));
             }
         } catch (err) {
             console.error("Lỗi transcribe:", err);
-            alert("Có lỗi khi xử lý giọng nói, vui lòng thử lại.");
+            alert(t("voiceProcessingError"));
         } finally {
             setIsTranscribing(false);
         }
@@ -229,10 +231,10 @@ export const ChatBot = () => {
                             </div>
                             <div>
                                 <div className="text-white fw-bold" style={{ fontSize: '0.95rem', lineHeight: 1.1 }}>
-                                    Trợ lý AI
+                                    {t("AI_Assistant1")}
                                 </div>
                                 <div className="text-white-50" style={{ fontSize: '0.7rem' }}>
-                                    Khoa CNTT - Việt Hung
+                                    {t("Faculty_of _Information_Technology_Viet_Hung")}
                                 </div>
                             </div>
                         </div>
@@ -288,7 +290,7 @@ export const ChatBot = () => {
                                     className="p-3 shadow-sm bg-white text-muted"
                                     style={{ borderRadius: '1rem 1rem 1rem 0.2rem', border: '1px solid #eaeaea', fontSize: '0.9rem' }}
                                 >
-                                    Đang nhập...
+                                    {t("typing")}
                                 </div>
                             </div>
                         )}
@@ -342,9 +344,9 @@ export const ChatBot = () => {
                                 ref={inputRef}
                                 type="text"
                                 placeholder={
-                                    isRecording ? "🔴 Đang ghi âm... bấm mic để dừng" :
-                                        isTranscribing ? "⏳ Đang nhận diện giọng nói..." :
-                                            "Nhập tin nhắn..."
+                                    isRecording ? t("recording") :
+                                        isTranscribing ? t("transcribing") :
+                                            t("inputPlaceholder")
                                 }
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
@@ -393,7 +395,7 @@ export const ChatBot = () => {
                                     transition: 'background 0.2s ease',
                                     animation: isRecording ? 'pulse 1.2s infinite' : 'none'
                                 }}
-                                title={isRecording ? "Bấm để dừng ghi âm" : "Bấm để nói"}
+                                title={isRecording ? t("stopRecording") : t("startRecording")}
                             >
                                 {isTranscribing ? (
                                     <span className="spinner-border spinner-border-sm" role="status"></span>
@@ -422,7 +424,7 @@ export const ChatBot = () => {
                                     color: 'white',
                                     transition: 'background 0.2s ease'
                                 }}
-                                title="Gửi tin nhắn"
+                                title={t("sendMessage")}
                             >
                                 <CIcon icon={cilArrowTop} />
                             </CButton>
@@ -464,7 +466,10 @@ export const ChatBot = () => {
                 {isOpen === false && (
                     <div className={cx('message')}>
                         <p style={{ margin: 0 }}>
-                            Xin chào <br /> tôi là trợ lý AI!
+                          {i18n.language=="vi"?<div>
+                            {t("closedGreetingHello")} <br />
+                          </div> : ""}  
+                            {t("closedGreetingAssistant")}
                         </p>
                     </div>
                 )}
