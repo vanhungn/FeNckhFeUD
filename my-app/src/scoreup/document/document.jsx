@@ -4,7 +4,7 @@ import style from "./document.module.scss";
 import { useNavigate } from "react-router-dom";
 import { Get } from "../../baseService/baseService";
 import LoadingComponent from "../../components/loadingComponent/loadingComponent";
-
+import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style);
 const LIMIT = 12;
 
@@ -19,6 +19,7 @@ export const Document = () => {
     const [search, setSearch] = useState("")
     const listRef = useRef(null);
     const loadingRef = useRef(false);
+    const { t, i18n } = useTranslation();
 
     const CallApi = async (pageNumber) => {
         if (loadingRef.current) return;
