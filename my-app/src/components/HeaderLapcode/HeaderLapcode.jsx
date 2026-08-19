@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import classNames from "classnames/bind"
 import style from "./HeaderLapcode.module.scss"
 import { useTranslation } from 'react-i18next';
@@ -7,11 +7,11 @@ export const HeaderLapCode = () => {
     const { t } = useTranslation();
     const location = useLocation()
     const path = location.pathname
-
+    const navigate = useNavigate()
     return (
         <div className={cx('header')}>
             <div style={{ borderRight: "5px rgba(211, 209, 209, 1) solid", width: "fit-content", paddingRight: 10 }}>
-                <img style={{ width: 35, height: 35, borderRadius: "50%" }} src="https://fit.neu.edu.vn/codelab/NEUOJ-LOGO.png" alt="" />
+                <img onClick={() => navigate("/")} style={{ width: 35, height: 35, borderRadius: "50%", cursor: "pointer" }} src="https://fit.neu.edu.vn/codelab/NEUOJ-LOGO.png" alt="" />
             </div>
             <div className={cx('headerCodeLap')}>
                 <Link to={'/code_lap'} style={{ textDecoration: "none" }} >
