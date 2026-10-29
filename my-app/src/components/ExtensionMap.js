@@ -1,24 +1,6 @@
 const EXTENSION_MAP = {
-  bash: "sh",
-  c: "c",
-  cpp: "cpp",
-  "cpp17": "cpp",
-  csharp: "cs",
-  go: "go",
-  java: "java",
-  javascript: "js",
-  kotlin: "kt",
-  php: "php",
-  python: "py",
-  ruby: "rb",
-  rust: "rs",
-  scala: "scala",
-  swift: "swift",
-  typescript: "ts",
-  r: "r",
-  sql: "sql",
-  perl: "pl",
-  lua: "lua",
-  dart: "dart",
+    cpp: "cpp", c: "c", python: "py", java: "java",
+    javascript: "js", typescript: "ts", go: "go", rust: "rs",
+    csharp: "cs", ruby: "rb", php: "php", swift: "swift", sql: "sql",
 };
-export default EXTENSION_MAP
+export default EXTENSION_MAP;

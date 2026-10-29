@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./home.module.scss"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
@@ -12,6 +12,48 @@ import { ChatBot } from "../components/Chatbot/Chatbot";
 import ZaloChatWidget from "../components/ZaloChatWidget/ZaloChatWidget";
 import { useTranslation } from "react-i18next";
 const cx = classNames.bind(styles)
+
+/* ---------- Số chạy từ 0 -> giá trị thật khi cuộn tới ---------- */
+function CountUp({ to, decimals = 0, suffix = '', duration = 1600 }) {
+  const ref = useRef(null);
+  const [val, setVal] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const step = (t) => {
+        const p = Math.min(1, (t - t0) / duration);
+        setVal(to * (1 - Math.pow(1 - p, 3))); // easeOutCubic
+        if (p < 1) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+  }, [to, duration]);
+
+  const text = decimals
+    ? val.toFixed(decimals)
+    : Math.round(val).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // 53348 -> 53.348
+
+  return <h2 ref={ref}>{text}{suffix}</h2>;
+}
+
+/* ---------- Icon SVG cho 6 thẻ "Vì sao chọn" ---------- */
+const ICONS = {
+  fee: <><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></>,
+  building: <><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4" /></>,
+  book: <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />,
+  plane: <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />,
+  work: <><rect width="20" height="14" x="2" y="7" rx="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></>,
+  zap: <path d="M13 2 3 14h9l-1 8 10-12h-9z" />,
+};
+
 export const Home = () => {
   const [pageImg, setPageImg] = useState(1);
   const [dataNews, setDataNews] = useState([])
@@ -24,6 +66,23 @@ export const Home = () => {
   const [banner, setBanner] = useState([])
   const [seeImg, seSeeImg] = useState('')
   const { t, i18n } = useTranslation();
+
+  /* ---------- Dữ liệu cho thanh số liệu và 6 thẻ lý do ---------- */
+  const stats = [
+    { to: 49, label: t("Five_traditional_training_years") },
+    { to: 92.7, decimals: 1, suffix: '%', label: t("Students_find_employment_immediately_after_graduation") },
+    { to: 100, suffix: '%', label: t("Students_receive_internships_at_reputable_companies_and_corporations") },
+    { to: 53348, label: t("Students_who_have_graduated") },
+  ];
+
+  const reasons = [
+    { icon: 'fee', text: `${t("Tuition_Fees")} ${t("endow")}` },
+    { icon: 'building', text: `${t("Physical_infrastructure")} ${t("modern")}` },
+    { icon: 'book', text: `${t("Quality")} ${t("train")}` },
+    { icon: 'plane', text: `${t("Opportunities")} ${t("Opportunities_to_study")} ${t("abroad")}` },
+    { icon: 'work', text: `${t("Opportunity")} ${t("For_Work")}` },
+    { icon: 'zap', text: t("Dynamic_Environment") },
+  ];
 
   const handleNext = () => {
     setPageImg(prev => Math.min(prev + 1, MAX_PAGE));
@@ -136,7 +195,7 @@ export const Home = () => {
               })
             }
             <div>
-              <CButton onClick={() => navigate("/information?info=generalNews")} className={cx('btnSeeMore')} >{t("See_More")} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <CButton onClick={() => navigate("/information?info=su_kien")} className={cx('btnSeeMore')} >{t("See_More")} <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 <path d="M12 5L19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -147,84 +206,51 @@ export const Home = () => {
         </div>
 
       </div>
-      <div className={cx('achievement')} data-aos="fade-up" style={{ backgroundColor: "#0061bb", margin: "40px 0px", padding: "30px 0px" }}>
-        <div className={cx('result')} style={{ width: "80%", margin: "auto auto", display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
-          <div style={{ color: "#fff", textAlign: "center" }}>
-            <h2>49</h2>
-            <h5>{t("Five_traditional_training_years")}</h5>
-          </div>
-          <div style={{ color: "#fff", textAlign: "center" }}>
-            <h2>92.7%</h2>
-            <h5>{t("Students_find_employment_immediately_after_graduation")}</h5>
-          </div>
-          <div style={{ color: "#fff", textAlign: "center" }}>
-            <h2>100%</h2>
-            <h5>{t("Students_receive_internships_at_reputable_companies_and_corporations")}</h5>
-          </div>
-          <div style={{ color: "#fff", textAlign: "center" }}>
-            <h2> 53.348</h2>
-            <h5>{t("Students_who_have_graduated")}</h5>
-          </div>
+
+      {/* ================= THANH SỐ LIỆU (mới) ================= */}
+      <div className={cx('achievement')} data-aos="fade-up">
+        <div className={cx('result')}>
+          {stats.map((s, i) => (
+            <div className={cx('stat')} key={i}>
+              <CountUp to={s.to} decimals={s.decimals} suffix={s.suffix} />
+              <h5>{s.label}</h5>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* ================= VÌ SAO CHỌN KHOA CNTT (mới) ================= */}
       <div className={cx('chooseDepartment')}>
-        <div className={cx('whyChoose')} style={{ width: "100%", height: "100%", backgroundColor: "rgba(236, 236, 236, 0.8)" }}>
-          <div >
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <div className={cx('boxIntroduce')} style={{ marginTop: 100 }} data-aos="fade-up">
-                <img width={150} height={100} src="https://i.ibb.co/3VGbhB4/30.png" alt="" />
-                <h5>{t("Tuition_Fees")} <br />
-                  {t("endow")}</h5>
-              </div>
-              <div className={cx('boxIntroduce')} data-aos="fade-up">
-                <img width={150} height={100} src="https://i.ibb.co/9HnXXzCj/31.png" alt="" />
+        <div className={cx('whyChoose')}>
+          <div className={cx('head')} data-aos="fade-up">
+            <h3 className={cx('questionChoose')}>{t("Why_choose_the_IT_department")}</h3>
+          </div>
 
-                <h5> {t("Physical_infrastructure")} <br />
-                  {t("modern")}</h5>
+          <div className={cx('grid')}>
+            {reasons.map((r, i) => (
+              // data-aos nằm ở div ngoài để không đè transform hover của thẻ bên trong
+              <div key={i} data-aos="fade-up" data-aos-delay={(i % 3) * 120}>
+                <div className={cx('boxIntroduce')}>
+                  <span className={cx('num')}>0{i + 1}</span>
+                  <div className={cx('iconWrap')}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">{ICONS[r.icon]}</svg>
+                  </div>
+                  <h5 className={cx('cardTitle')}>{r.text}</h5>
+                </div>
               </div>
-              <div className={cx('boxIntroduce')} style={{ marginTop: 100 }} data-aos="fade-up">
-                <img width={150} height={100} src="https://i.ibb.co/WNsCJH1v/35.png" alt="" />
+            ))}
+          </div>
 
-                <h5> {t("Quality")}<br />
-                  {t("train")}</h5>
-              </div>
-            </div>
-            <div className={cx('questionChoose')} style={{
-              backgroundColor: "#fff",
-              color: "#0061bb",
-              border: "2px #0061bb solid",
-              width: "fit-content",
-              padding: 15,
-              margin: "auto auto"
-            }}>
-              <h3>{t("Why_choose_the_IT_department")}</h3>
-            </div>
-            <div style={{ marginBottom: "40px", display: "flex", justifyContent: "space-between" }}>
-              <div className={cx('boxIntroduce')} data-aos="fade-up">
-                <img width={150} height={100} src="https://i.ibb.co/LhcwxFWd/36.png" alt="" />
-
-                <h5>{t("Opportunities")}<br />
-                  {t("Opportunities_to_study")}<br />
-                  {t("abroad")}</h5>
-              </div>
-              <div className={cx('boxIntroduce')} style={{ marginTop: 100 }} data-aos="fade-up">
-                <img width={150} height={100} src="https://i.ibb.co/L77hg7z/37.png" alt="" />
-
-                <h5>{t("Opportunity")}<br />
-                  {t("For_Work")}</h5>
-              </div>
-              <div className={cx('boxIntroduce')} data-aos="fade-up">
-                <img width={140} height={100} src="https://i.ibb.co/Z1kjNhS4/38.png" alt="" />
-
-                <h5>{t("Dynamic_Environment")}</h5>
-              </div>
-            </div>
-            <div style={{ height: "50px", width: "fit-content", margin: "auto auto" }}>
-              <Link to={'https://dkxettuyen.viu.edu.vn/dang-ky-ho-so-xet-tuyen-theo-dot.html?p=t9vVOfClrsYCt9J3R0dfoH81x39W4IQQTNhNORTiYgg'} target="_blank" >
-                <CButton className={cx('registerNow')} style={{ backgroundColor: "#0061bb", color: "#fff", fontSize: 22, fontWeight: "600" }}>{t("REGISTER_NOW")}</CButton>
-
-              </Link>
-            </div>
+          <div className={cx('cta')} data-aos="zoom-in">
+            <a
+              className={cx('registerNow')}
+              href="https://dkxettuyen.viu.edu.vn/dang-ky-ho-so-xet-tuyen-theo-dot.html?p=t9vVOfClrsYCt9J3R0dfoH81x39W4IQQTNhNORTiYgg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("REGISTER_NOW")}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -311,9 +337,6 @@ export const Home = () => {
 
                 <p>{t("Ministry_of_Education_and_Training")}</p>
               </Link>
-
-
-
 
             </div>
             <div>

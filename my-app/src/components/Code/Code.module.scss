@@ -1,152 +1,520 @@
-.codeLap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+/* ============================================================
+   Code.module.scss
+   Bảng màu: header indigo đậm, nút cam, nền kem ấm, nhấn indigo
+   (bố cục giữ nguyên, chỉ đổi màu / bo góc / bóng)
+   ============================================================ */
 
-.runCode {
-    width: fit-content;
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 
-    height: 20px;
-}
+.code {
+    --c-bg: #f6f4ef;
+    --c-surface: #fcfbf8;
+    --c-field: #f1efea;
+    --c-line: #e8e5de;
+    --c-text: #1e1b3a;
+    --c-muted: #7a7690;
+    --c-pill: #ebe8e1;
 
-.headerCodeLap {
-    padding: 10px 15px;
-    background-color: rgb(246, 246, 246);
+    --c-indigo: #4a3ad6;
+    --c-indigo-hover: #3b2fb8;
+    --c-indigo-soft: #eeebfd;
+
+    --c-orange: #ff9f1c;
+    --c-orange-2: #ffb21f;
+    --c-orange-ink: #2a1500;
+    --c-orange-glow: rgba(255, 159, 28, 0.45);
+
+    --c-ok: #15803d;
+    --c-danger: #b91c1c;
+    --c-danger-soft: #fef2f2;
+    --c-danger-line: #fecaca;
+
+    --radius: 14px;
+    --font-ui: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    min-height: 100%;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: var(--font-ui);
 }
 
-.header {
-    padding: 0 15px;
-    background-color: rgb(246, 246, 246);
-    display: grid;
-    grid-template-columns: 1fr 8fr 1fr;
-    align-items: center;
-
-}
-
-.title {
-    width: fit-content;
-    padding: 10px;
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    &:hover {
-        background-color: #fff;
-    }
-}
-
-.select {
-    border-radius: 5px;
-    background-color: #fff;
-    cursor: pointer;
-    position: relative;
-
-    .selectLanguage {
-        border-radius: 5px;
-        padding: 0px 5px 5px 5px;
-        background-color: #fff;
-        border-radius: 5px;
-        position: absolute;
-        top: 125%;
-        right: 50%;
-        transform: translateX(40%);
-        z-index: 10;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-        .language {
-            padding: 5px;
-            width: 100%;
-            border-radius: 5px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgb(241, 240, 240);
-            }
-        }
-    }
-}
+/* ---------------- Thanh trên ---------------- */
 
 .program {
-
-    padding: 10px;
-    background-color: #0284c7;
+    position: sticky;
+    top: 0;
+    z-index: 30;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    background: linear-gradient(100deg, #1b1a52 0%, #3a2fa0 100%);
+    box-shadow: 0 2px 12px rgba(27, 26, 82, 0.25);
 }
 
-.searchLanguage {
-    padding: 0 10px;
-    border-bottom: 1px black solid;
-    border-radius: 5px 5px 0 0;
+.brand {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+
+.toolbar {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    gap: 10px;
+}
 
-    input {
-        padding: 10px;
-        border: none;
-        outline: none;
-    }
+/* ---------------- Chọn ngôn ngữ ---------------- */
+
+.select {
+    position: relative;
 }
 
 .chooseSelect {
-    padding: 10px;
     display: flex;
-    gap: 15px
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 160px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+
+    svg {
+        stroke: currentColor; // đè stroke="gray" trong JSX
+        opacity: 0.85;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.22);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--c-orange);
+        outline-offset: 2px;
+    }
+}
+
+.selectLanguage {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    width: 260px;
+    padding: 6px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    box-shadow: 0 14px 34px rgba(27, 26, 82, 0.2);
+    color: var(--c-text);
+    z-index: 40;
+}
+
+.searchLanguage {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    border: 1px solid var(--c-line);
+    border-radius: 10px;
+    background: #fff;
+
+    &:focus-within {
+        border-color: var(--c-indigo);
+        box-shadow: 0 0 0 3px var(--c-indigo-soft);
+    }
+
+    input {
+        flex: 1;
+        min-width: 0;
+        padding: 2px 0;
+        border: none;
+        outline: none;
+        background: transparent;
+        font: inherit;
+        font-size: 13.5px;
+        color: var(--c-text);
+    }
+}
+
+.languageList {
+    max-height: 220px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d6d2c8 transparent;
+}
+
+.language {
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--c-bg);
+    }
+
+    &.active {
+        background: var(--c-indigo-soft);
+        color: var(--c-indigo);
+        font-weight: 700;
+    }
 }
 
 .buttonDownLoad {
-    background-color: #00AEEF;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
     border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--c-orange), var(--c-orange-2));
+    color: var(--c-orange-ink);
+    box-shadow: 0 4px 14px var(--c-orange-glow);
     cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+
+    svg {
+        stroke: currentColor; // đè stroke="white" nếu còn trong JSX
+    }
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px var(--c-orange-glow);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+    }
 }
 
-.element {
-    overflow: auto;
-    /* hoặc scroll */
-    scrollbar-width: none;
-    /* Ẩn cho Firefox */
-    -ms-overflow-style: none;
-    /* Ẩn cho IE và Edge cũ */
-}
+/* ---------------- Bố cục chính ---------------- */
 
-/* Ẩn cho Chrome, Safari và Opera */
-.element::-webkit-scrollbar {
-    display: none;
-}
-
-.boxCodeLap {
-    margin-bottom: 15px;
+.workspace {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 16px;
+    align-items: start;
+    padding: 16px;
+
+    @media (max-width: 1100px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 
-.startCode {
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.analysis {
+    grid-column: 1 / -1;
+    min-width: 0;
+}
+
+/* ---------------- Khung thu gọn (Collapse) ---------------- */
+
+.panel {
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px rgba(40, 30, 10, 0.05);
+    overflow: hidden;
+}
+
+.panelNested {
+    margin-top: 8px;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.panelHead {
     display: flex;
     align-items: center;
-    color: #fff;
-    background-color: #28A745;
-    border-radius: 5px;
-    padding: 5px;
-    gap: 10px;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    border: 0;
+    background: transparent;
+    color: var(--c-text);
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 700;
+    text-align: left;
     cursor: pointer;
+    transition: background .15s;
+
+    &:hover {
+        background: rgba(74, 58, 214, 0.04);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--c-indigo);
+        outline-offset: -2px;
+    }
 }
 
-.boxInput {
+.panelHeadSm {
+    padding: 9px 14px;
+    font-size: 13.5px;
+}
+
+.panelOpen > .panelHead {
+    border-bottom: 1px solid var(--c-line);
+}
+
+// mũi tên đặc nhỏ (▾) thay cho chevron nét mảnh
+.chevron {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+    color: var(--c-text);
+    transition: transform .15s;
+}
+
+.chevronOpen {
+    transform: rotate(90deg);
+}
+
+.panelExtra {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--c-pill);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-muted);
+}
+
+.panelBody {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+
+    p {
+        margin: 0 0 8px;
+    }
+
+    ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+}
+
+.flush {
+    padding: 0;
+
+    // thanh cam bên trái dòng đang chọn trong Monaco
+    :global(.current-line-margin) {
+        border-left: 3px solid var(--c-orange);
+        box-sizing: border-box;
+    }
+}
+
+/* ---------------- Input / nút / Output ---------------- */
+
+.textarea {
+    display: block;
     width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid var(--c-line);
+    border-radius: 12px;
+    background: var(--c-field);
+    color: var(--c-text);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    resize: vertical;
+    outline: none;
 
-    height: 50vh;
+    &:focus {
+        border-color: var(--c-indigo);
+        box-shadow: 0 0 0 3px var(--c-indigo-soft);
+    }
+}
 
-    border-radius: 15px;
-    background-color: #fff;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 25px;
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.runBtn,
+.analyzeBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s, transform .15s, box-shadow .15s;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.runBtn {
+    border: none;
+    background: linear-gradient(135deg, var(--c-orange), var(--c-orange-2));
+    color: var(--c-orange-ink);
+    box-shadow: 0 4px 14px var(--c-orange-glow);
+
+    &:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px var(--c-orange-glow);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--c-indigo);
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        opacity: .6;
+        box-shadow: none;
+    }
+}
+
+.analyzeBtn {
+    border: 1.5px solid var(--c-indigo);
+    background: #fff;
+    color: var(--c-indigo);
+
+    &:hover:not(:disabled) {
+        background: var(--c-indigo-soft);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--c-indigo);
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        border-color: #dcd9e8;
+        background: var(--c-field);
+        color: #a29fb5;
+    }
+}
+
+.outputBox,
+.errorBox,
+.codeBlock {
+    margin: 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.55;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d6d2c8 transparent;
+}
+
+.outputBox {
+    min-height: 64px;
+    max-height: 260px;
+    background: var(--c-field);
+    border: 1px solid var(--c-line);
+    color: var(--c-text);
+}
+
+.errorBox {
+    max-height: 200px;
+    margin-bottom: 10px;
+    background: var(--c-danger-soft);
+    border: 1px solid var(--c-danger-line);
+    color: var(--c-danger);
+}
+
+.codeBlock {
+    margin-top: 8px;
+    background: var(--c-field);
+    border: 1px solid var(--c-line);
+    white-space: pre;
+}
+
+.alertError {
+    margin: 0;
+    padding: 10px 14px;
+    background: var(--c-danger-soft);
+    border: 1px solid var(--c-danger-line);
+    border-radius: 12px;
+    color: var(--c-danger);
+    font-size: 13.5px;
+    text-align: left;
+}
+
+.statusOk {
+    color: var(--c-ok);
+    font-weight: 700;
+}
+
+.statusErr {
+    color: var(--c-danger);
+    font-weight: 700;
+}
+
+.matchOk,
+.matchBad {
+    margin: 0 0 8px;
+    font-weight: 700;
+}
+
+.matchOk {
+    color: var(--c-ok);
+}
+
+.matchBad {
+    color: var(--c-danger);
+}
+
+/* ---------------- Kết quả chấm ---------------- */
+
+.reqList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        margin-bottom: 4px;
+    }
+}
+
+.reqMet {
+    color: var(--c-ok);
+}
+
+.reqUnmet {
+    color: var(--c-danger);
+}
+
+.reqNote {
+    color: var(--c-muted);
 }

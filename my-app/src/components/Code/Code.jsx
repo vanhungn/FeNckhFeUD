@@ -9,26 +9,67 @@ import { useTranslation } from "react-i18next";
 
 const cx = classNames.bind(style);
 
+/* ---------- Theme màu cho Monaco (chỉ là màu, không ảnh hưởng logic) ---------- */
+
+const defineTheme = (monaco) => {
+    monaco.editor.defineTheme("lapcode-warm", {
+        base: "vs",
+        inherit: true,
+        rules: [
+            { token: "keyword", foreground: "4F46E5" },
+            { token: "keyword.directive", foreground: "7C3AED" },
+            { token: "type", foreground: "4F46E5" },
+            { token: "string", foreground: "E8590C" },
+            { token: "number", foreground: "0284C7" },
+            { token: "comment", foreground: "9A96AE", fontStyle: "italic" },
+        ],
+        colors: {
+            "editor.background": "#FCFBF8",
+            "editor.foreground": "#1E1B3A",
+            "editor.lineHighlightBackground": "#FFF3E0",
+            "editor.lineHighlightBorder": "#00000000",
+            "editorLineNumber.foreground": "#A9A6BD",
+            "editorLineNumber.activeForeground": "#F59E0B",
+            "editor.selectionBackground": "#DCD7FF",
+            "editorCursor.foreground": "#4F46E5",
+            "editorIndentGuide.background": "#E8E5DE",
+            "editorIndentGuide.background1": "#E8E5DE",
+            "editorGutter.background": "#FCFBF8",
+        },
+    });
+};
+
 /* ---------- Component phụ: đặt NGOÀI component chính ---------- */
 
-const Collapse = ({ title, extra, defaultOpen = true, children, level = 1 }) => {
+const Chevron = ({ open }) => (
+    <svg
+        className={cx("chevron", { chevronOpen: open })}
+        width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+        aria-hidden="true"
+    >
+        <polyline points="9 6 15 12 9 18" />
+    </svg>
+);
+
+// flush: bỏ padding bên trong (dùng cho khung editor)
+const Collapse = ({ title, extra, defaultOpen = true, children, level = 1, flush = false }) => {
     const [open, setOpen] = useState(defaultOpen);
+    const nested = level === 2;
     return (
-        <div style={{ marginTop: level === 1 ? 12 : 8, border: "1px solid #ddd", borderRadius: 5, overflow: "hidden", background: "#fff" }}>
-            <div
+        <div className={cx("panel", { panelNested: nested, panelOpen: open })}>
+            <button
+                type="button"
+                className={cx("panelHead", { panelHeadSm: nested })}
                 onClick={() => setOpen((v) => !v)}
-                style={{
-                    display: "flex", alignItems: "center", gap: 8, cursor: "pointer", userSelect: "none",
-                    padding: level === 1 ? "8px 12px" : "6px 10px",
-                    background: level === 1 ? "#f1f0f0" : "#fafafa", color: "#000",
-                    fontWeight: 600, fontSize: level === 1 ? 15 : 14,
-                }}
+                aria-expanded={open}
             >
-                <span style={{ display: "inline-block", width: 14, transition: "transform .15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}>▶</span>
+                <Chevron open={open} />
                 <span>{title}</span>
-                {extra && <span style={{ fontWeight: 400, fontSize: 12, marginLeft: "auto" }}>{extra}</span>}
-            </div>
-            <div style={{ display: open ? "block" : "none", padding: 10, color: "#000", textAlign: "left" }}>
+                {extra && <span className={cx("panelExtra")}>{extra}</span>}
+            </button>
+            {/* display:none để giữ nguyên nội dung (editor, scroll) khi thu gọn */}
+            <div className={cx("panelBody", { flush })} style={{ display: open ? "block" : "none" }}>
                 {children}
             </div>
         </div>
@@ -43,9 +84,7 @@ const SolutionCard = ({ title, s, defaultOpen = false }) => {
             <p>{s.idea}</p>
             <p><b>Time</b> {s.timeComplexity} · <b>Space</b> {s.spaceComplexity}</p>
             {s.tradeoff && <p><i>{s.tradeoff}</i></p>}
-            {s.code && (
-                <pre style={{ background: "#f1f0f0", padding: 10, borderRadius: 5, overflow: "auto" }}>{s.code}</pre>
-            )}
+            {s.code && <pre className={cx("codeBlock")}>{s.code}</pre>}
         </Collapse>
     );
 };
@@ -163,36 +202,40 @@ export const Code = ({ problem = "", expectedOutput = "", sampleInput = "" }) =>
     const isCorrect = runInfo?.ok && expectedOutput && output.trim() === String(expectedOutput).trim();
 
     return (
-        <div>
+        <div className={cx("code")}>
             {/* Thanh trên */}
             <div className={cx("program")}>
-                <div>
-                    <h2 style={{ color: "#fff" }}>solution</h2>
-                </div>
-                <div style={{ display: "flex", gap: 15 }}>
+                <h2 className={cx("brand")}>Solution</h2>
+
+                <div className={cx("toolbar")}>
                     <div className={cx("select")}>
-                        <div onClick={() => setTurnOnSelectLanguage((v) => !v)} className={cx("chooseSelect")}>
+                        <button
+                            type="button"
+                            className={cx("chooseSelect")}
+                            onClick={() => setTurnOnSelectLanguage((v) => !v)}
+                            aria-expanded={turnOnSelectLanguage}
+                        >
                             <span>{displayLanguage}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                 <polyline points="6 9 12 3 18 9" />
                                 <polyline points="6 15 12 21 18 15" />
                             </svg>
-                        </div>
+                        </button>
 
                         <div style={{ display: turnOnSelectLanguage ? "block" : "none" }} className={cx("selectLanguage")}>
                             <div className={cx("searchLanguage")}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                     <path d="m21 21-4.34-4.34"></path>
                                     <circle cx="11" cy="11" r="8"></circle>
                                 </svg>
                                 <input type="text" placeholder="Chọn ngôn ngữ..." onChange={handleOnchangeSearch} />
                             </div>
-                            <div className={cx("element")} style={{ width: "100%", height: 150, overflow: "auto" }}>
+                            <div className={cx("languageList")}>
                                 {listLanguage.map((item) => (
                                     <div
                                         key={item.codeName}
                                         onClick={() => handleChooseLanguage(item.codeName, item.name, item.source)}
-                                        className={cx("language")}
+                                        className={cx("language", { active: item.codeName === language })}
                                     >
                                         {`${item.name}(${item.codeName})`}
                                     </div>
@@ -201,152 +244,139 @@ export const Code = ({ problem = "", expectedOutput = "", sampleInput = "" }) =>
                         </div>
                     </div>
 
-                    <div>
-                        <button type="button" className={cx("buttonDownLoad")} style={{ flexShrink: 0 }} onClick={handleDownload}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        className={cx("buttonDownLoad")}
+                        onClick={handleDownload}
+                        title="Tải code xuống"
+                        aria-label="Tải code xuống"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
-            <div className={cx("boxCodeLap")} style={{ display: "block", width: "100%", boxSizing: "border-box" }}>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "flex-start", width: "100%" }}>
+            <div className={cx("workspace")}>
+                {/* Cột trái: Code (rộng hơn) */}
+                <div className={cx("column")}>
+                    <Collapse title="Code" extra={displayLanguage} flush>
+                        <Editor
+                            height="max(420px, calc(100vh - 230px))"
+                            language={language}
+                            theme="lapcode-warm"
+                            beforeMount={defineTheme}
+                            value={code}
+                            onChange={(v) => setCode(v ?? "")}
+                            options={{
+                                automaticLayout: true,
+                                minimap: { enabled: false },
+                                scrollBeyondLastLine: false,
+                                fontSize: 14,
+                                fontFamily: '"JetBrains Mono", Menlo, Consolas, monospace',
+                                padding: { top: 12, bottom: 12 },
+                            }}
+                        />
+                    </Collapse>
+                </div>
 
-                    {/* Cột trái: Code (rộng hơn) */}
-                    <div style={{ flex: "3 1 480px", minWidth: 0 }}>
-                        <Collapse title="Code" extra={displayLanguage}>
-                            <Editor
-                                height="480px"
-                                language={language}
-                                value={code}
-                                onChange={(v) => setCode(v ?? "")}
-                                options={{ automaticLayout: true, minimap: { enabled: false }, scrollBeyondLastLine: false }}
-                            />
-                        </Collapse>
+                {/* Cột phải: Input, nút, Output */}
+                <div className={cx("column")}>
+                    <Collapse title="Input">
+                        <textarea
+                            className={cx("textarea")}
+                            placeholder="Nhập dữ liệu đầu vào (input)..."
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            rows={4}
+                        />
+                    </Collapse>
+
+                    <div className={cx("actions")}>
+                        <button type="button" className={cx("runBtn")} onClick={runCode} disabled={loading}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            <span>{loading ? `${t("Running")}...` : t("Run_code")}</span>
+                        </button>
+                        <button
+                            type="button"
+                            className={cx("analyzeBtn")}
+                            onClick={handleAnalyze}
+                            disabled={analyzing || !runInfo}
+                            title={!runInfo ? "Hãy chạy code trước khi chấm điểm" : ""}
+                        >
+                            {analyzing ? "Đang chấm..." : "🤖 Chấm điểm & gợi ý"}
+                        </button>
                     </div>
 
-                    {/* Cột phải: Input, nút, Output */}
-                    <div style={{ flex: "2 1 360px", minWidth: 0 }}>
-                        <Collapse title="Input">
-                            <textarea
-                                placeholder="Nhập dữ liệu đầu vào (input)..."
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                rows={4}
-                                style={{ borderRadius: 5, padding: 10, width: "100%", boxSizing: "border-box", outline: "none", border: "1px solid #ccc" }}
-                            />
-                        </Collapse>
+                    {analyzeError && <p className={cx("alertError")}>{analyzeError}</p>}
 
-                        <div style={{ display: "flex", gap: 10, margin: "12px 0" }}>
-                            <button style={{ border: "none" }} onClick={runCode} disabled={loading}>
-                                <div className={cx("startCode")}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                    </svg>
-                                    <span>{loading ? `${t("Running")}...` : t("Run_code")}</span>
-                                </div>
-                            </button>
-                            <button
-                                style={{ border: "none", padding: "0 14px", borderRadius: 5, cursor: "pointer" }}
-                                onClick={handleAnalyze}
-                                disabled={analyzing || !runInfo}
-                                title={!runInfo ? "Hãy chạy code trước khi chấm điểm" : ""}
-                            >
-                                {analyzing ? "Đang chấm..." : "🤖 Chấm điểm & gợi ý"}
-                            </button>
-                        </div>
-
-                        {analyzeError && (
-                            <p style={{ color: "#b91c1c", background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 5, padding: 8, margin: "0 0 12px", textAlign: "left" }}>
-                                {analyzeError}
+                    <Collapse
+                        title="Output"
+                        extra={
+                            runInfo && (
+                                <span className={cx(runInfo.ok ? "statusOk" : "statusErr")}>
+                                    {runInfo.status}
+                                    {runInfo.time != null && ` · ${runInfo.time}s · ${runInfo.memory}KB`}
+                                </span>
+                            )
+                        }
+                    >
+                        {runInfo?.ok && expectedOutput && sameInput && (
+                            <p className={cx(isCorrect ? "matchOk" : "matchBad")}>
+                                {isCorrect ? "✅ Khớp output mẫu" : "❌ Sai output mẫu"}
                             </p>
                         )}
+                        {error && <pre className={cx("errorBox")}>{error}</pre>}
+                        <pre className={cx("outputBox")}>{output}</pre>
+                    </Collapse>
+                </div>
 
-                        <Collapse
-                            title="Output"
-                            extra={
-                                runInfo && (
-                                    <span style={{ color: runInfo.ok ? "#16a34a" : "#dc2626", fontWeight: 600 }}>
-                                        {runInfo.status}
-                                        {runInfo.time != null && ` · ${runInfo.time}s · ${runInfo.memory}KB`}
-                                    </span>
-                                )
-                            }
-                        >
-                            {runInfo?.ok && expectedOutput && sameInput && (
-                                <p style={{ color: isCorrect ? "#16a34a" : "#dc2626", fontWeight: 600, margin: "0 0 8px" }}>
-                                    {isCorrect ? "✅ Khớp output mẫu" : "❌ Sai output mẫu"}
-                                </p>
+                {/* Hàng dưới: kết quả AI, chiếm trọn 1 hàng */}
+                {analysis && (
+                    <div className={cx("analysis")}>
+                        <Collapse title={`🤖 Kết quả chấm: ${analysis.score}/10`}>
+                            <p>{analysis.verdict}</p>
+                            <p>
+                                <b>Độ phức tạp:</b> Time {analysis.complexity?.time} · Space {analysis.complexity?.space}
+                            </p>
+
+                            {analysis.requirements?.length > 0 && (
+                                <Collapse title="Đối chiếu yêu cầu đề bài" level={2}>
+                                    <ul className={cx("reqList")}>
+                                        {analysis.requirements.map((r, i) => (
+                                            <li key={i} className={cx(r.met ? "reqMet" : "reqUnmet")}>
+                                                {r.met ? "✅" : "❌"} {r.requirement}
+                                                {r.note && <span className={cx("reqNote")}> — {r.note}</span>}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Collapse>
                             )}
-                            {error && (
-                                <pre
-                                    style={{
-                                        background: "#fef2f2", color: "#b91c1c", border: "1px solid #fecaca",
-                                        padding: 10, margin: "0 0 10px", borderRadius: 5, textAlign: "left",
-                                        whiteSpace: "pre-wrap", maxHeight: 200, overflow: "auto",
-                                    }}
-                                >
-                                    {error}
-                                </pre>
-                            )}
-                            <pre
-                                className={cx("element")}
-                                style={{
-                                    background: "rgb(241,240,240)", color: "#000", padding: 10, margin: 0,
-                                    textAlign: "left", borderRadius: 5, minHeight: 60, maxHeight: 260, overflow: "auto",
-                                }}
-                            >
-                                {output}
-                            </pre>
+
+                            <Collapse title="Điểm tốt" level={2}>
+                                <ul>{analysis.strengths?.map((s, i) => <li key={i}>{s}</li>)}</ul>
+                            </Collapse>
+
+                            <Collapse title="Vấn đề cần sửa" level={2}>
+                                {analysis.issues?.length ? (
+                                    <ul>{analysis.issues.map((s, i) => <li key={i}>{s}</li>)}</ul>
+                                ) : (
+                                    <p>Không phát hiện vấn đề.</p>
+                                )}
+                            </Collapse>
+
+                            <SolutionCard title="✅ Cách tối ưu nhất" s={analysis.optimalSolution} defaultOpen />
+                            {analysis.alternatives?.map((s, i) => (
+                                <SolutionCard key={i} title={`💡 Cách khác ${i + 1}`} s={s} />
+                            ))}
                         </Collapse>
                     </div>
-
-                    {/* Hàng dưới: kết quả AI, chiếm trọn 1 hàng */}
-                    {analysis && (
-                        <div style={{ flex: "1 1 100%", minWidth: 0 }}>
-                            <Collapse title={`🤖 Kết quả chấm: ${analysis.score}/10`}>
-                                <p>{analysis.verdict}</p>
-                                <p>
-                                    <b>Độ phức tạp:</b> Time {analysis.complexity?.time} · Space {analysis.complexity?.space}
-                                </p>
-
-                                {analysis.requirements?.length > 0 && (
-                                    <Collapse title="Đối chiếu yêu cầu đề bài" level={2}>
-                                        <ul style={{ listStyle: "none", paddingLeft: 0, margin: 0 }}>
-                                            {analysis.requirements.map((r, i) => (
-                                                <li key={i} style={{ color: r.met ? "#16a34a" : "#dc2626", marginBottom: 4 }}>
-                                                    {r.met ? "✅" : "❌"} {r.requirement}
-                                                    {r.note && <span style={{ color: "#444" }}> — {r.note}</span>}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </Collapse>
-                                )}
-
-                                <Collapse title="Điểm tốt" level={2}>
-                                    <ul>{analysis.strengths?.map((s, i) => <li key={i}>{s}</li>)}</ul>
-                                </Collapse>
-
-                                <Collapse title="Vấn đề cần sửa" level={2}>
-                                    {analysis.issues?.length ? (
-                                        <ul>{analysis.issues.map((s, i) => <li key={i}>{s}</li>)}</ul>
-                                    ) : (
-                                        <p>Không phát hiện vấn đề.</p>
-                                    )}
-                                </Collapse>
-
-                                <SolutionCard title="✅ Cách tối ưu nhất" s={analysis.optimalSolution} defaultOpen />
-                                {analysis.alternatives?.map((s, i) => (
-                                    <SolutionCard key={i} title={`💡 Cách khác ${i + 1}`} s={s} />
-                                ))}
-                            </Collapse>
-                        </div>
-                    )}
-                </div>
+                )}
             </div>
         </div>
     );

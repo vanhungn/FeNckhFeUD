@@ -1,3 +1,11 @@
+/* ============================================================
+   document.module.scss
+   Cùng bảng màu với các trang khác: indigo đậm + nền kem
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+// Giữ lại các rule cũ để không ảnh hưởng nơi khác đang dùng chung
 .contentBgrImg {
     padding: 80px;
 }
@@ -11,105 +19,238 @@ h5 {
 }
 
 .practice {
+    --c-bg: #f6f4ef;
+    --c-surface: #fcfbf8;
+    --c-field: #f1efea;
+    --c-line: #e8e5de;
+    --c-text: #1e1b3a;
+    --c-muted: #7a7690;
+    --c-indigo: #4a3ad6;
+    --c-indigo-hover: #3b2fb8;
+    --c-indigo-soft: #eeebfd;
+    --c-orange: #ff9f1c;
+
     height: 100vh;
-    padding: 20px 60px;
     display: flex;
     flex-direction: column;
+    background: var(--c-bg);
+    color: var(--c-text);
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
-.listPractice {
-    overflow-y: auto;
-    background-color: rgb(26, 78, 141);
-    border-radius: 5px;
-    padding: 15px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    min-height: 0;
-    scrollbar-width: none;
-}
+/* ---------------- Hero + tìm kiếm ---------------- */
 
-
-
-.btnTitle {
-    width: 100%;
-    padding: 10px;
-    background-color: rgb(26, 78, 141);
+.hero {
+    flex-shrink: 0;
+    padding: 32px 24px 60px;
+    text-align: center;
     color: #fff;
-    border: none;
-    border-radius: 5px;
-    height: fit-content;
+    background: linear-gradient(100deg, rgb(26, 78, 141) 0%, #3a2fa0 100%);
 
-}
-
-.boxTitle {
-    width: 100%;
-    border-radius: 10px;
-    padding: 30px;
-    background-color: rgb(242, 247, 253);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: grid;
-    grid-template-rows: 1fr 0.5fr 1fr;
-
-    h3 {
-        color: rgb(26, 78, 141);
-        text-align: center;
-
+    @media (max-height: 700px) {
+        padding: 16px 24px 44px;
     }
 }
 
-.search {
-    padding: 15px;
-    display: flex;
-    justify-content: center;
+.heroTitle {
+    color: #fff !important;
+    margin: 0 0 6px;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800;
+}
 
+.heroSub {
+    margin: 0;
+    font-size: 14.5px;
+    color: rgba(255, 255, 255, 0.78);
+
+    @media (max-height: 700px) {
+        display: none;
+    }
+}
+
+// thanh tìm kiếm đè lên mép dưới của hero
+.search {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 680px;
+    margin: -26px auto 0;
+    padding: 0 24px;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 16px 0 18px;
+    background: #fff;
+    border-radius: 16px;
+    color: var(--c-muted);
+    box-shadow: 0 10px 30px rgba(27, 26, 82, 0.22);
+    transition: box-shadow .15s;
+
+    &:focus-within {
+        box-shadow: 0 10px 30px rgba(27, 26, 82, 0.22), 0 0 0 3px rgba(255, 159, 28, 0.55);
+    }
 }
 
 .inputSearch {
-    width: 65%;
-    padding: 10px;
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
     border: none;
     outline: none;
-    border-radius: 5px;
-    box-shadow: rgb(83, 144, 219) 0px 8px 24px;
-}
+    background: transparent;
+    color: var(--c-text);
+    font: inherit;
+    font-size: 15.5px;
 
-@media (max-width:1280px) {
-    .boxTitle {
-
-        h3 {
-            font-size: 20px;
-        }
-
-        select {
-            font-size: 13px !important;
-        }
-
-        .btnTitle {
-            font-size: 12px !important;
-        }
+    &::placeholder {
+        color: #9a96ae;
     }
 }
 
-@media (max-width: 1024px) and (max-height: 800px) {
-    .boxTitle {
+/* ---------------- Danh sách môn (vùng cuộn) ---------------- */
 
-        h3 {
-            font-size: 16px;
-        }
+.listPractice {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 24px 60px 40px;
+    display: grid;
+    // tự chia số cột theo chiều rộng, thay cho repeat(4, 1fr) cố định
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    align-content: start;
+    scrollbar-width: none;
 
-        select {
-            font-size: 10px !important;
-        }
-
-        .btnTitle {
-            font-size: 12px !important;
-        }
+    @media (max-width: 768px) {
+        padding: 16px 16px 32px;
     }
 }
 
-@media (max-width: 1024px) {
-    .boxTitle {
-        padding: 15px !important;
+.loadingRow {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+/* ---------------- Thẻ môn học ---------------- */
+
+.boxTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 18px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(40, 30, 10, 0.05);
+    transition: border-color .15s;
+
+    &:hover,
+    &:focus-within {
+        border-color: #c9c3f3;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.35;
+        text-align: left;
+        color: var(--c-text);
+        // luôn chừa chỗ cho 2 dòng để các thẻ cao bằng nhau
+        min-height: calc(2 * 1.35em);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+.cardTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.iconTile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgb(26, 78, 141);
+    color: #fff;
+}
+
+.count {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #ebe8e1;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-muted);
+}
+
+.cardActions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.select {
+    width: 100%;
+    padding: 10px 36px 10px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 10px;
+    background-color: var(--c-field);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237a7690' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    color: var(--c-text);
+    font: inherit;
+    font-size: 14px;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+
+    &:focus {
+        border-color: var(--c-indigo);
+        box-shadow: 0 0 0 3px var(--c-indigo-soft);
+    }
+}
+
+.btnTitle {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    background:rgb(26, 78, 141);
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s;
+
+    &:hover {
+        background: var(--c-indigo-hover);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--c-orange);
+        outline-offset: 2px;
     }
 }

@@ -17,29 +17,75 @@ import { cilArrowTop, cilMic, cilX } from '@coreui/icons';
 import { useTranslation } from "react-i18next";
 const cx = classNames.bind(style);
 
+const API_ORIGIN = import.meta.env.VITE_API_URL || "https://cnkh.onrender.com";
+
+// ✅ Store nằm ngoài component (trong bộ nhớ JS).
+// - Chuyển trang / unmount / mount lại component: VẪN CÒN
+// - Reload trang (F5): MẤT
+let chatStore = {
+    messages: null, // null = chưa có lịch sử
+    isOpen: false
+};
+
 export const ChatBot = () => {
     const { t, i18n } = useTranslation();
 
-    const [messages, setMessages] = useState([
-        { role: 'bot', text: t("greeting") }
-    ]);
+    // ✅ Khởi tạo từ store (nếu có), không có thì dùng lời chào mặc định
+    const [messages, setMessages] = useState(
+        () => chatStore.messages || [{ role: 'bot', text: t("greeting") }]
+    );
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef(null);
     const inputRef = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(() => chatStore.isOpen);
     const [isRecording, setIsRecording] = useState(false);
     const [isTranscribing, setIsTranscribing] = useState(false);
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
-    const cancelledRef = useRef(false); // ✅ Thêm ref này để theo dõi trạng thái hủy
-
+    const cancelledRef = useRef(false);
+    const [downloadingId, setDownloadingId] = useState(null);
     const suggestions = [
         t("admissions"),
         t("itMajors"),
         t("tuition"),
         t("careerOpportunities"),
     ];
+
+    // ✅ Đồng bộ state -> store
+    useEffect(() => {
+        chatStore.messages = messages;
+    }, [messages]);
+
+    useEffect(() => {
+        chatStore.isOpen = isOpen;
+    }, [isOpen]);
+
+    const handleDownload = async (f) => {
+        if (downloadingId) return;
+        setDownloadingId(f.fileId);
+        try {
+            const res = await fetch(`${API_ORIGIN}${f.downloadUrl}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = f.fileName || 'document';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            window.URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error('Lỗi tải file:', err);
+            alert(t("downloadError", "Không tải được file, vui lòng thử lại"));
+        } finally {
+            setDownloadingId(null);
+        }
+    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -48,6 +94,11 @@ export const ChatBot = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
+
+    // ✅ Khi mở lại chatbox, cuộn xuống tin nhắn cuối
+    useEffect(() => {
+        if (isOpen) scrollToBottom();
+    }, [isOpen]);
 
     const sendMessage = async (queryText) => {
         if (!queryText.trim()) return;
@@ -71,7 +122,8 @@ export const ChatBot = () => {
 
             setMessages([...newMessages, {
                 role: 'bot',
-                text: data.answer || t("serverResponse")
+                text: data.answer || t("serverResponse"),
+                files: data.files || [] // danh sách file nguồn từ Google Drive
             }]);
 
         } catch (error) {
@@ -125,7 +177,7 @@ export const ChatBot = () => {
             const mediaRecorder = new MediaRecorder(stream);
             mediaRecorderRef.current = mediaRecorder;
             audioChunksRef.current = [];
-            cancelledRef.current = false; // ✅ Reset trạng thái hủy mỗi lần bắt đầu ghi mới
+            cancelledRef.current = false; // Reset trạng thái hủy mỗi lần bắt đầu ghi mới
 
             mediaRecorder.ondataavailable = (e) => {
                 if (e.data.size > 0) audioChunksRef.current.push(e.data);
@@ -135,9 +187,9 @@ export const ChatBot = () => {
                 // Dừng tất cả track của mic
                 stream.getTracks().forEach((track) => track.stop());
 
-                // ✅ Kiểm tra xem có bị hủy không, nếu hủy thì không transcribe
+                // Nếu bị hủy thì không transcribe
                 if (cancelledRef.current) {
-                    cancelledRef.current = false; // reset lại cho lần sau
+                    cancelledRef.current = false;
                     return;
                 }
 
@@ -153,11 +205,11 @@ export const ChatBot = () => {
         }
     };
 
-    // ✅ cancelRecording: set state trước, rồi mới stop để tránh race condition
+    // cancelRecording: set state trước, rồi mới stop để tránh race condition
     const cancelRecording = () => {
-        cancelledRef.current = true;   // đánh dấu là hủy
-        setIsRecording(false);          // cập nhật UI ngay
-        mediaRecorderRef.current?.stop(); // rồi mới dừng recorder
+        cancelledRef.current = true;
+        setIsRecording(false);
+        mediaRecorderRef.current?.stop();
     };
 
     const transcribeAudio = async (audioBlob) => {
@@ -274,6 +326,43 @@ export const ChatBot = () => {
                                     }}
                                 >
                                     {msg.text}
+
+                                    {/* Xem / Tải file nguồn (chỉ hiện khi lấy từ Google Drive) */}
+                                    {msg.role === 'bot' && msg.files?.length > 0 && (
+                                        <div style={{ marginTop: '10px', paddingTop: '8px', borderTop: '1px solid #eee' }}>
+                                            <div style={{ fontSize: '0.75rem', color: '#888', marginBottom: '6px' }}>
+                                                📎 {t("sourceDocuments", "Tài liệu nguồn")}
+                                            </div>
+
+                                            {msg.files.map((f) => (
+                                                <div key={f.fileId} style={{ marginBottom: '6px' }}>
+                                                    <div style={{ fontSize: '0.8rem', fontWeight: 600, wordBreak: 'break-word' }}>
+                                                        📄 {f.fileName}
+                                                    </div>
+
+                                                    <div className="d-flex gap-2 mt-1">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => handleDownload(f)}
+                                                            disabled={downloadingId === f.fileId}
+                                                            style={{
+                                                                fontSize: '0.75rem',
+                                                                padding: '2px 10px',
+                                                                borderRadius: '999px',
+                                                                background: '#6a4cff',
+                                                                color: '#fff',
+                                                                border: 'none',
+                                                                cursor: downloadingId === f.fileId ? 'wait' : 'pointer',
+                                                                opacity: downloadingId === f.fileId ? 0.7 : 1
+                                                            }}
+                                                        >
+                                                            {downloadingId === f.fileId ? '⏳' : '⬇'} {t("downloadFile", "Tải về")}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -466,9 +555,9 @@ export const ChatBot = () => {
                 {isOpen === false && (
                     <div className={cx('message')}>
                         <p style={{ margin: 0 }}>
-                          {i18n.language=="vi"?<div>
-                            {t("closedGreetingHello")} <br />
-                          </div> : ""}  
+                            {i18n.language == "vi" ? <div>
+                                {t("closedGreetingHello")} <br />
+                            </div> : ""}
                             {t("closedGreetingAssistant")}
                         </p>
                     </div>

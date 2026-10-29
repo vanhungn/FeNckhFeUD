@@ -85,12 +85,23 @@ export const Document = () => {
 
     return (
         <div className={cx("practice")}>
+            <header className={cx("hero")}>
+                <h1 className={cx("heroTitle")}>Tài liệu học tập</h1>
+                <p className={cx("heroSub")}>Chọn môn học, chọn tài liệu và bắt đầu ôn tập.</p>
+            </header>
+
             <div className={cx("search")}>
-                <input
-                    className={cx("inputSearch")}
-                    placeholder="Tìm tên môn"
-                    onChange={handleOnchange}
-                />
+                <div className={cx("searchBox")}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
+                    <input
+                        className={cx("inputSearch")}
+                        placeholder="Tìm tên môn"
+                        onChange={handleOnchange}
+                    />
+                </div>
             </div>
 
             <div
@@ -100,31 +111,47 @@ export const Document = () => {
             >
                 {dataAlgorithm.map(item => (
                     <div key={item._id} className={cx("boxTitle")}>
+                        <div className={cx("cardTop")}>
+                            <span className={cx("iconTile")}>
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                                </svg>
+                            </span>
+                            <span className={cx("count")}>{item.docx?.length ?? 0} tài liệu</span>
+                        </div>
+
                         <h3>{item.course}</h3>
 
-                        <select
-                            style={{ width: "100%", height: 40, padding: 5, margin: "10px 0" }}
-                            onChange={handleOnchangeCode}
-                        >
-                            <option value="">{t("Select_document")}</option>
-                            {item.docx.map(doc => (
-                                <option key={doc._id} value={doc._id}>
-                                    {doc.name}
-                                </option>
-                            ))}
-                        </select>
+                        <div className={cx("cardActions")}>
+                            <select
+                                className={cx("select")}
+                                onChange={handleOnchangeCode}
+                            >
+                                <option value="">{t("Select_document")}</option>
+                                {item.docx.map(doc => (
+                                    <option key={doc._id} value={doc._id}>
+                                        {doc.name}
+                                    </option>
+                                ))}
+                            </select>
 
-                        <button
+                            <button
 
-                            className={cx("btnTitle")}
-                            onClick={() => handleDoHomework(item._id)}
-                        >
-                            {t("See_document")}
-                        </button>
+                                className={cx("btnTitle")}
+                                onClick={() => handleDoHomework(item._id)}
+                            >
+                                {t("See_document")}
+                            </button>
+                        </div>
                     </div>
                 ))}
 
-                {loading && <LoadingComponent />}
+                {loading && (
+                    <div className={cx("loadingRow")}>
+                        <LoadingComponent />
+                    </div>
+                )}
 
             </div>
         </div>

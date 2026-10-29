@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import style from "./algorithmAndData.module.scss";
 import { Code } from "../../components/Code/Code";
-import { ProblemPanel } from "../../components/Code/ProblemPanel"; // sửa đường dẫn cho đúng chỗ bạn đặt file
+import { ProblemExample, ProblemPanel } from "../../components/Code/ProblemPanel";
 import { useEffect, useState } from "react";
 import { Get } from "../../baseService/baseService";
 import { useParams } from "react-router-dom";
@@ -15,7 +15,6 @@ export const AlgorithmAndData = () => {
 
     const CallApi = async () => {
         try {
-            // đã bỏ dấu cách thừa ở cuối URL
             const data = await Get(`/problem/detail/${code}`);
             setDetail(data.data.data);
         } catch (error) {
@@ -38,28 +37,17 @@ export const AlgorithmAndData = () => {
         .join("\n");
 
     return (
-        <div className={cx("algorithmAndData")} style={{ display: "flex", width: "100%", minHeight: "100vh" }}>
-            <ProblemPanel width={300}>
-                <div className={cx("topic")} style={{ width: "100%", maxWidth: "none" }}>
-                    <p>{detail?.statement}</p>
-                    <div>
-                        <p>{detail?.suggest}</p>
-                    </div>
-                    <h5>{t("For_example")}:</h5>
-                    <div className={cx("output")}>
-                        <h6>Input:</h6>
-                        <div style={{ backgroundColor: "#fff", padding: 5, borderRadius: 10 }}>
-                            {detail?.input}
-                        </div>
-                        Output:
-                        <div style={{ backgroundColor: "#fff", padding: 5, borderRadius: 10 }}>
-                            {detail?.output}
-                        </div>
-                    </div>
-                </div>
+        // Chỉ 1 container duy nhất: cột trái là ProblemPanel, cột phải là Code
+        <div className={cx("algorithmAndData")}>
+            <ProblemPanel width={340} title={t("Problem")}>
+                <p>{detail?.statement}</p>
+                <p>{detail?.suggest}</p>
+
+                <h3>{t("For_example")}</h3>
+                <ProblemExample input={detail?.input} output={detail?.output} />
             </ProblemPanel>
 
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div className={cx("content")}>
                 <Code
                     problem={problemText}
                     sampleInput={detail?.input ?? ""}

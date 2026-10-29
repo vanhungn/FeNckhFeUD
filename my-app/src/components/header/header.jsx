@@ -88,8 +88,7 @@ export const Header = () => {
                     <Link style={{ textDecoration: "none", color: "#fff" }} to="https://daotao.viu.edu.vn/sinh-vien/dm-tin-tuc/bieu-mau-sinh-vien.html">
                         {t("Form")}  </Link>
                 </div>
-
-                {/* <div className={cx('boxCategory')}>
+                <div className={cx('boxCategory')}>
                     <div>
                         <svg onClick={() => handleTurnOnSearch()} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -97,24 +96,80 @@ export const Header = () => {
                             <line x1="21" y1="21" x2="16.65" y2="16.65" />
                         </svg>
                     </div>
-
                     {turnOnSearch &&
-                        <div className={cx('boxInput')} ref={outSize}>
-                            <CFormInput className={cx('inputSearch')} onChange={handleOnchangeSearch} placeholder="Search..." />
+                        <div
+                            className={cx('boxInput')}
+                            ref={outSize}
+                            style={{
+                                position: 'absolute',
+                                top: 'calc(100% + 10px)',
+                                right: 0,
+                                zIndex: 1000,
+                                display: 'flex',
+                                alignItems: 'stretch',
+                                width: '320px',
+                                maxWidth: '90vw',
+                                background: '#fff',
+                                borderRadius: '8px',
+                                overflow: 'hidden',
+                                border: '1px solid #d0d7de',
+                                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
+                                transition: 'border-color 0.2s ease, box-shadow 0.2s ease'
+                            }}
+                            onFocus={(e) => {
+                                e.currentTarget.style.borderColor = '#0061bb';
+                                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 97, 187, 0.25)';
+                            }}
+                            onBlur={(e) => {
+                                e.currentTarget.style.borderColor = '#d0d7de';
+                                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.15)';
+                            }}
+                        >
+                            <CFormInput
+                                className={cx('inputSearch')}
+                                onChange={handleOnchangeSearch}
+                                placeholder="Search..."
+                                style={{
+                                    flex: 1,
+                                    minWidth: 0,
+                                    height: '44px',
+                                    padding: '0 14px',
+                                    fontSize: '0.95rem',
+                                    color: '#333',
+                                    background: '#fff',
+                                    border: 'none',
+                                    borderRadius: 0,
+                                    boxShadow: 'none',
+                                    outline: 'none'
+                                }}
+                            />
 
-                            <div className={cx('boxIconSearch')} onClick={() => handleSubmitSearch()}>
+                            <div
+                                className={cx('boxIconSearch')}
+                                onClick={() => handleSubmitSearch()}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '48px',
+                                    flexShrink: 0,
+                                    background: '#0061bb',
+                                    color: '#fff',
+                                    cursor: 'pointer',
+                                    transition: 'background 0.2s ease'
+                                }}
+                                onMouseEnter={(e) => (e.currentTarget.style.background = '#004f99')}
+                                onMouseLeave={(e) => (e.currentTarget.style.background = '#0061bb')}
+                            >
                                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
                                     <circle cx="11" cy="11" r="8" />
                                     <line x1="21" y1="21" x2="16.65" y2="16.65" />
                                 </svg>
                             </div>
-
                         </div>
                     }
-
-
-                </div> */}
+                </div>
                 <div className={cx('boxCategory')}>
                     <svg onClick={() => handleTurnOn()} xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM4 20c0-2.21 3.58-4 8-4s8 1.79 8 4v1H4v-1z" />

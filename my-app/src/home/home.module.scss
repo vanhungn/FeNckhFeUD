@@ -1,3 +1,9 @@
+/* =====================================================
+   FILE SCSS HOÀN CHỈNH (đã gộp rule cũ + giao diện mới)
+   Đổi tên theo file module hiện tại của bạn (vd: Home.module.scss)
+   ===================================================== */
+
+/* ---------- Banner / Home ---------- */
 .banner {
     height: 60vh;
     width: 100%;
@@ -41,7 +47,7 @@
 .news {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px
+    gap: 15px;
 }
 
 .event {
@@ -53,7 +59,6 @@
     h5 {
         font-size: 18px !important;
         font-weight: 600;
-
     }
 
     p {
@@ -68,44 +73,15 @@
     width: 100%;
 }
 
-.chooseDepartment {
-    height: fit-content;
-    width: 100%;
-    background: url("../../public/9.jpg");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}
-
-.boxIntroduce {
-    height: fit-content;
-    max-width: 200px;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 20px;
-
-
-    img {
-        border-radius: 20px;
-        object-fit: cover;
-    }
-
-}
-
 .imgLibrary {
     width: 100%;
     height: 100%;
     transition: 1s all;
-
 }
 
 .boxImg {
     overflow: hidden;
     border-radius: 15px;
-
 
     &:hover {
         .imgLibrary {
@@ -129,93 +105,272 @@
     }
 }
 
-.registerNow {
+/* =====================================================
+   THANH SỐ LIỆU (achievement)
+   ===================================================== */
+.achievement {
+    position: relative;
+    margin: 40px 0;
+    padding: 34px 0;
+    overflow: hidden;
+    background: linear-gradient(110deg, #003f85, #0061bb 60%, #1a82e0);
 
-    padding: 10px 50px;
-    animation: myAnimation 1s linear 2s infinite alternate;
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 85% -40%, rgba(255, 185, 59, .35), transparent 55%);
+    }
+}
+
+.result {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stat {
+    text-align: center;
+    color: #fff;
+    padding: 6px 16px;
+
+    &+& {
+        border-left: 1px solid rgba(255, 255, 255, .2);
+    }
+
+    h2 {
+        margin: 0;
+        color: #ffb93b;
+        font-weight: 800;
+        font-size: clamp(28px, 4vw, 48px);
+    }
+
+    h5 {
+        margin: 8px 0 0;
+        font-weight: 400;
+        font-size: 15px;
+        opacity: .9;
+    }
+}
+
+/* =====================================================
+   VÌ SAO CHỌN KHOA CNTT
+   ===================================================== */
+.chooseDepartment {
+    position: relative;
+    overflow: hidden;
+    background-color: #eef3fb;
+    background-image: radial-gradient(rgba(0, 97, 187, .13) 1.4px, transparent 1.4px);
+    background-size: 26px 26px;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        pointer-events: none;
+    }
+
+    &::before {
+        width: 380px;
+        height: 380px;
+        left: -120px;
+        top: 40px;
+        background: #1a6fd0;
+        opacity: .3;
+    }
+
+    &::after {
+        width: 320px;
+        height: 320px;
+        right: -100px;
+        bottom: 20px;
+        background: #ffb93b;
+        opacity: .22;
+    }
 }
 
 .whyChoose {
-    padding: 20px 250px !important;
+    position: relative;
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 24px 80px;
 }
 
-@keyframes myAnimation {
-    from {
-        padding: 10px 50px;
+.head {
+    text-align: center;
+    margin-bottom: 44px;
+}
 
-    }
+.questionChoose {
+    display: inline-block;
+    margin: 0;
+    color: #0f2347;
+    font-weight: 800;
+    font-size: clamp(24px, 3.6vw, 40px);
 
-    to {
-        padding: 5px 30px;
-
+    &::after {
+        content: "";
+        display: block;
+        width: 70px;
+        height: 5px;
+        margin: 14px auto 0;
+        border-radius: 3px;
+        background: linear-gradient(90deg, #ffb93b, #1a6fd0);
     }
 }
 
-@media (max-width:1220px) {
-    .box {
-        .icon {
-            width: 50px;
-            height: 50px;
-        }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
 
-        .title {
-            font-size: 16px;
-        }
+.boxIntroduce {
+    position: relative;
+    height: 100%;
+    padding: 30px 26px 28px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #dbe4f3;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 97, 187, .12);
+    transition: transform .3s, box-shadow .3s, border-color .3s;
 
-        p {
-            font-size: 14px !important;
-        }
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 0;
+        background: linear-gradient(90deg, #ffb93b, #1a6fd0);
+        transition: width .4s;
     }
 
+    &:hover {
+        transform: translateY(-8px);
+        border-color: #1a6fd0;
+        box-shadow: 0 18px 40px rgba(26, 111, 208, .25);
 
-    .event {
-        div {
-            h5 {
-                font-size: 16px;
-            }
-
-            p {
-                font-size: 12px !important;
-                margin: 0;
-            }
-        }
-    }
-
-    .achievement {
-        h1 {
-            font-size: 30px;
+        &::after {
+            width: 100%;
         }
 
-        h5 {
-            font-size: 16px;
-        }
-    }
-
-    .chooseDepartment {
-        .whyChoose {
-            padding: 20px 100px !important;
-
-            .boxIntroduce {
-                padding: 20px;
-            }
+        .iconWrap {
+            transform: rotate(-8deg) scale(1.08);
         }
 
-    }
-
-    .partner {
-        width: 300px !important;
-    }
-
-    .imgPartner {
-        grid-template-columns: 150px 150px 150px 150px 150px !important;
-
-        img {
-            height: 150px !important;
+        .num {
+            color: rgba(255, 185, 59, .55);
         }
     }
 }
 
-@media(max-width:1280px) {
+.num {
+    position: absolute;
+    right: 22px;
+    top: 12px;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1;
+    color: #e3eaf6;
+    transition: color .3s;
+}
+
+.iconWrap {
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #0061bb, #1a82e0);
+    box-shadow: 0 8px 18px rgba(26, 111, 208, .4);
+    transition: transform .35s;
+
+    svg {
+        width: 30px;
+        height: 30px;
+        fill: none;
+        stroke: #fff;
+        stroke-width: 1.9;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+}
+
+.cardTitle {
+    margin: 22px 0 0;
+    color: #0f2347;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 54px;
+}
+
+.registerNow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    border-radius: 50px;
+    color: #06194a;
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(90deg, #ffc95e, #ffa726);
+    box-shadow: 0 10px 26px rgba(255, 167, 38, .45);
+    animation: pulse 2.2s ease-in-out infinite;
+    transition: transform .25s;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: #06194a;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform .25s;
+    }
+
+    &:hover {
+        color: #06194a;
+        transform: translateY(-3px);
+        animation-play-state: paused;
+
+        svg {
+            transform: translateX(5px);
+        }
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 10px 26px rgba(255, 167, 38, .45);
+    }
+
+    50% {
+        box-shadow: 0 10px 36px rgba(255, 167, 38, .8), 0 0 0 10px rgba(255, 167, 38, .18);
+    }
+}
+
+/* =====================================================
+   RESPONSIVE
+   (giữ nguyên thứ tự các mốc như file gốc để không đổi hành vi cũ)
+   ===================================================== */
+
+@media (max-width:1280px) {
     .home {
         padding-top: 14vh;
     }
@@ -235,16 +390,57 @@
     }
 }
 
-@media (max-width:1024px) {
-    .whyChoose {
-        padding: 20px 100px !important;
+@media (max-width:1220px) {
+    .box {
+        .icon {
+            width: 50px;
+            height: 50px;
+        }
 
-        .boxIntroduce {
-            padding: 20px;
+        .title {
+            font-size: 16px;
+        }
+
+        p {
+            font-size: 14px !important;
         }
     }
 
+    .event {
+        div {
+            h5 {
+                font-size: 16px;
+            }
 
+            p {
+                font-size: 12px !important;
+                margin: 0;
+            }
+        }
+    }
+
+    .stat h5 {
+        font-size: 14px;
+    }
+
+    .whyChoose {
+        padding: 60px 24px 70px;
+    }
+
+    .partner {
+        width: 300px !important;
+    }
+
+    .imgPartner {
+        grid-template-columns: 150px 150px 150px 150px 150px !important;
+
+        img {
+            height: 150px !important;
+        }
+    }
+}
+
+@media (max-width:1024px) {
     .home {
         padding-top: 15vh;
     }
@@ -254,42 +450,30 @@
         font-weight: 600;
     }
 
-    .achievement {
-        div {
-            div {
-                h2 {
-                    font-size: 16px !important;
-                }
+    .result {
+        width: 92%;
+    }
 
-                h5 {
-                    font-size: 12px !important;
-                }
-            }
+    .stat {
+        padding: 6px 10px;
+
+        h5 {
+            font-size: 12px;
         }
     }
 
-    .questionChoose {
-        padding: 10px !important;
-
-        h3 {
-            font-size: 18px !important;
-        }
+    .cardTitle {
+        font-size: 17px;
     }
 
     .registerNow {
-        font-size: 16px !important;
+        font-size: 18px;
+        padding: 14px 34px;
     }
 
     .titleNews {
         font-size: 16px !important;
         font-weight: 600;
-    }
-
-    .boxIntroduce {
-        img {
-            width: 110px !important;
-            height: 80px !important;
-        }
     }
 
     .event {
@@ -318,38 +502,26 @@
     }
 }
 
+@media (max-width:900px) {
 
+    /* Tablet: số liệu 2x2, thẻ lý do 2 cột */
+    .result {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 22px;
+    }
+
+    .stat:nth-child(3) {
+        border-left: 0;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
 @media(max-width:890px) {
     .home {
         padding-top: 8vh;
-    }
-
-    .whyChoose {
-        padding: 20px 60px !important;
-
-        .boxIntroduce {
-            padding: 20px;
-        }
-    }
-
-    .questionChoose {
-        padding: 10px !important;
-
-        h3 {
-            font-size: 18px !important;
-        }
-    }
-
-    .boxIntroduce {
-        img {
-            width: 90px !important;
-            height: 70px !important;
-        }
-    }
-
-    .registerNow {
-        font-size: 16px !important;
     }
 
     .imgPartner {
@@ -366,43 +538,17 @@
         padding-top: 8vh;
     }
 
-    .questionChoose {
-        padding: 5px !important;
-
-        h3 {
-            font-size: 16px !important;
-        }
-    }
-
     .whyChoose {
-        padding: 20px 150px !important;
-
-        .boxIntroduce {
-            padding: 15px;
-        }
+        padding: 50px 20px 60px;
     }
 
-    .boxIntroduce {
-        img {
-            width: 70px !important;
-            height: 50px !important;
-        }
-
-        h5 {
-            font-size: 12px !important;
-            margin: 0 !important;
-        }
-    }
-
-    .registerNow {
-        font-size: 14px !important;
+    .head {
+        margin-bottom: 32px;
     }
 
     .partner {
         width: 150px !important;
     }
-
-
 }
 
 @media(max-width:540px) {
@@ -423,19 +569,47 @@
         }
     }
 
-    .chooseDepartment {
-        .whyChoose {
-            padding: 20px !important;
+    /* Điện thoại: thẻ lý do 1 cột */
+    .achievement {
+        margin: 28px 0;
+        padding: 26px 0;
+    }
 
-            .boxIntroduce {
-                padding: 20px;
-            }
+    .whyChoose {
+        padding: 44px 16px 56px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .boxIntroduce {
+        padding: 24px 22px;
+    }
+
+    .iconWrap {
+        width: 54px;
+        height: 54px;
+
+        svg {
+            width: 26px;
+            height: 26px;
         }
+    }
 
+    .cardTitle {
+        margin-top: 16px;
+        font-size: 16px;
+    }
+
+    .cta {
+        margin-top: 38px;
     }
 
     .registerNow {
-        font-size: 12px !important;
+        font-size: 16px;
+        padding: 13px 30px;
     }
 
     .partner {
@@ -467,8 +641,6 @@
     .home {
         padding-top: 12vh;
     }
-
-
 }
 
 @media (max-width:360px) {
@@ -486,28 +658,28 @@
         grid-template-rows: 80px;
     }
 
-    .questionChoose {
-        padding: 5px !important;
+    .result {
+        width: 94%;
+    }
 
-        h3 {
-            font-size: 14px !important;
+    .stat {
+        padding: 4px 6px;
+
+        h2 {
+            font-size: 26px;
+        }
+
+        h5 {
+            font-size: 11px;
         }
     }
 
-    .chooseDepartment {
-        .whyChoose {
-            padding: 20px !important;
+    .questionChoose {
+        font-size: 22px;
+    }
 
-            .boxIntroduce {
-                padding: 10px !important;
-
-                img {
-                    width: 60px !important;
-                    height: 50px !important;
-                }
-            }
-        }
-
+    .num {
+        font-size: 44px;
     }
 
     .imgPartner {
@@ -531,25 +703,22 @@
         }
     }
 
-    .achievement {
-        .result {
-            div {
-                h2 {
-                    font-size: 14px !important;
-                }
-
-                h5 {
-                    font-size: 12px !important;
-                }
-            }
-        }
-    }
-
     .library {
         font-size: 14px !important;
     }
 
     .partner {
         width: 40px !important;
+    }
+}
+
+/* Tôn trọng người dùng tắt hiệu ứng chuyển động */
+@media (prefers-reduced-motion: reduce) {
+
+    .registerNow,
+    .boxIntroduce,
+    .iconWrap {
+        animation: none;
+        transition: none;
     }
 }
